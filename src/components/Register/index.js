@@ -4,23 +4,32 @@ import Checkbox from "material-ui/Checkbox";
 import RaisedButton from "material-ui/RaisedButton";
 import { Link } from "react-router-dom";
 
-export default class Login extends Component {
+export default class Registration extends Component {
   render() {
     return (
-      <div id="body" className="hold-transition login-page">
-        <div className="login-box">
-          <div className="login-logo">
+      <div id="body" className="hold-transition register-page">
+        <div className="register-box">
+          <div className="register-logo">
             <a href="../../index2.html">
               <b>Admin</b>
               LTE
             </a>
           </div>
 
-          {/* <!-- /.login-logo --> */}
-          <div className="login-box-body">
-            <p className="login-box-msg">Sign in to start your session</p>
+          <div className="register-box-body">
+            <p className="login-box-msg">Register a new membership</p>
 
             <form method="post">
+              <div className="form-group">
+                <TextField
+                  type="text"
+                  style={{ width: "95%" }}
+                  hintText="Full name"
+                  floatingLabelText="Enter your name"
+                />
+                <span className="glyphicon glyphicon-user" />
+              </div>
+
               <div className="form-group">
                 <TextField
                   type="email"
@@ -42,13 +51,15 @@ export default class Login extends Component {
               <div className="row">
                 <div className="col-xs-8">
                   <div className="checkbox icheck">
-                    {/* <Checkbox />
-                    <label>Remember Me</label> */}
+                    {/* <Checkbox/>
+                    <label>
+                      I agree to the <a href="#">terms</a>
+                    </label> */}
                   </div>
                 </div>
                 <div className="col-xs-4">
                   <RaisedButton
-                    label="Sign In"
+                    label="Sign Up"
                     primary={true}
                     labelStyle={{
                       "fontSize": "14px",
@@ -65,22 +76,17 @@ export default class Login extends Component {
                 href="#"
                 className="btn btn-block btn-social btn-facebook btn-flat"
               >
-                <i className="fa fa-facebook" /> Sign in using Facebook
+                <i className="fa fa-facebook" /> Sign up using Facebook
               </a>
               <a
                 href="#"
                 className="btn btn-block btn-social btn-google btn-flat"
               >
-                <i className="fa fa-google-plus" /> Sign in using Google+
+                <i className="fa fa-google-plus" /> Sign up using Google+
               </a>
             </div> */}
-
-            <Link to="/password-reset" className="text-center">
-              I forgot my password
-            </Link>
-            <br />
-            <Link to="/register" className="text-center">
-              Register a new membership
+            <Link to="/login" className="text-center">
+              I already have a membership
             </Link>
           </div>
         </div>

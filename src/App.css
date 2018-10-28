@@ -8,3 +8,16 @@ body {
   height: -webkit-fill-available;
   margin: auto;
 }
+
+.glyphicon { 
+  right: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  height: 60px;
+}
+
+label {
+  font-weight: 500;
+}
