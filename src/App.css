@@ -1,15 +1,16 @@
-html, 
+html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
-.login-box, .register-box {
+.login-box,
+.register-box {
   width: 360px;
   height: -webkit-fill-available;
   margin: auto;
 }
 
-.glyphicon { 
+.glyphicon {
   right: 10px;
 }
 
@@ -20,4 +21,12 @@ body {
 
 label {
   font-weight: 500;
+}
+
+.alert {
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }

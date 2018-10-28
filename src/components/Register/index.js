@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 import Checkbox from "material-ui/Checkbox";
 import RaisedButton from "material-ui/RaisedButton";
-import { Link } from "react-router-dom";
+import { Link, browserHistory } from "react-router-dom";
+import axios from "axios";
 
 export default class Registration extends Component {
   constructor(props) {
@@ -10,32 +11,83 @@ export default class Registration extends Component {
     this.state = {
       name: "",
       email: "",
-      password: ""
+      password: "",
+
+      error: false,
+      errorMessage: ""
     };
     this.onSubmit = this.onSubmit.bind(this);
+    this.validate = this.validate.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("props", this.props);
+    // this.props.history.push('/');
   }
 
   onSubmit() {
-    fetch(process.env.REACT_APP_API_URL_AUTH + "register", {
-      method: "POST",
-      headers: {
-        "access-control-allow-origin": "*",
-        "Content-Type": "Application/json"
-      },
-      body: {
+    if (this.validate()) {
+      const data = {
         name: this.state.name,
         email: this.state.email,
         password: this.state.password
-      }
-    })
-      .then(response => response.json())
-      .then(response => {
-        console.log("response", response);
-      })
-      .catch(error => console.log("error", error));
+      };
+      axios
+        .post(process.env.REACT_APP_API_URL_AUTH + "register", data)
+        // .then(response => response.json())
+        .then(response => {
+          this.props.history.push("/");
+        })
+        .catch(error => {
+          if (error.response && error.response.data.message) {
+            this.setState(
+              { error: true, errorMessage: error.response.data.message },
+              state => {
+                setTimeout(() => {
+                  this.setState({ error: false, errorMessage: "" });
+                }, 3000);
+              }
+            );
+          }
+        });
+    }
   }
 
-  componentDidMount() {}
+  validate() {
+    if (this.state.name == "") {
+      this.setState(
+        { error: true, errorMessage: "User name required" },
+        state => {
+          setTimeout(() => {
+            this.setState({ error: false, errorMessage: "" });
+          }, 3000);
+        }
+      );
+      return false;
+    } else if (this.state.email == "") {
+      this.setState(
+        { error: true, errorMessage: "User email required" },
+        state => {
+          setTimeout(() => {
+            this.setState({ error: false, errorMessage: "" });
+          }, 3000);
+        }
+      );
+      return false;
+    } else if (this.state.password == "") {
+      this.setState(
+        { error: true, errorMessage: "Password required" },
+        state => {
+          setTimeout(() => {
+            this.setState({ error: false, errorMessage: "" });
+          }, 3000);
+        }
+      );
+      return false;
+    }
+    return true;
+  }
+
   render() {
     return (
       <div id="body" className="hold-transition register-page">
@@ -119,6 +171,14 @@ export default class Registration extends Component {
                 <i className="fa fa-google-plus" /> Sign up using Google+
               </a>
             </div> */}
+
+            {this.state.error && (
+              <div className="alert alert-danger alert-dismissible">
+                <p>
+                  <i className="icon fa fa-warning" /> {this.state.errorMessage}
+                </p>
+              </div>
+            )}
             <Link to="/login" className="text-center">
               I already have a membership
             </Link>
