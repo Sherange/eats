@@ -25,7 +25,7 @@ export default class Home extends Component {
             /> */}
             <CardMedia
               overlay={
-                <CardTitle title="Overlay title" subtitle="Overlay subtitle" />
+                <CardTitle title="The Coffee Corner" subtitle="River Avenue, Aluthgama" />
               }
             >
               <img
@@ -44,11 +44,11 @@ export default class Home extends Component {
             <CardHeader
               title="URL Avatar"
               subtitle="Subtitle"
-              avatar="images/jsa-128.jpg"
+              avatar="/images/profile.png"
             />
             <CardActions>
-              <FlatButton label="Action1" />
-              <FlatButton label="Action2" />
+              <FlatButton label="View" />
+              <FlatButton label="Place Order" />
             </CardActions>
           </Card>
         </div>
