@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 import Checkbox from "material-ui/Checkbox";
 import RaisedButton from "material-ui/RaisedButton";
-import { Link, browserHistory } from "react-router-dom";
-import axios from "axios";
+import CircularProgress from "material-ui/CircularProgress";
+import { Link } from "react-router-dom";
+import Axios from "axios";
 
 export default class Registration extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class Registration extends Component {
       email: "",
       password: "",
 
+      isFetching: false,
       error: false,
       errorMessage: ""
     };
@@ -21,27 +23,32 @@ export default class Registration extends Component {
   }
 
   componentDidMount() {
-    console.log("props", this.props);
     // this.props.history.push('/');
   }
 
   onSubmit() {
     if (this.validate()) {
+      this.setState({ isFetching: true });
       const data = {
         name: this.state.name,
         email: this.state.email,
         password: this.state.password
       };
-      axios
-        .post(process.env.REACT_APP_API_URL_AUTH + "register", data)
+      Axios.post(process.env.REACT_APP_API_URL + "user/register", data)
         // .then(response => response.json())
         .then(response => {
-          this.props.history.push("/");
+          this.setState({ isFetching: false }, state => {
+            this.props.history.push("/");
+          });
         })
         .catch(error => {
           if (error.response && error.response.data.message) {
             this.setState(
-              { error: true, errorMessage: error.response.data.message },
+              {
+                isFetching: false,
+                error: true,
+                errorMessage: error.response.data.message
+              },
               state => {
                 setTimeout(() => {
                   this.setState({ error: false, errorMessage: "" });
@@ -54,7 +61,7 @@ export default class Registration extends Component {
   }
 
   validate() {
-    if (this.state.name == "") {
+    if (this.state.name === "") {
       this.setState(
         { error: true, errorMessage: "User name required" },
         state => {
@@ -64,7 +71,7 @@ export default class Registration extends Component {
         }
       );
       return false;
-    } else if (this.state.email == "") {
+    } else if (this.state.email === "") {
       this.setState(
         { error: true, errorMessage: "User email required" },
         state => {
@@ -101,60 +108,80 @@ export default class Registration extends Component {
 
           <div className="register-box-body">
             <p className="login-box-msg">Register a new membership</p>
-            <form onSubmit={event => event.preventDefault()} method="post">
-              <div className="form-group">
-                <TextField
-                  type="text"
-                  onChange={e => this.setState({ name: e.target.value })}
-                  style={{ width: "95%" }}
-                  hintText="Full name"
-                  floatingLabelText="Enter your name"
-                />
-                <span className="glyphicon glyphicon-user" />
-              </div>
+            {!this.state.isFetching && (
+              <form onSubmit={event => event.preventDefault()} method="post">
+                <div className="form-group">
+                  <TextField
+                    onChange={e => this.setState({ name: e.target.value })}
+                    value={this.state.name}
+                    type="text"
+                    style={{ width: "95%" }}
+                    hintText="Full name"
+                    floatingLabelText="Enter your name"
+                    // floatingLabelText="Enter your password"
+                  />
+                  <span className="glyphicon glyphicon-user" />
+                </div>
 
-              <div className="form-group">
-                <TextField
-                  type="email"
-                  onChange={e => this.setState({ email: e.target.value })}
-                  style={{ width: "95%" }}
-                  hintText="Email"
-                  floatingLabelText="Enter your email"
-                />
-                <span className="glyphicon glyphicon-envelope" />
-              </div>
-              <div className="form-group">
-                <TextField
-                  type="password"
-                  onChange={e => this.setState({ password: e.target.value })}
-                  style={{ width: "95%" }}
-                  hintText="Password"
-                  floatingLabelText="Enter your password"
-                />
-                <span className="glyphicon glyphicon-lock" />
-              </div>
-              <div className="row">
-                <div className="col-xs-8">
-                  <div className="checkbox icheck">
-                    {/* <Checkbox/>
+                <div className="form-group">
+                  <TextField
+                    onChange={e => this.setState({ email: e.target.value })}
+                    value={this.state.email}
+                    type="email"
+                    style={{ width: "95%" }}
+                    hintText="Email"
+                    floatingLabelText="Enter your email"
+                    // floatingLabelText="Enter your password"
+                  />
+                  <span className="glyphicon glyphicon-envelope" />
+                </div>
+                <div className="form-group">
+                  <TextField
+                    onChange={e => this.setState({ password: e.target.value })}
+                    value={this.state.password}
+                    type="password"
+                    style={{ width: "95%" }}
+                    hintText="Password"
+                    floatingLabelText="Enter your password"
+                    // floatingLabelText="Enter your password"
+                  />
+                  <span className="glyphicon glyphicon-lock" />
+                </div>
+                <div className="row">
+                  <div className="col-xs-8">
+                    <div className="checkbox icheck">
+                      {/* <Checkbox/>
                     <label>
                       I agree to the <a href="#">terms</a>
                     </label> */}
+                    </div>
+                  </div>
+                  <div className="col-xs-4">
+                    <RaisedButton
+                      onClick={() => this.onSubmit()}
+                      label="Sign Up"
+                      primary={true}
+                      labelStyle={{
+                        fontSize: "14px",
+                        textTransform: "none"
+                      }}
+                    />
                   </div>
                 </div>
-                <div className="col-xs-4">
-                  <RaisedButton
-                    onClick={() => this.onSubmit()}
-                    label="Sign Up"
-                    primary={true}
-                    labelStyle={{
-                      fontSize: "14px",
-                      textTransform: "none"
-                    }}
-                  />
-                </div>
-              </div>
-            </form>
+              </form>
+            )}
+
+            {this.state.isFetching && (
+              <CircularProgress
+                size={60}
+                style={{
+                  display: "block",
+                  margin: "auto",
+                  marginTop: "20px",
+                  marginBottom: "20px"
+                }}
+              />
+            )}
 
             {/* <div className="social-auth-links text-center">
               <p>- OR -</p>
