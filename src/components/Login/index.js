@@ -37,7 +37,7 @@ export default class Login extends Component {
         //.then( response => response.json())
         .then(response => {
           if (response.data.error) {
-            console.log("er", response.data.error);
+            console.log("error", response.data.error);
           }
           localStorage.setItem(
             "access_token",

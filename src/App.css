@@ -30,3 +30,36 @@ label {
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
+.content-header > h1 {
+  margin-bottom: 10px;
+} 
+
+.content { 
+  min-height: 0px;;
+}
+
+.grid-container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  padding: 10px;
+}
+.grid-item {
+  padding: 5px;
+  text-align: center;
+}
+
+/* @media screen and (max-width: 900px) {
+  .grid-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns:repeat(auto-fit, 560px);
+    padding: 10px;
+  }
+  .grid-item {
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
+} */
