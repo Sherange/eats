@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
+import { Provider } from "react-redux";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import * as serviceWorker from "./serviceWorker";
 
-const MainApp = () => (
-  <MuiThemeProvider>
-    <App />
-  </MuiThemeProvider>
+ReactDOM.render(
+  <Provider>
+    <MuiThemeProvider>
+      <App />
+    </MuiThemeProvider>
+  </Provider>,
+  document.getElementById("root")
 );
-
-ReactDOM.render(<MainApp />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
