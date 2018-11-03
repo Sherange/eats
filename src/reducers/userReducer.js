@@ -3,14 +3,16 @@ import {
   IS_FETCHING,
   DONE_FETCHING,
   IS_AUTHENTICATED,
-  USER_REGISTRATION_ERROR
+  USER_REGISTRATION_ERROR,
+  USER_LOGIN_ERROR
 } from "../actions/types";
 
 const initialState = {
   isFetching: false,
-  authenticated: false,
+  isAuthenticated: false,
   user: [],
-  userRegistrationError: ""
+  userRegistrationError: "",
+  userLoginError: ""
 };
 
 export default function(state = initialState, action) {
@@ -35,10 +37,15 @@ export default function(state = initialState, action) {
         ...state,
         userRegistrationError: action.payload
       };
+    case USER_LOGIN_ERROR:
+      return {
+        ...state,
+        userLoginError: action.payload
+      };
     case IS_AUTHENTICATED:
       return {
         ...state,
-        authenticated: true
+        isAuthenticated: true
       };
     default:
       return state;

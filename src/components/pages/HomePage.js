@@ -1,19 +1,23 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import Header from "../header";
 import SideBar from "../sidebar";
 import MainFooter from "../footer";
-import Home from "../home"
+import Home from "../home";
 
 class HomePage extends Component {
+  componentDidMount() {
+    if (this.props.isAuthenticated === false) {
+      this.props.history.push("/login");
+    }
+  }
   render() {
-    console.log(this.props)
     return (
       <div id="body" className="hold-transition skin-green sidebar-mini">
         <div className="wrapper">
           <Header />
           <SideBar />
-          <Home></Home>
+          <Home />
           <MainFooter />
         </div>
       </div>
@@ -23,10 +27,8 @@ class HomePage extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.user,
-  authenticated: state.user.authenticated,
+  isAuthenticated: state.user.isAuthenticated,
   isFetching: state.user.isFetching
-
-
 });
 
-export default  connect(mapStateToProps) (HomePage)
+export default connect(mapStateToProps)(HomePage);

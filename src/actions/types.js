@@ -6,3 +6,5 @@ export const SHOPS = "SHOPS";
 export const USER = "USER";
 export const IS_AUTHENTICATED = "IS_AUTHENTICATED";
 export const USER_REGISTRATION_ERROR = "USER_REGISTRATION_ERROR";
+
+export const USER_LOGIN_ERROR = "USER_LOGIN_ERROR"

@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import TextField from "material-ui/TextField";
 import Checkbox from "material-ui/Checkbox";
 import RaisedButton from "material-ui/RaisedButton";
 import CircularProgress from "material-ui/CircularProgress";
 import { Link } from "react-router-dom";
-import Axios from "axios";
+import { loginUser } from "../../actions/userActions";
+import { USER_LOGIN_ERROR } from "../../actions/types";
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,9 +25,28 @@ export default class Login extends Component {
 
   componentDidMount() {}
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.userLoginError) {
+      return { error: true, errorMessage: nextProps.userLoginError };
+    }
+    if (nextProps.isAuthenticated === true) {
+      nextProps.history.push("/");
+    }
+    return null;
+  }
+
+  componentDidUpdate(nextProps, prevState) {
+    if (this.state.error == true) {
+      setTimeout(() => {
+        this.setState({ error: false, errorMessage: "" }, state => {
+          nextProps.dispatch({ type: USER_LOGIN_ERROR, payload: "" });
+        });
+      }, 3000);
+    }
+  }
+
   onSubmit() {
     if (this.validate()) {
-      this.setState({ isFetching: true });
       const data = {
         grant_type: "password",
         client_id: process.env.REACT_APP_CLIENT_ID,
@@ -33,34 +54,7 @@ export default class Login extends Component {
         username: this.state.email,
         password: this.state.password
       };
-      Axios.post(process.env.REACT_APP_AUTH_URL + "oauth/token", data)
-        //.then( response => response.json())
-        .then(response => {
-          if (response.data.error) {
-            console.log("error", response.data.error);
-          }
-          localStorage.setItem(
-            "access_token",
-            "Bearer " + response.data.access_token
-          );
-          this.props.history.push("/");
-        })
-        .catch(error => {
-          if (error.response && error.response.data.message) {
-            this.setState(
-              {
-                isFetching: false,
-                error: true,
-                errorMessage: error.response.data.message
-              },
-              state => {
-                setTimeout(() => {
-                  this.setState({ error: false, errorMessage: "" });
-                }, 3000);
-              }
-            );
-          }
-        });
+      this.props.dispatch(loginUser(data));
     }
   }
 
@@ -104,54 +98,52 @@ export default class Login extends Component {
           <div className="login-box-body">
             <p className="login-box-msg">Sign in to start your session</p>
 
-            {!this.state.isFetching && (
-              <form onSubmit={e => e.preventDefault()} method="post">
-                <div className="form-group">
-                  <TextField
-                    onChange={e => this.setState({ email: e.target.value })}
-                    value={this.state.email}
-                    type="email"
-                    style={{ width: "95%" }}
-                    hintText="Email"
-                    floatingLabelText="Enter your email"
-                    // errorText="This field is required"
-                  />
-                  <span className="glyphicon glyphicon-envelope" />
-                </div>
-                <div className="form-group">
-                  <TextField
-                    onChange={e => this.setState({ password: e.target.value })}
-                    value={this.state.password}
-                    type="password"
-                    style={{ width: "95%" }}
-                    hintText="Password"
-                    // floatingLabelText="Enter your password"
-                  />
-                  <span className="glyphicon glyphicon-lock" />
-                </div>
-                <div className="row">
-                  <div className="col-xs-8">
-                    <div className="checkbox icheck">
-                      {/* <Checkbox />
+            <form onSubmit={e => e.preventDefault()} method="post">
+              <div className="form-group">
+                <TextField
+                  onChange={e => this.setState({ email: e.target.value })}
+                  value={this.state.email}
+                  type="email"
+                  style={{ width: "95%" }}
+                  hintText="Email"
+                  floatingLabelText="Enter your email"
+                  // errorText="This field is required"
+                />
+                <span className="glyphicon glyphicon-envelope" />
+              </div>
+              <div className="form-group">
+                <TextField
+                  onChange={e => this.setState({ password: e.target.value })}
+                  value={this.state.password}
+                  type="password"
+                  style={{ width: "95%" }}
+                  hintText="Password"
+                  // floatingLabelText="Enter your password"
+                />
+                <span className="glyphicon glyphicon-lock" />
+              </div>
+              <div className="row">
+                <div className="col-xs-8">
+                  <div className="checkbox icheck">
+                    {/* <Checkbox />
                     <label>Remember Me</label> */}
-                    </div>
-                  </div>
-                  <div className="col-xs-4">
-                    <RaisedButton
-                      onClick={() => this.onSubmit()}
-                      label="Sign In"
-                      primary={true}
-                      labelStyle={{
-                        fontSize: "14px",
-                        textTransform: "none"
-                      }}
-                    />
                   </div>
                 </div>
-              </form>
-            )}
+                <div className="col-xs-4">
+                  <RaisedButton
+                    onClick={() => this.onSubmit()}
+                    label="Sign In"
+                    primary={true}
+                    labelStyle={{
+                      fontSize: "14px",
+                      textTransform: "none"
+                    }}
+                  />
+                </div>
+              </div>
+            </form>
 
-            {this.state.isFetching && (
+            {this.props.isFetching && (
               <CircularProgress
                 size={60}
                 style={{
@@ -200,3 +192,11 @@ export default class Login extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  user: state.user.user,
+  isAuthenticated: state.user.isAuthenticated,
+  isFetching: state.user.isFetching,
+  userLoginError: state.user.userLoginError
+});
+
+export default connect(mapStateToProps)(Login);

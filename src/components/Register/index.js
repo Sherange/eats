@@ -35,17 +35,17 @@ class Registration extends Component {
       }, 3000);
       return { error: true, errorMessage: nextProps.userRegistrationError };
     }
-    if (nextProps.authenticated === true) {
+    if (nextProps.isAuthenticated === true) {
       nextProps.history.push("/");
     }
     return null;
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(nextProps, prevProps) {
     if (this.state.error == true) {
       setTimeout(() => {
         this.setState({ error: false, errorMessage: "" }, state => {
-          this.props.dispatch({ type: USER_REGISTRATION_ERROR, payload: "" });
+          nextProps.dispatch({ type: USER_REGISTRATION_ERROR, payload: "" });
         });
       }, 3000);
     }
@@ -219,7 +219,7 @@ class Registration extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.user,
-  authenticated: state.user.authenticated,
+  isAuthenticated: state.user.isAuthenticated,
   isFetching: state.user.isFetching,
   userRegistrationError: state.user.userRegistrationError
 });
