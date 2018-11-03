@@ -1,0 +1,8 @@
+export const IS_FETCHING = "IS_FETCHING";
+export const DONE_FETCHING = "DONE_FETCHING";
+
+export const SHOPS = "SHOPS";
+
+export const USER = "USER";
+export const IS_AUTHENTICATED = "IS_AUTHENTICATED";
+export const USER_REGISTRATION_ERROR = "USER_REGISTRATION_ERROR";

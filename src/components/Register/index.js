@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/userActions";
+import { USER_REGISTRATION_ERROR } from "../../actions/types";
+
 import TextField from "material-ui/TextField";
 import Checkbox from "material-ui/Checkbox";
 import RaisedButton from "material-ui/RaisedButton";
 import CircularProgress from "material-ui/CircularProgress";
 import { Link } from "react-router-dom";
-import Axios from "axios";
 
-export default class Registration extends Component {
+class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +17,6 @@ export default class Registration extends Component {
       email: "",
       password: "",
 
-      isFetching: false,
       error: false,
       errorMessage: ""
     };
@@ -26,37 +28,37 @@ export default class Registration extends Component {
     // this.props.history.push('/');
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.userRegistrationError) {
+      setTimeout(() => {
+        return { error: false, errorMessage: "" };
+      }, 3000);
+      return { error: true, errorMessage: nextProps.userRegistrationError };
+    }
+    if (nextProps.authenticated === true) {
+      nextProps.history.push("/");
+    }
+    return null;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.state.error == true) {
+      setTimeout(() => {
+        this.setState({ error: false, errorMessage: "" }, state => {
+          this.props.dispatch({ type: USER_REGISTRATION_ERROR, payload: "" });
+        });
+      }, 3000);
+    }
+  }
+
   onSubmit() {
     if (this.validate()) {
-      this.setState({ isFetching: true });
       const data = {
         name: this.state.name,
         email: this.state.email,
         password: this.state.password
       };
-      Axios.post(process.env.REACT_APP_API_URL + "user/register", data)
-        // .then(response => response.json())
-        .then(response => {
-          this.setState({ isFetching: false }, state => {
-            this.props.history.push("/");
-          });
-        })
-        .catch(error => {
-          if (error.response && error.response.data.message) {
-            this.setState(
-              {
-                isFetching: false,
-                error: true,
-                errorMessage: error.response.data.message
-              },
-              state => {
-                setTimeout(() => {
-                  this.setState({ error: false, errorMessage: "" });
-                }, 3000);
-              }
-            );
-          }
-        });
+      this.props.dispatch(registerUser(data));
     }
   }
 
@@ -108,70 +110,69 @@ export default class Registration extends Component {
 
           <div className="register-box-body">
             <p className="login-box-msg">Register a new membership</p>
-            {!this.state.isFetching && (
-              <form onSubmit={event => event.preventDefault()} method="post">
-                <div className="form-group">
-                  <TextField
-                    onChange={e => this.setState({ name: e.target.value })}
-                    value={this.state.name}
-                    type="text"
-                    style={{ width: "95%" }}
-                    hintText="Full name"
-                    floatingLabelText="Enter your name"
-                    // floatingLabelText="Enter your password"
-                  />
-                  <span className="glyphicon glyphicon-user" />
-                </div>
 
-                <div className="form-group">
-                  <TextField
-                    onChange={e => this.setState({ email: e.target.value })}
-                    value={this.state.email}
-                    type="email"
-                    style={{ width: "95%" }}
-                    hintText="Email"
-                    floatingLabelText="Enter your email"
-                    // floatingLabelText="Enter your password"
-                  />
-                  <span className="glyphicon glyphicon-envelope" />
-                </div>
-                <div className="form-group">
-                  <TextField
-                    onChange={e => this.setState({ password: e.target.value })}
-                    value={this.state.password}
-                    type="password"
-                    style={{ width: "95%" }}
-                    hintText="Password"
-                    floatingLabelText="Enter your password"
-                    // floatingLabelText="Enter your password"
-                  />
-                  <span className="glyphicon glyphicon-lock" />
-                </div>
-                <div className="row">
-                  <div className="col-xs-8">
-                    <div className="checkbox icheck">
-                      {/* <Checkbox/>
+            <form onSubmit={event => event.preventDefault()} method="post">
+              <div className="form-group">
+                <TextField
+                  onChange={e => this.setState({ name: e.target.value })}
+                  value={this.state.name}
+                  type="text"
+                  style={{ width: "95%" }}
+                  hintText="Full name"
+                  floatingLabelText="Enter your name"
+                  // floatingLabelText="Enter your password"
+                />
+                <span className="glyphicon glyphicon-user" />
+              </div>
+
+              <div className="form-group">
+                <TextField
+                  onChange={e => this.setState({ email: e.target.value })}
+                  value={this.state.email}
+                  type="email"
+                  style={{ width: "95%" }}
+                  hintText="Email"
+                  floatingLabelText="Enter your email"
+                  // floatingLabelText="Enter your password"
+                />
+                <span className="glyphicon glyphicon-envelope" />
+              </div>
+              <div className="form-group">
+                <TextField
+                  onChange={e => this.setState({ password: e.target.value })}
+                  value={this.state.password}
+                  type="password"
+                  style={{ width: "95%" }}
+                  hintText="Password"
+                  floatingLabelText="Enter your password"
+                  // floatingLabelText="Enter your password"
+                />
+                <span className="glyphicon glyphicon-lock" />
+              </div>
+              <div className="row">
+                <div className="col-xs-8">
+                  <div className="checkbox icheck">
+                    {/* <Checkbox/>
                     <label>
                       I agree to the <a href="#">terms</a>
                     </label> */}
-                    </div>
-                  </div>
-                  <div className="col-xs-4">
-                    <RaisedButton
-                      onClick={() => this.onSubmit()}
-                      label="Sign Up"
-                      primary={true}
-                      labelStyle={{
-                        fontSize: "14px",
-                        textTransform: "none"
-                      }}
-                    />
                   </div>
                 </div>
-              </form>
-            )}
+                <div className="col-xs-4">
+                  <RaisedButton
+                    onClick={() => this.onSubmit()}
+                    label="Sign Up"
+                    primary={true}
+                    labelStyle={{
+                      fontSize: "14px",
+                      textTransform: "none"
+                    }}
+                  />
+                </div>
+              </div>
+            </form>
 
-            {this.state.isFetching && (
+            {this.props.isFetching && (
               <CircularProgress
                 size={60}
                 style={{
@@ -215,3 +216,12 @@ export default class Registration extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user.user,
+  authenticated: state.user.authenticated,
+  isFetching: state.user.isFetching,
+  userRegistrationError: state.user.userRegistrationError
+});
+
+export default connect(mapStateToProps)(Registration);
