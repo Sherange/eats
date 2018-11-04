@@ -1,10 +1,27 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
+import RaisedButton from "material-ui/RaisedButton";
+import { logoutUser } from "../../actions/userActions";
 export default class Navigation extends Component {
-
-  renderRightMenu() {
-    
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+    this.goToProfile = this.goToProfile.bind(this);
+    this.goToLogin = this.goToLogin.bind(this);
   }
+
+  logOut() {
+    this.props.dispatch(logoutUser);
+  }
+
+  goToProfile() {
+    this.props.history.push("/profile");
+  }
+
+  goToLogin() {
+    this.props.history.push("/login");
+  }
+
   render() {
     return (
       <nav className="navbar navbar-static-top" role="navigation">
@@ -117,7 +134,7 @@ export default class Navigation extends Component {
                           {/* <!-- Change the css width attribute to simulate progress --> */}
                           <div
                             className="progress-bar progress-bar-aqua"
-                            style={{ 'width': '20%' }}
+                            style={{ width: "20%" }}
                             role="progressbar"
                             aria-valuenow="20"
                             aria-valuemin="0"
@@ -147,7 +164,7 @@ export default class Navigation extends Component {
                   alt="User Image"
                 />
                 {/* <!-- hidden-xs hides the username on small devices so only the image appears. --> */}
-                <span className="hidden-xs">Alexander Pierce</span>
+                <span className="hidden-xs">{this.props.user.name}</span>
               </a>
               <ul className="dropdown-menu">
                 {/* <!-- The user image in the menu --> */}
@@ -159,37 +176,47 @@ export default class Navigation extends Component {
                   />
 
                   <p>
-                    Alexander Pierce - Web Developer
+                    {this.props.user.name}
                     <small>Member since Nov. 2012</small>
                   </p>
                 </li>
-                {/* <!-- Menu Body --> */}
-                <li className="user-body">
-                  <div className="row">
-                    <div className="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div className="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div className="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </div>
-                  {/* <!-- /.row --> */}
-                </li>
-                {/* <!-- Menu Footer--> */}
                 <li className="user-footer">
                   <div className="pull-left">
-                    <a href="#" className="btn btn-default btn-flat">
-                      Profile
-                    </a>
+                    <RaisedButton
+                      onClick={() => this.goToProfile()}
+                      label="Profile"
+                      primary={true}
+                      labelStyle={{
+                        fontSize: "14px",
+                        textTransform: "none"
+                      }}
+                    />
                   </div>
-                  <div className="pull-right">
-                    <a href="#" className="btn btn-default btn-flat">
-                      Sign out
-                    </a>
-                  </div>
+                  {this.props.user ? (
+                    <div className="pull-right">
+                      <RaisedButton
+                        onClick={() => this.logOut()}
+                        label="Logout"
+                        primary={true}
+                        labelStyle={{
+                          fontSize: "14px",
+                          textTransform: "none"
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="pull-right">
+                      <RaisedButton
+                        onClick={() => this.goToLogin()}
+                        label="Login"
+                        primary={true}
+                        labelStyle={{
+                          fontSize: "14px",
+                          textTransform: "none"
+                        }}
+                      />
+                    </div>
+                  )}
                 </li>
               </ul>
             </li>

@@ -4,18 +4,27 @@ import Header from "../header";
 import SideBar from "../sidebar";
 import MainFooter from "../footer";
 import Home from "../home";
+import { getLoginUser } from "../../actions/userActions";
 
 class HomePage extends Component {
   componentDidMount() {
+    this.props.dispatch(getLoginUser());
     if (this.props.isAuthenticated === false) {
       this.props.history.push("/login");
     }
   }
+
+  componentDidUpdate() {
+    if (this.props.isAuthenticated === false) {
+      this.props.history.push("/login");
+    }
+  }
+
   render() {
     return (
       <div id="body" className="hold-transition skin-green sidebar-mini">
         <div className="wrapper">
-          <Header />
+          <Header history={this.props.history} />
           <SideBar />
           <Home />
           <MainFooter />

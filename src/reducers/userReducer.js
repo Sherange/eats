@@ -45,7 +45,7 @@ export default function(state = initialState, action) {
     case IS_AUTHENTICATED:
       return {
         ...state,
-        isAuthenticated: true
+        isAuthenticated: action.payload
       };
     default:
       return state;

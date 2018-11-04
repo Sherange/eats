@@ -1,23 +1,29 @@
 import React, { Component } from "react";
-import UserPanel from './UserPanel'
-import SearchBar from './SearchBar'
-import SideMenu from './SideMenu'
-
-
-export default class SideBar extends Component {
+import { connect } from "react-redux";
+import UserPanel from "./UserPanel";
+import SearchBar from "./SearchBar";
+import SideMenu from "./SideMenu";
+class SideBar extends Component {
   render() {
     return (
       <aside className="main-sidebar">
         {/* <!-- sidebar: style can be found in sidebar.less --> */}
         <section className="sidebar">
           {/* user panel (optional)  */}
-          <UserPanel></UserPanel>
+          <UserPanel user={this.props.user} />
           {/* search form (Optional) */}
-          <SearchBar></SearchBar>
+          <SearchBar />
           {/* <!-- Sidebar Menu --> */}
-          <SideMenu></SideMenu>
+          <SideMenu user={this.props.user} />
         </section>
       </aside>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user.user,
+  isAuthenticated: state.user.isAuthenticated
+});
+
+export default connect(mapStateToProps)(SideBar);

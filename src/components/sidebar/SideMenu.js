@@ -53,25 +53,26 @@ export default class SideMenu extends Component {
           </ul>
         </li> */}
 
-        <li className="header">USER </li>
+        <li className="header">USER</li>
 
-        <li className="">
+        <li>
           <a href="/profile/id">
             <i className="fa fa-link" /> <span>Profile</span>
           </a>
         </li>
 
-        <li className="">
-          <a href="/orders/id">
+        <li>
+          <a href="/orders">
             <i className="fa fa-link" /> <span>My Orders</span>
           </a>
         </li>
 
-        <li className="">
-          <a href="/myshops/id">
+        <li>
+          <a href="/myshops">
             <i className="fa fa-link" /> <span>My Shops</span>
           </a>
         </li>
+
       </ul>
     );
   }

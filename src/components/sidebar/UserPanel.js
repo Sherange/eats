@@ -12,7 +12,7 @@ export default class UserPannel extends Component {
           />
         </div>
         <div className="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{this.props.user.name}</p>
           {/* <!-- Status --> */}
           <a href="#">
             <i className="fa fa-circle text-success" /> Online

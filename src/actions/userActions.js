@@ -21,7 +21,10 @@ export const registerUser = data => dispatch => {
       // .then(response => response.json())
       .then(response => {
         dispatch({ type: USER, payload: response.data.data });
-        dispatch({ type: IS_AUTHENTICATED });
+        dispatch({
+          type: IS_AUTHENTICATED,
+          payload: true
+        });
         dispatch({ type: DONE_FETCHING });
       })
       .catch(error => {
@@ -50,8 +53,10 @@ export const loginUser = data => dispatch => {
           });
         } else {
           dispatch({
-            type: IS_AUTHENTICATED
+            type: IS_AUTHENTICATED,
+            payload: true
           });
+          dispatch({ type: DONE_FETCHING });
         }
         localStorage.setItem(
           "access_token",
@@ -69,4 +74,33 @@ export const loginUser = data => dispatch => {
         }
       })
   );
+};
+
+export const getLoginUser = () => dispatch => {
+  if (localStorage.access_token) {
+    return axios
+      .get(process.env.REACT_APP_API_URL + "user", {
+        headers: {
+          Authorization: localStorage.access_token
+        }
+      })
+      .then(response => {
+        dispatch({ type: USER, payload: response.data });
+        dispatch({ type: IS_AUTHENTICATED, payload: true });
+        // dispatch({ type: DONE_FETCHING });
+      });
+  }
+};
+
+export const logoutUser = dispatch => {
+  localStorage.removeItem("access_token");
+  dispatch({
+    type: USER,
+    payload: []
+  });
+  dispatch({
+    type: IS_AUTHENTICATED,
+    payload: false
+  });
+  // this.props.history.push("/");
 };
