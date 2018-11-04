@@ -6,7 +6,10 @@ import MainFooter from "../footer";
 export default class Layout extends Component {
   renderContent() {
     return (
-      <div className="content-wrapper">
+      <div
+        className="content-wrapper"
+        style={{ minHeight: window.innerHeight }}
+      >
         {/* Content Header (Page header)  */}
         <section className="content-header">
           <h1>

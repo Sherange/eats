@@ -4,7 +4,10 @@ import Cards from "./Cards";
 class Home extends Component {
   render() {
     return (
-      <div className="content-wrapper">
+      <div
+        className="content-wrapper"
+        style={{ minHeight: window.innerHeight }}
+      >
         <section className="content">
           <div className="row">
             <div className="col-md-3 col-sm-6 col-xs-12">

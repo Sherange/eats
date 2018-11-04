@@ -1,39 +1,54 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class SideMenu extends Component {
   render() {
     return (
       <ul className="sidebar-menu" data-widget="tree">
+        <li className="header">PAGES</li>
+
+        <li>
+          <Link to="/">
+            <i className="fa fa-link" />
+            Home
+          </Link>
+        </li>
+
         <li className="header">FOOD CATEGORIES</li>
 
         <li>
-          <a href="/lunch">
-            <i className="fa fa-link" /> <span>Lunch</span>
-          </a>
+          <Link to="/lunch">
+            <i className="fa fa-link" />
+            Lunch
+          </Link>
         </li>
 
         <li>
-          <a href="/breakfast">
-            <i className="fa fa-link" /> <span>Breakfast</span>
-          </a>
+          <Link to="/breakfast">
+            <i className="fa fa-link" />
+            Breakfast
+          </Link>
         </li>
 
         <li>
-          <a href="/dinner">
-            <i className="fa fa-link" /> <span>Dinner</span>
-          </a>
+          <Link to="/dinner">
+            <i className="fa fa-link" />
+            Dinner
+          </Link>
         </li>
 
         <li>
-          <a href="/drinks">
-            <i className="fa fa-link" /> <span>Drinks</span>
-          </a>
+          <Link to="/drinks">
+            <i className="fa fa-link" />
+            Drinks
+          </Link>
         </li>
 
         <li>
-          <a href="/desserts">
-            <i className="fa fa-link" /> <span>Desserts & Bakes</span>
-          </a>
+          <Link to="/desserts">
+            <i className="fa fa-link" />
+            Desserts
+          </Link>
         </li>
 
         {/* <li className="treeview">
@@ -56,23 +71,25 @@ export default class SideMenu extends Component {
         <li className="header">USER</li>
 
         <li>
-          <a href="/profile/id">
-            <i className="fa fa-link" /> <span>Profile</span>
-          </a>
+          <Link to="/profile">
+            <i className="fa fa-link" />
+            Profile
+          </Link>
         </li>
 
         <li>
-          <a href="/orders">
-            <i className="fa fa-link" /> <span>My Orders</span>
-          </a>
+          <Link to="/orders">
+            <i className="fa fa-link" />
+            Orders
+          </Link>
         </li>
 
         <li>
-          <a href="/myshops">
-            <i className="fa fa-link" /> <span>My Shops</span>
-          </a>
+          <Link to="/myshops">
+            <i className="fa fa-link" />
+            My shops
+          </Link>
         </li>
-
       </ul>
     );
   }

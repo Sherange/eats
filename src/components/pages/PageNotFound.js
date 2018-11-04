@@ -11,7 +11,10 @@ export default class PageNotFound extends Component {
         <div className="wrapper">
           <Header />
           <SideBar />
-          <div className="content-wrapper">
+          <div
+            className="content-wrapper"
+            style={{ minHeight: window.innerHeight }}
+          >
             <section className="content-header">
               <h1>404 Error Page</h1>
               <ol className="breadcrumb">

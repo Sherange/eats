@@ -9,38 +9,30 @@ class MyShops extends Component {
     this.state = {
       name: "",
       cuisinesAvailable: "",
-      openingHours : ""
+      openingHours: ""
     };
   }
   render() {
     return (
-      <div className="content-wrapper">
+      <div
+        className="content-wrapper"
+        style={{ minHeight: window.innerHeight }}
+      >
         <section className="content-header">
           <h1>
-            Add New Shop
+            Add New Food Court
             <small>Preview</small>
           </h1>
-          <ol className="breadcrumb">
-            <li>
-              <a href="#">
-                <i className="fa fa-dashboard" /> Home
-              </a>
-            </li>
-            <li>
-              <a href="#">Forms</a>
-            </li>
-            <li className="active">General Elements</li>
-          </ol>
         </section>
 
         <section className="content">
           <div className="row">
             {/* <!-- left column --> */}
-            <div className="col-md-6">
+            <div className="col-md-8">
               <div className="box box-primary">
-                <div className="box-header with-border">
+                {/* <div className="box-header with-border">
                   <h3 className="box-title">Quick Example</h3>
-                </div>
+                </div> */}
                 <form role="form">
                   <div className="box-body">
                     <div className="form-group">
@@ -50,7 +42,7 @@ class MyShops extends Component {
                         type="text"
                         style={{ width: "95%" }}
                         hintText=""
-                        floatingLabelText="Enter your shop name"
+                        floatingLabelText="Food Court Name"
                         // errorText="This field is required"
                       />
                     </div>
@@ -80,19 +72,23 @@ class MyShops extends Component {
                         // errorText="This field is required"
                       />
                     </div>
-                    {/* <div className="checkbox">
-                      <label>
-                        <input type="checkbox" /> Check me out
-                      </label>
-                    </div> */}
                   </div>
-
                   <div className="box-footer">
-                    <button type="submit" className="btn btn-primary">
-                      Submit
-                    </button>
+                    <RaisedButton label="Primary" primary={true} />
                   </div>
                 </form>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="box box-info">
+                <div className="box-header with-border">
+                  {/* <h3 className="box-title">Quick Example</h3> */}
+                  <img
+                    src="/images/profile.png"
+                    className="img-box"
+                    alt="User Image"
+                  />
+                </div>
               </div>
             </div>
           </div>
