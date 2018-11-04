@@ -52,17 +52,17 @@ export const loginUser = data => dispatch => {
             payload: response.data.message
           });
         } else {
+          localStorage.setItem(
+            "access_token",
+            "Bearer " + response.data.access_token
+          );
           dispatch({
             type: IS_AUTHENTICATED,
             payload: true
           });
+          dispatch(getLoginUser());
           dispatch({ type: DONE_FETCHING });
         }
-        localStorage.setItem(
-          "access_token",
-          "Bearer " + response.data.access_token
-        );
-        this.props.history.push("/");
       })
       .catch(error => {
         if (error.response && error.response.data.message) {
