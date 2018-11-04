@@ -10,7 +10,7 @@ export default class SideMenu extends Component {
         <li>
           <Link to="/">
             <i className="fa fa-link" />
-            Home
+            <span>Home</span>
           </Link>
         </li>
 
@@ -19,35 +19,35 @@ export default class SideMenu extends Component {
         <li>
           <Link to="/lunch">
             <i className="fa fa-link" />
-            Lunch
+            <span>Lunch</span>
           </Link>
         </li>
 
         <li>
           <Link to="/breakfast">
             <i className="fa fa-link" />
-            Breakfast
+            <span>Breakfast</span>
           </Link>
         </li>
 
         <li>
           <Link to="/dinner">
             <i className="fa fa-link" />
-            Dinner
+            <span>Dinner</span>
           </Link>
         </li>
 
         <li>
           <Link to="/drinks">
             <i className="fa fa-link" />
-            Drinks
+            <span>Drinks</span>
           </Link>
         </li>
 
         <li>
           <Link to="/desserts">
             <i className="fa fa-link" />
-            Desserts
+            <span>Desserts</span>
           </Link>
         </li>
 
@@ -73,21 +73,21 @@ export default class SideMenu extends Component {
         <li>
           <Link to="/profile">
             <i className="fa fa-link" />
-            Profile
+            <span>Profile</span>
           </Link>
         </li>
 
         <li>
           <Link to="/orders">
             <i className="fa fa-link" />
-            Orders
+            <span>Orders</span>
           </Link>
         </li>
 
         <li>
           <Link to="/myshops">
             <i className="fa fa-link" />
-            My shops
+            <span>My shops</span>
           </Link>
         </li>
       </ul>
