@@ -9,9 +9,48 @@ class MyShops extends Component {
     this.state = {
       name: "",
       cuisinesAvailable: "",
-      openingHours: ""
+      openingHours: "",
+      address: "",
+      phoneNumber: "",
+      description: "",
+
+      error: false,
+      errorMessage: "",
+
+      errorName: "",
+      errorCuisines: "",
+      errorOpeningHours: "",
+      errorAddress: "",
+      errorDescription: ""
     };
+    this.validate = this.validate.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
+
+  validate() {
+    if (this.state.name === "") {
+      this.setState({ error: true, errorName: "Shop name required" });
+      return false;
+    } else if (this.state.cuisinesAvailable === "") {
+      this.setState({ error: true, errorCuisines: "Cuisines required" });
+      return false;
+    } else if (this.state.address === "") {
+      this.setState({ error: true, errorAddress: "Address required" });
+      return false;
+    } else if (this.state.description === "") {
+      this.setState({ error: true, errorDescription: "Description required" });
+      return false;
+    }
+    return true;
+  }
+
+  onSubmit() {
+    if (this.validate() === true) {
+      console.log("here");
+      // this.props.dispatch('')
+    }
+  }
+
   render() {
     return (
       <div
@@ -33,48 +72,111 @@ class MyShops extends Component {
                 {/* <div className="box-header with-border">
                   <h3 className="box-title">Quick Example</h3>
                 </div> */}
-                <form role="form">
+                <form
+                  method="POST"
+                  onSubmit={e => {
+                    e.preventDefault();
+                  }}
+                >
                   <div className="box-body">
-                    <div className="form-group">
+                    <div>
                       <TextField
-                        onChange={e => this.setState({ name: e.target.value })}
+                        onChange={e =>
+                          this.setState({
+                            name: e.target.value,
+                            error: false,
+                            errorName: ""
+                          })
+                        }
                         value={this.state.name}
                         type="text"
                         style={{ width: "95%" }}
                         hintText=""
                         floatingLabelText="Food Court Name"
-                        // errorText="This field is required"
+                        errorText={this.state.errorName}
                       />
                     </div>
-                    <div className="form-group">
+                    <div>
                       <TextField
                         onChange={e =>
-                          this.setState({ cuisinesAvailable: e.target.value })
+                          this.setState({
+                            cuisinesAvailable: e.target.value,
+                            error: false,
+                            errorCuisines: ""
+                          })
                         }
                         value={this.state.cuisinesAvailable}
                         type="text"
                         style={{ width: "95%" }}
                         hintText=""
                         floatingLabelText="Cuisines Available"
-                        // errorText="This field is required"
+                        errorText={this.state.errorCuisines}
                       />
                     </div>
-                    <div className="form-group">
+                    <div>
                       <TextField
                         onChange={e =>
-                          this.setState({ openingHours: e.target.value })
+                          this.setState({
+                            openingHours: e.target.value,
+                            error: false,
+                            errorOpeningHours: ""
+                          })
                         }
                         value={this.state.openingHours}
                         type="text"
                         style={{ width: "95%" }}
                         hintText=""
                         floatingLabelText="Opening Hours"
-                        // errorText="This field is required"
+                        errorText={this.state.errorOpeningHours}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        onChange={e =>
+                          this.setState({
+                            address: e.target.value,
+                            error: false,
+                            errorAddress: ""
+                          })
+                        }
+                        value={this.state.address}
+                        multiLine={true}
+                        rows={1}
+                        rowsMax={3}
+                        type="text"
+                        style={{ width: "95%" }}
+                        hintText=""
+                        floatingLabelText="Address"
+                        errorText={this.state.errorAddress}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        onChange={e =>
+                          this.setState({
+                            description: e.target.value,
+                            error: false,
+                            errorDescription: ""
+                          })
+                        }
+                        value={this.state.description}
+                        multiLine={true}
+                        rows={1}
+                        rowsMax={3}
+                        type="text"
+                        style={{ width: "95%" }}
+                        hintText=""
+                        floatingLabelText="Description"
+                        errorText={this.state.errorDescription}
                       />
                     </div>
                   </div>
                   <div className="box-footer">
-                    <RaisedButton label="Primary" primary={true} />
+                    <RaisedButton
+                      label="Submit"
+                      primary={true}
+                      onClick={() => this.onSubmit()}
+                    />
                   </div>
                 </form>
               </div>
@@ -98,4 +200,10 @@ class MyShops extends Component {
   }
 }
 
-export default MyShops;
+const mapStateToProps = state => ({
+  user: state.user.user,
+  isAuthenticated: state.user.isAuthenticated,
+  isFetching: state.user.isFetching
+});
+
+export default connect(mapStateToProps)(MyShops);

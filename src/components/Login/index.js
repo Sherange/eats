@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import TextField from "material-ui/TextField";
-import Checkbox from "material-ui/Checkbox";
 import RaisedButton from "material-ui/RaisedButton";
 import CircularProgress from "material-ui/CircularProgress";
 import { Link } from "react-router-dom";
@@ -36,7 +35,7 @@ class Login extends Component {
   }
 
   componentDidUpdate(nextProps, prevState) {
-    if (this.state.error == true) {
+    if (this.state.error === true) {
       setTimeout(() => {
         this.setState({ error: false, errorMessage: "" }, state => {
           nextProps.dispatch({ type: USER_LOGIN_ERROR, payload: "" });

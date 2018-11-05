@@ -71,7 +71,7 @@ export default class SideMenu extends Component {
         <li className="header">USER</li>
 
         <li>
-          <Link to="/profile">
+          <Link to="/profile/10">
             <i className="fa fa-link" />
             <span>Profile</span>
           </Link>
