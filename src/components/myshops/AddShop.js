@@ -4,6 +4,10 @@ import RaisedButton from "material-ui/RaisedButton";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import { registerShop } from "../../actions/shopActions";
+import {
+  SHOP_REGISTRATION_ERROR,
+  SHOP_REGISTRATION_SUCCESS
+} from "../../actions/types";
 
 class AddShop extends Component {
   constructor(props) {
@@ -19,6 +23,9 @@ class AddShop extends Component {
       error: false,
       errorMessage: "",
 
+      success: false,
+      successMessage: "",
+
       errorName: "",
       errorCuisines: "",
       errorOpeningHours: "",
@@ -30,6 +37,35 @@ class AddShop extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.shopRegistrationError) {
+      return { error: true, errorMessage: nextProps.shopRegistrationError };
+    }
+    if (nextProps.shopRegistrationSuccess)
+      return {
+        success: true,
+        successMessage: nextProps.shopRegistrationSuccess
+      };
+    return null;
+  }
+
+  componentDidUpdate(nextProps) {
+    if (this.state.error === true) {
+      setTimeout(() => {
+        this.setState({ error: false, errorMessage: "" }, state => {
+          nextProps.dispatch({ type: SHOP_REGISTRATION_ERROR, payload: "" });
+        });
+      }, 3000);
+    }
+    if (this.state.success === true) {
+      setTimeout(() => {
+        this.setState({ success: false, successMessage: "" }, state => {
+          nextProps.dispatch({ type: SHOP_REGISTRATION_SUCCESS, payload: "" });
+        });
+      }, 3000);
+    }
+  }
+
   handleChange = (event, index, value) =>
     this.setState({
       cuisinesAvailable: value,
@@ -39,25 +75,24 @@ class AddShop extends Component {
 
   validate() {
     if (this.state.name === "") {
-      this.setState({ error: true, errorName: "Shop name required" });
+      this.setState({ errorName: "Shop name required" });
       return false;
     } else if (this.state.cuisinesAvailable === "") {
-      this.setState({ error: true, errorCuisines: "Cuisines required" });
+      this.setState({ errorCuisines: "Cuisines required" });
       return false;
     } else if (this.state.openingHours === "") {
       this.setState({
-        error: true,
         errorOpeningHours: "Opening Hours required"
       });
       return false;
     } else if (this.state.phoneNumber === "") {
-      this.setState({ error: true, errorPhoneNumber: "Phone number required" });
+      this.setState({ errorPhoneNumber: "Phone number required" });
       return false;
     } else if (this.state.address === "") {
-      this.setState({ error: true, errorAddress: "Address required" });
+      this.setState({ errorAddress: "Address required" });
       return false;
     } else if (this.state.description === "") {
-      this.setState({ error: true, errorDescription: "Description required" });
+      this.setState({ errorDescription: "Description required" });
       return false;
     }
     return true;
@@ -69,6 +104,7 @@ class AddShop extends Component {
         name: this.state.name,
         cuisines_available: this.state.cuisinesAvailable,
         opening_hours: this.state.openingHours,
+        phone_number: this.state.phoneNumber,
         address: this.state.address,
         description: this.state.description
       };
@@ -84,7 +120,7 @@ class AddShop extends Component {
       <MenuItem key={4} value={4} primaryText="Weekends" />,
       <MenuItem key={5} value={5} primaryText="Weekly" />
     ];
-    console.log('this.porps',this.props)
+
     return (
       <section className="content">
         <div className="row">
@@ -105,7 +141,6 @@ class AddShop extends Component {
                       onChange={e =>
                         this.setState({
                           name: e.target.value,
-                          error: false,
                           errorName: ""
                         })
                       }
@@ -132,8 +167,7 @@ class AddShop extends Component {
                   <TextField
                     onChange={e =>
                       this.setState({
-                        cuisinesAvailable: e.target.value,
-                        error: false,
+                        cuisinesAvailable: e.target.value
                         errorCuisines: ""
                       })
                     }
@@ -150,7 +184,6 @@ class AddShop extends Component {
                       onChange={e =>
                         this.setState({
                           openingHours: e.target.value,
-                          error: false,
                           errorOpeningHours: ""
                         })
                       }
@@ -167,7 +200,6 @@ class AddShop extends Component {
                       onChange={e =>
                         this.setState({
                           phoneNumber: e.target.value,
-                          error: false,
                           errorPhoneNumber: ""
                         })
                       }
@@ -187,7 +219,6 @@ class AddShop extends Component {
                       onChange={e =>
                         this.setState({
                           address: e.target.value,
-                          error: false,
                           errorAddress: ""
                         })
                       }
@@ -207,7 +238,6 @@ class AddShop extends Component {
                       onChange={e =>
                         this.setState({
                           description: e.target.value,
-                          error: false,
                           errorDescription: ""
                         })
                       }
@@ -223,12 +253,31 @@ class AddShop extends Component {
                     />
                   </div>
                 </div>
+
                 <div className="box-footer">
                   <RaisedButton
                     label="Submit"
                     primary={true}
                     onClick={() => this.onSubmit()}
                   />
+
+                  {this.state.error && (
+                    <div className="alert alert-danger alert-dismissible">
+                      <p>
+                        <i className="icon fa fa-warning" />{" "}
+                        {this.state.errorMessage}
+                      </p>
+                    </div>
+                  )}
+
+                  {this.state.success && (
+                    <div className="alert alert-success alert-dismissible">
+                      <p>
+                        <i className="icon fa fa-hand-peace-o" />{" "}
+                        {this.state.successMessage}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </form>
             </div>

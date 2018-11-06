@@ -17,11 +17,10 @@ export const fetchShops = () => dispatch => {
       }
     })
     .then(response => {
-      dispatch({ type : SHOPS, payload : response.data.data })
+      dispatch({ type: SHOPS, payload: response.data.data });
       dispatch({ type: DONE_FETCHING });
     })
     .catch(error => {
-      console.log("error", error);
       dispatch({ type: DONE_FETCHING });
     });
 };
@@ -36,12 +35,23 @@ export const registerShop = data => dispatch => {
     })
     .then(response => {
       if (response.data.error) {
-        dispatch({ type : SHOP_REGISTRATION_ERROR, payload : response.data.data })
-      }else {
-        dispatch({ type : SHOP_REGISTRATION_SUCCESS, payload : response.data.message })
+        dispatch({
+          type: SHOP_REGISTRATION_ERROR,
+          payload: response.data.data
+        });
+      } else {
+        dispatch({
+          type: SHOP_REGISTRATION_SUCCESS,
+          payload: response.data.message
+        });
       }
     })
     .catch(error => {
-      console.log("error", error);
+      if (error.response.data.error) {
+        dispatch({
+          type: SHOP_REGISTRATION_ERROR,
+          payload: error.response.data.message
+        });
+      }
     });
 };

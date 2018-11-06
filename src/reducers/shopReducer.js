@@ -33,12 +33,12 @@ export default function(state = initialState, action) {
     case SHOP_REGISTRATION_SUCCESS:
       return {
         ...state,
-        SHOP_REGISTRATION_ERROR: action.payload
+        shopRegistrationSuccess: action.payload
       };
     case SHOP_REGISTRATION_ERROR:
       return {
         ...state,
-        SHOP_REGISTRATION_ERROR: action.payload
+        shopRegistrationError: action.payload
       };
 
     default:
