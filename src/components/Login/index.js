@@ -29,7 +29,7 @@ class Login extends Component {
       return { error: true, errorMessage: nextProps.userLoginError };
     }
     if (nextProps.isAuthenticated === true) {
-      nextProps.history.push("/");
+      nextProps.history.goBack();
     }
     return null;
   }
