@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
 
 class MyShops extends Component {
   constructor(props) {
@@ -21,11 +23,19 @@ class MyShops extends Component {
       errorCuisines: "",
       errorOpeningHours: "",
       errorAddress: "",
+      errorPhoneNumber: "",
       errorDescription: ""
     };
     this.validate = this.validate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  handleChange = (event, index, value) =>
+    this.setState({
+      cuisinesAvailable: value,
+      error: false,
+      errorCuisines: ""
+    });
 
   validate() {
     if (this.state.name === "") {
@@ -33,6 +43,15 @@ class MyShops extends Component {
       return false;
     } else if (this.state.cuisinesAvailable === "") {
       this.setState({ error: true, errorCuisines: "Cuisines required" });
+      return false;
+    } else if (this.state.openingHours === "") {
+      this.setState({
+        error: true,
+        errorOpeningHours: "Opening Hours required"
+      });
+      return false;
+    } else if (this.state.phoneNumber === "") {
+      this.setState({ error: true, errorPhoneNumber: "Phone number required" });
       return false;
     } else if (this.state.address === "") {
       this.setState({ error: true, errorAddress: "Address required" });
@@ -52,6 +71,14 @@ class MyShops extends Component {
   }
 
   render() {
+    const items = [
+      <MenuItem key={1} value={1} primaryText="Never" />,
+      <MenuItem key={2} value={2} primaryText="Every Night" />,
+      <MenuItem key={3} value={3} primaryText="Weeknights" />,
+      <MenuItem key={4} value={4} primaryText="Weekends" />,
+      <MenuItem key={5} value={5} primaryText="Weekly" />
+    ];
+
     return (
       <div
         className="content-wrapper"
@@ -66,7 +93,6 @@ class MyShops extends Component {
 
         <section className="content">
           <div className="row">
-            {/* <!-- left column --> */}
             <div className="col-md-8">
               <div className="box box-primary">
                 {/* <div className="box-header with-border">
@@ -97,6 +123,17 @@ class MyShops extends Component {
                       />
                     </div>
                     <div>
+                      <SelectField
+                        value={this.state.cuisinesAvailable}
+                        onChange={this.handleChange}
+                        floatingLabelText="Cuisines Available"
+                        autoWidth={true}
+                        errorText={this.state.errorCuisines}
+                      >
+                        {items}
+                      </SelectField>
+                    </div>
+                    {/* <div>
                       <TextField
                         onChange={e =>
                           this.setState({
@@ -112,7 +149,7 @@ class MyShops extends Component {
                         floatingLabelText="Cuisines Available"
                         errorText={this.state.errorCuisines}
                       />
-                    </div>
+                    </div> */}
                     <div>
                       <TextField
                         onChange={e =>
@@ -128,6 +165,26 @@ class MyShops extends Component {
                         hintText=""
                         floatingLabelText="Opening Hours"
                         errorText={this.state.errorOpeningHours}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        onChange={e =>
+                          this.setState({
+                            phoneNumber: e.target.value,
+                            error: false,
+                            errorPhoneNumber: ""
+                          })
+                        }
+                        value={this.state.phoneNumber}
+                        multiLine={true}
+                        rows={1}
+                        rowsMax={3}
+                        type="text"
+                        style={{ width: "95%" }}
+                        hintText=""
+                        floatingLabelText="Phone Number"
+                        errorText={this.state.errorPhoneNumber}
                       />
                     </div>
                     <div>

@@ -7,17 +7,22 @@ import Home from "../home";
 import { getLoginUser } from "../../actions/userActions";
 
 class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   componentDidMount() {
-    this.props.dispatch(getLoginUser());
     if (this.props.isAuthenticated === false) {
-      this.props.history.push("/login");
+      this.props.dispatch(getLoginUser());
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.isAuthenticated === false) {
-      this.props.history.push("/login");
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.user && nextProps.user.id === undefined) {
+      nextProps.history.push("/login");
     }
+    return null;
   }
 
   render() {
