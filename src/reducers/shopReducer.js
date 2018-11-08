@@ -1,7 +1,12 @@
 import {
   SHOPS,
-  SHOP_REGISTRATION_ERROR,
+  SELECTED_SHOP,
+  SHOP_PHOTOS,
+  USER_SHOPS,
+  SHOP_PHOTO_UPLOAD_SUCCESS,
+  SHOP_PHOTO_UPLOAD_ERROR,
   SHOP_REGISTRATION_SUCCESS,
+  SHOP_REGISTRATION_ERROR,
   IS_FETCHING,
   DONE_FETCHING
 } from "../actions/types";
@@ -9,8 +14,13 @@ import {
 const initialState = {
   isFetching: false,
   shops: [],
+  selectedShop: null,
+  shopPhotos: [],
+  userShops: [],
   shopRegistrationError: "",
-  shopRegistrationSuccess: ""
+  shopRegistrationSuccess: "",
+  shopPhotoUploadError: "",
+  shopPhotoUploadSuccess: ""
 };
 
 export default function(state = initialState, action) {
@@ -40,7 +50,26 @@ export default function(state = initialState, action) {
         ...state,
         shopRegistrationError: action.payload
       };
-
+    case SELECTED_SHOP:
+      return {
+        ...state,
+        selectedShop: action.payload
+      };
+    case SHOP_PHOTOS:
+      return {
+        ...state,
+        shopPhotos: action.payload
+      };
+    case SHOP_PHOTO_UPLOAD_SUCCESS:
+      return {
+        ...state,
+        shopPhotoUploadSuccess: action.payload
+      };
+    case SHOP_PHOTO_UPLOAD_ERROR:
+      return {
+        ...state,
+        shopPhotoUploadError: action.payload
+      };
     default:
       return state;
   }

@@ -25,6 +25,19 @@ export const fetchShops = () => dispatch => {
     });
 };
 
+export const getSelectedShop = data => dispatch => {
+  axios
+    .get(process.env.REACT_APP_API_URL + "shop/" + data.id, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.access_token
+      }
+    })
+    .then(response => {
+      console.log("data", data);
+    });
+};
+
 export const registerShop = data => dispatch => {
   return axios
     .post(process.env.REACT_APP_API_URL + "shop", data, {
