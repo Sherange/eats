@@ -61,3 +61,13 @@ label {
   display: block;
   margin: auto;
 }
+
+.line-vertical {
+  border-right: 2px solid #e8e8e8;
+  padding: 5px;
+}
+.form-filed {
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 100%;
+}

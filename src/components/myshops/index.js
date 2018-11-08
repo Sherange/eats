@@ -18,7 +18,7 @@ class MyShops extends Component {
         <div className="container" style={{ width: "100%", padding: "10px" }}>
           <Tabs inkBarStyle={{ backgroundColor: "#00a65a" }}>
             <Tab
-              label="Listed Shops"
+              label="My Shops"
               style={{ backgroundColor: "#ecf0f5", color: "black" }}
             >
               <ShopList />

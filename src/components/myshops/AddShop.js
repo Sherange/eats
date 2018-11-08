@@ -69,9 +69,15 @@ class AddShop extends Component {
   handleChange = (event, index, value) =>
     this.setState({
       cuisinesAvailable: value,
-      error: false,
       errorCuisines: ""
     });
+
+  handleChangeOpeningHours = (event, index, value) => {
+    this.setState({
+      openingHours: value,
+      errorOpeningHours: ""
+    });
+  };
 
   validate() {
     if (this.state.name === "") {
@@ -106,7 +112,8 @@ class AddShop extends Component {
         opening_hours: this.state.openingHours,
         phone_number: this.state.phoneNumber,
         address: this.state.address,
-        description: this.state.description
+        description: this.state.description,
+        user_id: this.props.user.id
       };
       this.props.dispatch(registerShop(data));
     }
@@ -122,180 +129,186 @@ class AddShop extends Component {
     ];
 
     return (
-      <section className="content">
-        <div className="row">
-          <div className="col-md-8">
-            <div className="box box-primary">
-              {/* <div className="box-header with-border">
+      <>
+        <section className="content-header">
+          <h1>
+            List your shops here
+            <small>start earning</small>
+          </h1>
+        </section>
+        <section className="content">
+          <div className="row">
+            <div className="col-md-8">
+              <div className="box box-primary">
+                {/* <div className="box-header with-border">
               <h3 className="box-title">Quick Example</h3>
             </div> */}
-              <form
-                method="POST"
-                onSubmit={e => {
-                  e.preventDefault();
-                }}
-              >
-                <div className="box-body">
-                  <div>
-                    <TextField
-                      onChange={e =>
-                        this.setState({
-                          name: e.target.value,
-                          errorName: ""
-                        })
-                      }
-                      value={this.state.name}
-                      type="text"
-                      style={{ width: "95%" }}
-                      hintText=""
-                      floatingLabelText="Food Court Name"
-                      errorText={this.state.errorName}
-                    />
-                  </div>
-                  <div>
-                    <SelectField
-                      value={this.state.cuisinesAvailable}
-                      onChange={this.handleChange}
-                      floatingLabelText="Cuisines Available"
-                      autoWidth={true}
-                      errorText={this.state.errorCuisines}
-                    >
-                      {items}
-                    </SelectField>
-                  </div>
-                  {/* <div>
-                  <TextField
-                    onChange={e =>
-                      this.setState({
-                        cuisinesAvailable: e.target.value
-                        errorCuisines: ""
-                      })
-                    }
-                    value={this.state.cuisinesAvailable}
-                    type="text"
-                    style={{ width: "95%" }}
-                    hintText=""
-                    floatingLabelText="Cuisines Available"
-                    errorText={this.state.errorCuisines}
-                  />
-                </div> */}
-                  <div>
-                    <TextField
-                      onChange={e =>
-                        this.setState({
-                          openingHours: e.target.value,
-                          errorOpeningHours: ""
-                        })
-                      }
-                      value={this.state.openingHours}
-                      type="text"
-                      style={{ width: "95%" }}
-                      hintText=""
-                      floatingLabelText="Opening Hours"
-                      errorText={this.state.errorOpeningHours}
-                    />
-                  </div>
-                  <div>
-                    <TextField
-                      onChange={e =>
-                        this.setState({
-                          phoneNumber: e.target.value,
-                          errorPhoneNumber: ""
-                        })
-                      }
-                      value={this.state.phoneNumber}
-                      multiLine={true}
-                      rows={1}
-                      rowsMax={3}
-                      type="text"
-                      style={{ width: "95%" }}
-                      hintText=""
-                      floatingLabelText="Phone Number"
-                      errorText={this.state.errorPhoneNumber}
-                    />
-                  </div>
-                  <div>
-                    <TextField
-                      onChange={e =>
-                        this.setState({
-                          address: e.target.value,
-                          errorAddress: ""
-                        })
-                      }
-                      value={this.state.address}
-                      multiLine={true}
-                      rows={1}
-                      rowsMax={3}
-                      type="text"
-                      style={{ width: "95%" }}
-                      hintText=""
-                      floatingLabelText="Address"
-                      errorText={this.state.errorAddress}
-                    />
-                  </div>
-                  <div>
-                    <TextField
-                      onChange={e =>
-                        this.setState({
-                          description: e.target.value,
-                          errorDescription: ""
-                        })
-                      }
-                      value={this.state.description}
-                      multiLine={true}
-                      rows={1}
-                      rowsMax={3}
-                      type="text"
-                      style={{ width: "95%" }}
-                      hintText=""
-                      floatingLabelText="Description"
-                      errorText={this.state.errorDescription}
-                    />
-                  </div>
-                </div>
-
-                <div className="box-footer">
-                  <RaisedButton
-                    label="Submit"
-                    primary={true}
-                    onClick={() => this.onSubmit()}
-                  />
-
-                  {this.state.error && (
-                    <div className="alert alert-danger alert-dismissible">
-                      <p>
-                        <i className="icon fa fa-warning" />{" "}
-                        {this.state.errorMessage}
-                      </p>
+                <form
+                  method="POST"
+                  onSubmit={e => {
+                    e.preventDefault();
+                  }}
+                >
+                  <div className="box-body">
+                    <div className="form-filed">
+                      <TextField
+                        onChange={e =>
+                          this.setState({
+                            name: e.target.value,
+                            errorName: ""
+                          })
+                        }
+                        style={{ width: "90%" }}
+                        value={this.state.name}
+                        type="text"
+                        hintText=""
+                        floatingLabelText="Food Court Name"
+                        errorText={this.state.errorName}
+                      />
                     </div>
-                  )}
-
-                  {this.state.success && (
-                    <div className="alert alert-success alert-dismissible">
-                      <p>
-                        <i className="icon fa fa-hand-peace-o" />{" "}
-                        {this.state.successMessage}
-                      </p>
+                    <div className="form-filed">
+                      <SelectField
+                        value={this.state.cuisinesAvailable}
+                        onChange={this.handleChange}
+                        floatingLabelText="Cuisines Available"
+                        style={{ width: "90%" }}
+                        errorText={this.state.errorCuisines}
+                      >
+                        {items}
+                      </SelectField>
                     </div>
-                  )}
-                </div>
-              </form>
+                    <div className="form-filed">
+                      <SelectField
+                        value={this.state.openingHours}
+                        onChange={this.handleChangeOpeningHours}
+                        floatingLabelText="Opening Hours"
+                        style={{ width: "90%" }}
+                        errorText={this.state.errorOpeningHours}
+                      >
+                        {items}
+                      </SelectField>
+                    </div>
+                    <div className="form-filed">
+                      <TextField
+                        onChange={e =>
+                          this.setState({
+                            phoneNumber: e.target.value,
+                            errorPhoneNumber: ""
+                          })
+                        }
+                        value={this.state.phoneNumber}
+                        multiLine={true}
+                        style={{ width: "90%" }}
+                        rows={1}
+                        rowsMax={3}
+                        type="text"
+                        hintText=""
+                        floatingLabelText="Phone Number"
+                        errorText={this.state.errorPhoneNumber}
+                      />
+                    </div>
+                    <div className="form-filed">
+                      <TextField
+                        onChange={e =>
+                          this.setState({
+                            address: e.target.value,
+                            errorAddress: ""
+                          })
+                        }
+                        value={this.state.address}
+                        multiLine={true}
+                        style={{ width: "90%" }}
+                        rows={1}
+                        rowsMax={3}
+                        type="text"
+                        hintText=""
+                        floatingLabelText="Address"
+                        errorText={this.state.errorAddress}
+                      />
+                    </div>
+                    <div className="form-filed">
+                      <TextField
+                        onChange={e =>
+                          this.setState({
+                            description: e.target.value,
+                            errorDescription: ""
+                          })
+                        }
+                        value={this.state.description}
+                        style={{ width: "90%" }}
+                        multiLine={true}
+                        rows={1}
+                        rowsMax={3}
+                        type="text"
+                        hintText=""
+                        floatingLabelText="Description"
+                        errorText={this.state.errorDescription}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="box-footer">
+                    <RaisedButton
+                      label="Submit"
+                      primary={true}
+                      onClick={() => this.onSubmit()}
+                    />
+
+                    {this.state.error && (
+                      <div className="alert alert-danger alert-dismissible">
+                        <p>
+                          <i className="icon fa fa-warning" />{" "}
+                          {this.state.errorMessage}
+                        </p>
+                      </div>
+                    )}
+
+                    {this.state.success && (
+                      <div className="alert alert-success alert-dismissible">
+                        <p>
+                          <i className="icon fa fa-hand-peace-o" />{" "}
+                          {this.state.successMessage}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-          <div className="col-md-4">
-            <div className="box box-info">
-              <div className="box-header with-border">
-                {/* <h3 className="box-title">Quick Example</h3> */}
-                <img
-                  src="/images/profile.png"
-                  className="img-box"
-                  alt="User Image"
-                />
+            <div className="col-md-4">
+              <div className="box box-info">
+                <div className="box-header with-border">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-xs-4 col-sm-2 col-md-1">
+                        <div className="line-vertical">
+                          <img
+                            src="/images/profile.png"
+                            className="img-circle"
+                            style={{ width: "100%" }}
+                            alt="User Image"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xs-8 col-sm-10 col-md-11" />
+                      <h3>{this.props.user.name}</h3>
+                      <p>Member Since - </p>
+                    </div>
+                  </div>
+
+                  {/* <h3 className="box-title">Quick Example</h3> */}
+                </div>
+              </div>
+
+              <div className="box box-info">
+                <div className="box-header with-border">
+                  <p>Here</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </>
     );
   }
 }
