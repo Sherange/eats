@@ -8,7 +8,7 @@ import {
   SHOP_REGISTRATION_ERROR,
   SHOP_REGISTRATION_SUCCESS
 } from "../../actions/types";
-
+import PhotoDrop from "./PhotoDrop";
 class AddShop extends Component {
   constructor(props) {
     super(props);
@@ -140,9 +140,9 @@ class AddShop extends Component {
           <div className="row">
             <div className="col-md-8">
               <div className="box box-primary">
-                {/* <div className="box-header with-border">
-              <h3 className="box-title">Quick Example</h3>
-            </div> */}
+                <div className="box-header with-border">
+                  <h3 className="box-title">Quick Example</h3>
+                </div>
                 <form
                   method="POST"
                   onSubmit={e => {
@@ -302,7 +302,10 @@ class AddShop extends Component {
 
               <div className="box box-info">
                 <div className="box-header with-border">
-                  <p>Here</p>
+                  <div className="box-header with-border">
+                    <h3 className="box-title">Upload Photos</h3>
+                  </div>
+                  <PhotoDrop />
                 </div>
               </div>
             </div>
