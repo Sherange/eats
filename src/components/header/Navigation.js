@@ -11,7 +11,7 @@ export default class Navigation extends Component {
   }
 
   logOut() {
-    this.props.dispatch(logoutUser);
+    this.props.dispatch(logoutUser(this.props.history));
   }
 
   goToProfile() {

@@ -46,6 +46,20 @@ class AddShop extends Component {
         success: true,
         successMessage: nextProps.shopRegistrationSuccess
       };
+
+    if (
+      nextProps.selectedShop &&
+      nextProps.selectedShop.name !== prevState.name
+    ) {
+      return {
+        name: nextProps.selectedShop.name,
+        cuisinesAvailable: nextProps.selectedShop.cuisines_available,
+        openingHours: nextProps.selectedShop.opening_hours,
+        phoneNumber: String(nextProps.selectedShop.phone_number),
+        address: nextProps.selectedShop.address,
+        description: nextProps.selectedShop.description
+      };
+    }
     return null;
   }
 
@@ -248,11 +262,19 @@ class AddShop extends Component {
                   </div>
 
                   <div className="box-footer">
-                    <RaisedButton
-                      label="Submit"
-                      primary={true}
-                      onClick={() => this.onSubmit()}
-                    />
+                    {this.props.selectedShop && this.props.selectedShop.id ? (
+                      <RaisedButton
+                        label="Update"
+                        primary={true}
+                        onClick={() => this.onSubmit()}
+                      />
+                    ) : (
+                      <RaisedButton
+                        label="Submit"
+                        primary={true}
+                        onClick={() => this.onSubmit()}
+                      />
+                    )}
 
                     {this.state.error && (
                       <div className="alert alert-danger alert-dismissible">

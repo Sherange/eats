@@ -29,11 +29,12 @@ class Login extends Component {
       return { error: true, errorMessage: nextProps.userLoginError };
     }
     if (nextProps.isAuthenticated === true) {
-      nextProps.history.goBack();
+      console.log(nextProps.history);
+      nextProps.history.push("/");
+      // nextProps.history.goBack();
     }
     return null;
   }
-
 
   componentDidUpdate(nextProps, prevState) {
     if (this.state.error === true) {

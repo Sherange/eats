@@ -15,16 +15,9 @@ class MyShopsPage extends Component {
 
   componentDidMount() {
     if (this.props.isAuthenticated === false) {
-      this.props.dispatch(getLoginUser());
+      this.props.dispatch(getLoginUser(this.props.history));
     }
     this.props.dispatch(fetchShops());
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.user && nextProps.user.id === undefined) {
-      nextProps.history.push("/login");
-    }
-    return null;
   }
 
   render() {

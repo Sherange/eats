@@ -76,7 +76,7 @@ export const loginUser = data => dispatch => {
   );
 };
 
-export const getLoginUser = () => dispatch => {
+export const getLoginUser = history => dispatch => {
   if (localStorage.access_token) {
     return axios
       .get(process.env.REACT_APP_API_URL + "user", {
@@ -89,10 +89,12 @@ export const getLoginUser = () => dispatch => {
         dispatch({ type: IS_AUTHENTICATED, payload: true });
         // dispatch({ type: DONE_FETCHING });
       });
+  } else {
+    history.push("/login");
   }
 };
 
-export const logoutUser = dispatch => {
+export const logoutUser = history => dispatch => {
   localStorage.removeItem("access_token");
   dispatch({
     type: USER,
@@ -102,5 +104,5 @@ export const logoutUser = dispatch => {
     type: IS_AUTHENTICATED,
     payload: false
   });
-  // this.props.history.push("/");
+  history.push("/login");
 };

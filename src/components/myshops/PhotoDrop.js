@@ -70,7 +70,7 @@ export default class PhotoDrop extends Component {
           </p>
         </Dropzone>
         {this.state.disabled && (
-          <p className="info">Please register your shop to upload photos</p>
+          <p className="info">Please register your shop first to upload photos</p>
         )}
       </div>
     );
