@@ -335,7 +335,10 @@ class UpdateShop extends Component {
                   <div className="box-header with-border">
                     <h3 className="box-title">Upload Photos</h3>
                   </div>
-                  <PhotoDrop selectedShop={this.props.selectedShop} />
+                  <PhotoDrop
+                    dispatch={this.props.dispatch}
+                    selectedShop={this.props.selectedShop}
+                  />
                 </div>
               </div>
             </div>

@@ -120,3 +120,16 @@ export const registerShop = data => dispatch => {
       }
     });
 };
+
+export const uploadShopPhotos = formData => dispatch => {
+  return axios
+    .post(process.env.REACT_APP_API_URL + "shop-photos", formData, {
+      headers: {
+        Authorization: localStorage.access_token,
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then(response => {
+      console.log("response", response);
+    });
+};
