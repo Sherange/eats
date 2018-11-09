@@ -5,7 +5,6 @@ import SideBar from "../sidebar";
 import MainFooter from "../footer";
 import MyShops from "../myshops";
 import { getLoginUser } from "../../actions/userActions";
-import { fetchShops } from "../../actions/shopActions";
 
 class MyShopsPage extends Component {
   constructor(props) {
@@ -17,7 +16,6 @@ class MyShopsPage extends Component {
     if (this.props.isAuthenticated === false) {
       this.props.dispatch(getLoginUser(this.props.history));
     }
-    this.props.dispatch(fetchShops());
   }
 
   render() {

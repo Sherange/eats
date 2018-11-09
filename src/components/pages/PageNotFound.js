@@ -1,15 +1,21 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Header from "../header";
 import SideBar from "../sidebar";
 import MainFooter from "../footer";
-
-export default class PageNotFound extends Component {
+import { getLoginUser } from "../../actions/userActions";
+class PageNotFound extends Component {
+  componentDidMount() {
+    if (this.props.isAuthenticated === false) {
+      this.props.dispatch(getLoginUser(this.props.history));
+    }
+  }
   render() {
     return (
       <div id="body" className="hold-transition skin-green sidebar-mini">
         <div className="wrapper">
-          <Header />
+          <Header history={this.props.history} />
           <SideBar />
           <div
             className="content-wrapper"
@@ -76,3 +82,11 @@ export default class PageNotFound extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user.user,
+  isAuthenticated: state.user.isAuthenticated,
+  isFetching: state.shop.isFetching
+});
+
+export default connect(mapStateToProps)(PageNotFound);

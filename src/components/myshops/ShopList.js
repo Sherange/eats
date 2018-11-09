@@ -38,43 +38,71 @@ class ShopList extends Component {
             >
               <img src={url} className="shop-list-image" />
             </div>
-            <div className="col-xs-8 col-sm-8 col-md-6">
+            <div className="col-xs-8 col-sm-8 col-md-8">
               <div className="shop-list-description">
-                <p>{shop.name}</p>
+                <p>
+                  <strong> {shop.name} </strong>
+                </p>
                 <p className="hidden-xs">{shop.description}</p>
                 <ul className="shop-list-features">
                   <li>
-                    <i className="fa fa-link" />
+                    <i className="fa fa-coffee" />
                     <span style={{ padding: "5px" }}>
                       Available Cusines - {shop.cuisines_available}
                     </span>
                   </li>
                   <li>
-                    <i className="fa fa-link" />
+                    <i className="fa fa-calendar-times-o" />
                     <span style={{ padding: "5px" }}>
                       Opening Hours - {shop.opening_hours}
                     </span>
                   </li>
                 </ul>
+
+                <ul className="shop-list-features">
+                  <li>
+                    <i className="fa fa-coffee" />
+                    <span style={{ padding: "5px" }}>
+                      Available Cusines - {shop.cuisines_available}
+                    </span>
+                  </li>
+                  <li>
+                    <i className="fa fa-calendar-times-o" />
+                    <span style={{ padding: "5px" }}>
+                      Opening Hours - {shop.opening_hours}
+                    </span>
+                  </li>
+                </ul>
+
+                
               </div>
             </div>
-            <div className="col-xs-4 col-sm-4 col-md-4">
+            <div className="col-xs-4 col-sm-4 col-md-2">
               <div className="shop-list-buttons">
                 <FlatButton
                   label="Update"
                   onClick={() => this.handleUpdate(shop.id)}
-                  backgroundColor={"#42A5F5"}
+                  primary={true}
+                  labelStyle={{ textTransform: "none" }}
+                  // backgroundColor={"#00a65a"}
                   style={{ margin: "5px" }}
+                  icon={<i className="fa fa-file-text-o" />}
                 />
                 <FlatButton
                   label="Delete"
-                  backgroundColor={"#EC407A"}
+                  primary={true}
+                  labelStyle={{ textTransform: "none" }}
+                  // backgroundColor={"#00a65a"}
                   style={{ margin: "5px" }}
+                  icon={<i className="fa fa-bitbucket" />}
                 />
                 <FlatButton
                   label="Status"
-                  backgroundColor={"#69F0AE"}
+                  primary={true}
+                  labelStyle={{ textTransform: "none" }}
+                  // backgroundColor={"#F5F5F5"}
                   style={{ margin: "5px" }}
+                  icon={<i className="fa fa-circle-thin" />}
                 />
               </div>
             </div>

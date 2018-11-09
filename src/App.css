@@ -83,20 +83,21 @@ label {
   border: 1px dashed;
 }
 
-.content-shop-list{
-  margin: 20px;
+.content-shop-list {
+  margin: 30px;
 }
 .shop-list-image {
-  width: 80%;
-  height: auto;
+  width: 100%;
+  height: -webkit-fill-available;
 }
 .shop-list-description {
   margin-top: 5px;
   padding: 5px;
-  font-size: 16px;
+  font-size: 14px;
 }
 .shop-list-features {
   list-style: none;
+  display: inline-block;
   margin: 0;
   padding: 0;
 }
@@ -104,14 +105,19 @@ label {
   margin: 10px;
 }
 .shop-list-buttons {
-  /* margin-top: 10px; */
   margin: auto;
   width: 100%;
+  padding: 10px;
+  display: inline-grid;
 }
 .boder-line {
+  max-height: 200px;
   border-top: 3px solid #3c8dbc;
   border-bottom: 1px solid #3c8dbc;
 }
 .info {
-  color: red
+  color: red;
+}
+.shop-list-right {
+  text-align: center;
 }
