@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ShopList from "./ShopList";
 import { getUserShops } from "../../actions/shopActions";
-import { SELECTED_SHOP } from "../../actions/types";
 class MyShops extends Component {
   constructor(props) {
     super(props);
@@ -15,10 +14,7 @@ class MyShops extends Component {
 
   render() {
     return (
-      <div
-        className="content-wrapper"
-        style={{ minHeight: window.innerHeight }}
-      >
+      <div className="content-wrapper">
         <ShopList
           dispatch={this.props.dispatch}
           user={this.props.user}

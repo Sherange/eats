@@ -309,7 +309,7 @@ class UpdateShop extends Component {
                             src="/images/profile.png"
                             className="img-circle"
                             style={{ width: "100%" }}
-                            alt="User Image"
+                            alt="UserImage"
                           />
                         </div>
                       </div>

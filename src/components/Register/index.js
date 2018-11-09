@@ -4,7 +4,7 @@ import { registerUser } from "../../actions/userActions";
 import { USER_REGISTRATION_ERROR } from "../../actions/types";
 
 import TextField from "material-ui/TextField";
-import Checkbox from "material-ui/Checkbox";
+// import Checkbox from "material-ui/Checkbox";
 import RaisedButton from "material-ui/RaisedButton";
 import CircularProgress from "material-ui/CircularProgress";
 import { Link } from "react-router-dom";
@@ -42,7 +42,7 @@ class Registration extends Component {
   }
 
   componentDidUpdate(nextProps, prevProps) {
-    if (this.state.error == true) {
+    if (this.state.error === true) {
       setTimeout(() => {
         this.setState({ error: false, errorMessage: "" }, state => {
           nextProps.dispatch({ type: USER_REGISTRATION_ERROR, payload: "" });
@@ -83,7 +83,7 @@ class Registration extends Component {
         }
       );
       return false;
-    } else if (this.state.password == "") {
+    } else if (this.state.password === "") {
       this.setState(
         { error: true, errorMessage: "Password required" },
         state => {

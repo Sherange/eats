@@ -37,20 +37,33 @@ class AddShop extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.shopRegistrationError) {
+      return { error: true, errorMessage: nextProps.shopRegistrationError };
+    }
+    if (nextProps.shopRegistrationSuccess)
+      return {
+        success: true,
+        successMessage: nextProps.shopRegistrationSuccess
+      };
+    return null;
+  }
+
   componentDidUpdate(nextProps) {
     if (this.state.error === true) {
       setTimeout(() => {
         this.setState({ error: false, errorMessage: "" }, state => {
           nextProps.dispatch({ type: SHOP_REGISTRATION_ERROR, payload: "" });
         });
-      }, 3000);
+      }, 2000);
     }
     if (this.state.success === true) {
       setTimeout(() => {
         this.setState({ success: false, successMessage: "" }, state => {
           nextProps.dispatch({ type: SHOP_REGISTRATION_SUCCESS, payload: "" });
+          this.props.history.push("/myshops");
         });
-      }, 3000);
+      }, 2000);
     }
   }
 
@@ -282,7 +295,7 @@ class AddShop extends Component {
                             src="/images/profile.png"
                             className="img-circle"
                             style={{ width: "100%" }}
-                            alt="User Image"
+                            alt="profile"
                           />
                         </div>
                       </div>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "../header";
 import SideBar from "../sidebar";
-import AddNewShop from "../addNewShop"
+import AddNewShop from "../addNewShop";
 import MainFooter from "../footer";
 import { getLoginUser } from "../../actions/userActions";
 
@@ -24,7 +24,7 @@ class NewShopPage extends Component {
         <div className="wrapper">
           <Header history={this.props.history} />
           <SideBar />
-          <AddNewShop></AddNewShop>
+          <AddNewShop history={this.props.history} />
           <MainFooter />
         </div>
       </div>

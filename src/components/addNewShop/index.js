@@ -18,6 +18,7 @@ class AddNewShop extends Component {
           user={this.props.user}
           shopRegistrationError={this.props.shopRegistrationError}
           shopRegistrationSuccess={this.props.shopRegistrationSuccess}
+          history={this.props.history}
         />
       </div>
     );

@@ -34,7 +34,7 @@ class ShopList extends Component {
               className="hidden-xs hidden-sm col-md-2"
               style={{ padding: "0px" }}
             >
-              <img src={url} className="shop-list-image" />
+              <img src={url} className="shop-list-image" alt="userImage" />
             </div>
             <div className="col-xs-8 col-sm-8 col-md-8">
               <div className="shop-list-description">

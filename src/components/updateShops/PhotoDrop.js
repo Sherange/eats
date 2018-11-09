@@ -18,7 +18,6 @@ export default class PhotoDrop extends Component {
     }else {
       return { disabled: true };
     }
-    return null;
   }
 
   onDrop(files) {
@@ -63,7 +62,7 @@ export default class PhotoDrop extends Component {
             src="/images/upload.png"
             className="img-box"
             // style={{ width: "100%" }}
-            alt="User Image"
+            alt="UserImage"
           />
           <p>
             Try dropping some files here, or click to select files to upload.

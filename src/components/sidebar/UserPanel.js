@@ -8,7 +8,7 @@ export default class UserPannel extends Component {
           <img
             src="/images/profile.png"
             className="img-circle"
-            alt="User Image"
+            alt="UserImage"
           />
         </div>
         <div className="pull-left info">
