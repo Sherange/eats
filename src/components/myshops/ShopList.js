@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { getSelectedShop, getUserShops } from "../../actions/shopActions";
 import FlatButton from "material-ui/FlatButton";
 class ShopList extends Component {
   constructor(props) {
@@ -18,8 +17,7 @@ class ShopList extends Component {
   }
 
   handleUpdate(id) {
-    this.props.dispatch(getSelectedShop({ id: id }));
-    this.props.handleTabChange(2);
+    this.props.history.push("/update-shop/" + id);
   }
 
   renderListItem = shops => {
@@ -73,8 +71,6 @@ class ShopList extends Component {
                     </span>
                   </li>
                 </ul>
-
-                
               </div>
             </div>
             <div className="col-xs-4 col-sm-4 col-md-2">

@@ -90,6 +90,13 @@ export default class SideMenu extends Component {
             <span>My shops</span>
           </Link>
         </li>
+
+          <li>
+          <Link to="/add-newshop">
+            <i className="fa fa-link" />
+            <span>Add new shop</span>
+          </Link>
+        </li>
       </ul>
     );
   }

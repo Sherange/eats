@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Header from "../header";
 import SideBar from "../sidebar";
 import MainFooter from "../footer";
-import MyShops from "../myshops";
+import UpdateShops from "../updateShops";
 import { getLoginUser } from "../../actions/userActions";
 
 class MyShopsPage extends Component {
@@ -24,9 +24,10 @@ class MyShopsPage extends Component {
         <div className="wrapper">
           <Header history={this.props.history} />
           <SideBar />
-          <MyShops
+          <UpdateShops
             dispatch={this.props.dispatch}
             history={this.props.history}
+            match={this.props.match}
           />
           <MainFooter />
         </div>

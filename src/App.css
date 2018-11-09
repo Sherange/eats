@@ -121,3 +121,22 @@ label {
 .shop-list-right {
   text-align: center;
 }
+
+.skin-green .sidebar-menu > li > p {
+  border-left: 3px solid transparent;
+  cursor: pointer;
+}
+.skin-green .sidebar-menu > li > p :hover {
+  text-decoration: none;
+}
+.skin-green .sidebar p {
+  color: #b8c7ce;
+}
+.sidebar-menu li > p {
+  position: relative;
+}
+
+.sidebar-menu > li > p {
+  padding: 12px 5px 12px 15px;
+  display: block;
+}

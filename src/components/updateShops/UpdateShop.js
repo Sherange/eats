@@ -9,7 +9,8 @@ import {
   SHOP_REGISTRATION_SUCCESS
 } from "../../actions/types";
 import PhotoDrop from "./PhotoDrop";
-class AddShop extends Component {
+
+class UpdateShop extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -338,4 +339,4 @@ class AddShop extends Component {
   }
 }
 
-export default AddShop;
+export default UpdateShop;
