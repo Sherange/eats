@@ -70,6 +70,11 @@ export default function(state = initialState, action) {
         ...state,
         shopPhotoUploadError: action.payload
       };
+    case USER_SHOPS:
+      return {
+        ...state,
+        userShops: action.payload
+      };
     default:
       return state;
   }

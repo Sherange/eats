@@ -82,3 +82,33 @@ label {
   padding: 10px;
   border: 1px dashed;
 }
+
+.content-shop-list{
+  margin: 20px;
+}
+.shop-list-image {
+  width: 80%;
+  height: auto;
+}
+.shop-list-description {
+  margin-top: 5px;
+  padding: 5px;
+  font-size: 16px;
+}
+.shop-list-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.shop-list-features > li {
+  margin: 10px;
+}
+.shop-list-buttons {
+  /* margin-top: 10px; */
+  margin: auto;
+  width: 100%;
+}
+.boder-line {
+  border-top: 3px solid #3c8dbc;
+  border-bottom: 1px solid #3c8dbc;
+}

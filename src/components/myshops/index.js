@@ -3,13 +3,20 @@ import { connect } from "react-redux";
 import { Tabs, Tab } from "material-ui/Tabs";
 import AddShop from "./AddShop";
 import ShopList from "./ShopList";
+import { getUserShops } from "../../actions/shopActions";
 class MyShops extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
+  componentDidMount() {
+    this.props.dispatch(getUserShops());
+  }
+
   render() {
+    // console.log("selectedShop", this.props.selectedShop);
+    // console.log("selectedShop", this.props.userShops);
     return (
       <div
         className="content-wrapper"
@@ -21,7 +28,12 @@ class MyShops extends Component {
               label="My Shops"
               style={{ backgroundColor: "#ecf0f5", color: "black" }}
             >
-              <ShopList />
+              <ShopList
+                dispatch={this.props.dispatch}
+                user={this.props.user}
+                userShops={this.props.userShops}
+                selectedShop={this.props.selectedShop}
+              />
             </Tab>
             <Tab
               label="Add New Shop"
@@ -43,9 +55,13 @@ class MyShops extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.user,
+  shops: state.shop.shops,
+  userShops: state.shop.userShops,
+  selectedShop: state.shop.selectedShop,
+
   isAuthenticated: state.user.isAuthenticated,
   isFetching: state.shop.isFetching,
-  shops: state.shop.shops,
+
   shopRegistrationError: state.shop.shopRegistrationError,
   shopRegistrationSuccess: state.shop.shopRegistrationSuccess
 });

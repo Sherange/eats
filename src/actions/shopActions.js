@@ -1,8 +1,13 @@
 import axios from "axios";
 import {
   SHOPS,
-  SHOP_REGISTRATION_ERROR,
+  SELECTED_SHOP,
+  SHOP_PHOTOS,
+  USER_SHOPS,
   SHOP_REGISTRATION_SUCCESS,
+  SHOP_PHOTO_UPLOAD_SUCCESS,
+  SHOP_REGISTRATION_ERROR,
+  SHOP_PHOTO_UPLOAD_ERROR,
   IS_FETCHING,
   DONE_FETCHING
 } from "./types";
@@ -26,6 +31,7 @@ export const fetchShops = () => dispatch => {
 };
 
 export const getSelectedShop = data => dispatch => {
+  dispatch({ type: IS_FETCHING });
   axios
     .get(process.env.REACT_APP_API_URL + "shop/" + data.id, {
       headers: {
@@ -34,9 +40,31 @@ export const getSelectedShop = data => dispatch => {
       }
     })
     .then(response => {
-      console.log("data", data);
+      dispatch({ type: SELECTED_SHOP, payload: response.data.data });
+      dispatch({ type: DONE_FETCHING });
+    })
+    .catch(error => {
+      dispatch({ type: DONE_FETCHING });
     });
 };
+
+export const getUserShops = () => dispatch => {
+  dispatch({ type: IS_FETCHING });
+  axios
+  .get(process.env.REACT_APP_API_URL + "user-shops", {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.access_token
+    }
+  })
+  .then(response => {
+    dispatch({ type: USER_SHOPS, payload: response.data.data });
+    dispatch({ type: DONE_FETCHING });
+  })
+  .catch(error => {
+    dispatch({ type: DONE_FETCHING });
+  });
+}
 
 export const registerShop = data => dispatch => {
   return axios
