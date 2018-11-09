@@ -14,7 +14,10 @@ class MyShops extends Component {
 
   render() {
     return (
-      <div className="content-wrapper">
+      <div
+        className="content-wrapper"
+        style={{ minHeight: window.innerHeight }}
+      >
         <ShopList
           dispatch={this.props.dispatch}
           user={this.props.user}
