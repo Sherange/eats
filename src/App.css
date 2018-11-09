@@ -112,3 +112,6 @@ label {
   border-top: 3px solid #3c8dbc;
   border-bottom: 1px solid #3c8dbc;
 }
+.info {
+  color: red
+}

@@ -4,46 +4,63 @@ import { Tabs, Tab } from "material-ui/Tabs";
 import AddShop from "./AddShop";
 import ShopList from "./ShopList";
 import { getUserShops } from "../../actions/shopActions";
+import { SELECTED_SHOP } from "../../actions/types";
 class MyShops extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      tabId: 1
+    };
+    this.handleTabChange = this.handleTabChange.bind(this);
   }
 
   componentDidMount() {
     this.props.dispatch(getUserShops());
   }
 
+  handleTabChange(value) {
+    if (value === 1) {
+      this.props.dispatch({ type: SELECTED_SHOP, payload: null });
+    }
+    this.setState({ tabId: value });
+  }
+
   render() {
-    // console.log("selectedShop", this.props.selectedShop);
-    // console.log("selectedShop", this.props.userShops);
     return (
       <div
         className="content-wrapper"
         style={{ minHeight: window.innerHeight }}
       >
         <div className="container" style={{ width: "100%", padding: "10px" }}>
-          <Tabs inkBarStyle={{ backgroundColor: "#00a65a" }}>
+          <Tabs
+            inkBarStyle={{ backgroundColor: "#00a65a" }}
+            initialSelectedIndex={this.state.tabId}
+            onChange={this.handleTabChange}
+            value={this.state.tabId}
+          >
             <Tab
               label="My Shops"
               style={{ backgroundColor: "#ecf0f5", color: "black" }}
+              value={1}
             >
               <ShopList
                 dispatch={this.props.dispatch}
                 user={this.props.user}
                 userShops={this.props.userShops}
-                selectedShop={this.props.selectedShop}
+                handleTabChange={this.handleTabChange.bind(this)}
               />
             </Tab>
             <Tab
-              label="Add New Shop"
+              label="Add / Update Shop"
               style={{ backgroundColor: "#ecf0f5", color: "black" }}
+              value={2}
             >
               <AddShop
                 dispatch={this.props.dispatch}
                 user={this.props.user}
                 shopRegistrationError={this.props.shopRegistrationError}
                 shopRegistrationSuccess={this.props.shopRegistrationSuccess}
+                selectedShop={this.props.selectedShop}
               />
             </Tab>
           </Tabs>

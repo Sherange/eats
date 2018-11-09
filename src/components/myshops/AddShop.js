@@ -305,7 +305,7 @@ class AddShop extends Component {
                   <div className="box-header with-border">
                     <h3 className="box-title">Upload Photos</h3>
                   </div>
-                  <PhotoDrop />
+                  <PhotoDrop selectedShop={this.props.selectedShop} />
                 </div>
               </div>
             </div>

@@ -7,10 +7,20 @@ export default class PhotoDrop extends Component {
     super(props);
     this.state = {
       files: [],
-      disabled: false
+      disabled: true
     };
     this.submit = this.submit.bind(this);
   }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.selectedShop && nextProps.selectedShop.id) {
+      return { disabled: false };
+    }else {
+      return { disabled: true };
+    }
+    return null;
+  }
+
   onDrop(files) {
     this.setState(
       {
@@ -49,16 +59,19 @@ export default class PhotoDrop extends Component {
           onDrop={this.onDrop.bind(this)}
           disabled={this.state.disabled}
         >
-         <img
-                            src="/images/upload.png"
-                            className="img-box"
-                            // style={{ width: "100%" }}
-                            alt="User Image"
-                          />
+          <img
+            src="/images/upload.png"
+            className="img-box"
+            // style={{ width: "100%" }}
+            alt="User Image"
+          />
           <p>
             Try dropping some files here, or click to select files to upload.
           </p>
         </Dropzone>
+        {this.state.disabled && (
+          <p className="info">Please register your shop to upload photos</p>
+        )}
       </div>
     );
   }

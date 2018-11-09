@@ -7,6 +7,7 @@ class ShopList extends Component {
     this.state = {
       userShops: []
     };
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -16,10 +17,11 @@ class ShopList extends Component {
     return null;
   }
 
-  componentDidMount() {
-    this.props.dispatch(getSelectedShop({ id: 1 }));
+  handleUpdate(id) {
+    this.props.dispatch(getSelectedShop({ id: id }));
+    this.props.handleTabChange(2);
   }
-  
+
   renderListItem = shops => {
     return shops.map((shop, index) => {
       let url =
@@ -60,6 +62,7 @@ class ShopList extends Component {
               <div className="shop-list-buttons">
                 <FlatButton
                   label="Update"
+                  onClick={() => this.handleUpdate(shop.id)}
                   backgroundColor={"#42A5F5"}
                   style={{ margin: "5px" }}
                 />
