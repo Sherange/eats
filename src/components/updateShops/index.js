@@ -21,6 +21,7 @@ class UpdateShops extends Component {
       >
         <UpdateShop
           dispatch={this.props.dispatch}
+          history={this.props.history}
           user={this.props.user}
           shopRegistrationError={this.props.shopRegistrationError}
           shopRegistrationSuccess={this.props.shopRegistrationSuccess}

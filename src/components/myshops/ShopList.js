@@ -32,12 +32,12 @@ class ShopList extends Component {
           <div className="container-fluid">
             <div className="row boder-line">
               <div
-                className="hidden-xs hidden-sm col-md-2"
+                className="hidden-xs hidden-sm col-md-3"
                 style={{ padding: "0px" }}
               >
                 <img src={url} className="shop-list-image" alt="userImage" />
               </div>
-              <div className="col-xs-8 col-sm-8 col-md-8">
+              <div className="col-xs-8 col-sm-8 col-md-7">
                 <div className="shop-list-description">
                   <p>
                     <strong> {shop.name} </strong>

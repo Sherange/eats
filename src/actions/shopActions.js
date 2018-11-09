@@ -48,23 +48,47 @@ export const getSelectedShop = data => dispatch => {
     });
 };
 
+export const updateShop = data => dispatch => {
+  return axios
+    .put(process.env.REACT_APP_API_URL + "shop/" + data.id, data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.access_token
+      }
+    })
+    .then(response => {
+      if (response.data.error) {
+        dispatch({
+          type: SHOP_REGISTRATION_ERROR,
+          payload: response.data.data
+        });
+      } else {
+        dispatch(getUserShops());
+        dispatch({
+          type: SHOP_REGISTRATION_SUCCESS,
+          payload: response.data.message
+        });
+      }
+    });
+};
+
 export const getUserShops = () => dispatch => {
   dispatch({ type: IS_FETCHING });
   axios
-  .get(process.env.REACT_APP_API_URL + "user-shops", {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: localStorage.access_token
-    }
-  })
-  .then(response => {
-    dispatch({ type: USER_SHOPS, payload: response.data.data });
-    dispatch({ type: DONE_FETCHING });
-  })
-  .catch(error => {
-    dispatch({ type: DONE_FETCHING });
-  });
-}
+    .get(process.env.REACT_APP_API_URL + "user-shops", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.access_token
+      }
+    })
+    .then(response => {
+      dispatch({ type: USER_SHOPS, payload: response.data.data });
+      dispatch({ type: DONE_FETCHING });
+    })
+    .catch(error => {
+      dispatch({ type: DONE_FETCHING });
+    });
+};
 
 export const registerShop = data => dispatch => {
   return axios

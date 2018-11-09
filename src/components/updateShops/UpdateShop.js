@@ -3,7 +3,7 @@ import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
-import { registerShop } from "../../actions/shopActions";
+import { updateShop } from "../../actions/shopActions";
 import {
   SHOP_REGISTRATION_ERROR,
   SHOP_REGISTRATION_SUCCESS
@@ -14,12 +14,14 @@ class UpdateShop extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       name: "",
       cuisinesAvailable: "",
       openingHours: "",
       address: "",
       phoneNumber: "",
       description: "",
+      status: "",
 
       error: false,
       errorMessage: "",
@@ -38,46 +40,49 @@ class UpdateShop extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.shopRegistrationError) {
-      return { error: true, errorMessage: nextProps.shopRegistrationError };
-    }
-    if (nextProps.shopRegistrationSuccess)
-      return {
-        success: true,
-        successMessage: nextProps.shopRegistrationSuccess
-      };
-
-    if (
-      nextProps.selectedShop &&
-      nextProps.selectedShop.name !== prevState.name
-    ) {
-      return {
-        name: nextProps.selectedShop.name,
-        cuisinesAvailable: nextProps.selectedShop.cuisines_available,
-        openingHours: nextProps.selectedShop.opening_hours,
-        phoneNumber: String(nextProps.selectedShop.phone_number),
-        address: nextProps.selectedShop.address,
-        description: nextProps.selectedShop.description
-      };
-    }
-    return null;
-  }
-
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.error === true) {
       setTimeout(() => {
         this.setState({ error: false, errorMessage: "" }, state => {
-          nextProps.dispatch({ type: SHOP_REGISTRATION_ERROR, payload: "" });
+          this.props.dispatch({ type: SHOP_REGISTRATION_ERROR, payload: "" });
         });
-      }, 3000);
+      }, 2000);
     }
+
     if (this.state.success === true) {
       setTimeout(() => {
         this.setState({ success: false, successMessage: "" }, state => {
-          nextProps.dispatch({ type: SHOP_REGISTRATION_SUCCESS, payload: "" });
+          this.props.dispatch({ type: SHOP_REGISTRATION_SUCCESS, payload: "" });
+          this.props.history.push("/myshops");
         });
-      }, 3000);
+      }, 2000);
+    }
+
+    if (this.props.shopRegistrationError && this.state.error === false) {
+      this.setState({
+        error: true,
+        errorMessage: this.props.shopRegistrationError
+      });
+    }
+
+    if (this.props.shopRegistrationSuccess && this.state.success === false) {
+      this.setState({
+        success: true,
+        successMessage: this.props.shopRegistrationSuccess
+      });
+    }
+
+    if (prevProps.selectedShop !== this.props.selectedShop) {
+      this.setState({
+        id: this.props.selectedShop.id,
+        name: this.props.selectedShop.name,
+        cuisinesAvailable: this.props.selectedShop.cuisines_available,
+        openingHours: this.props.selectedShop.opening_hours,
+        phoneNumber: String(this.props.selectedShop.phone_number),
+        address: this.props.selectedShop.address,
+        description: this.props.selectedShop.description,
+        status: this.props.selectedShop.status
+      });
     }
   }
 
@@ -122,15 +127,17 @@ class UpdateShop extends Component {
   onSubmit() {
     if (this.validate() === true) {
       const data = {
+        id: this.state.id,
         name: this.state.name,
         cuisines_available: this.state.cuisinesAvailable,
         opening_hours: this.state.openingHours,
         phone_number: this.state.phoneNumber,
         address: this.state.address,
         description: this.state.description,
-        user_id: this.props.user.id
+        user_id: this.props.user.id,
+        status: this.state.status
       };
-      this.props.dispatch(registerShop(data));
+      this.props.dispatch(updateShop(data));
     }
   }
 
