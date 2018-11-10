@@ -88,6 +88,9 @@ export const getLoginUser = history => dispatch => {
         dispatch({ type: USER, payload: response.data });
         dispatch({ type: IS_AUTHENTICATED, payload: true });
         // dispatch({ type: DONE_FETCHING });
+      })
+      .catch(error => {
+        history.push("/login");
       });
   } else {
     history.push("/login");

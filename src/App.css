@@ -88,17 +88,17 @@ label {
   margin-bottom: 0px;
 }
 .shop-list-image {
-  width: 80%;
-  height: -webkit-fill-available;
+  width: 150px;
+  height: 150px;
 }
 .shop-list-description {
-  margin-top: 5px;
+  margin: 10px;
   padding: 5px;
   font-size: 14px;
 }
 .shop-list-features {
   list-style: none;
-  display: inline-block;
+  display: -webkit-box;
   margin: 0;
   padding: 0;
 }
@@ -106,19 +106,35 @@ label {
   margin: 10px;
 }
 .shop-list-buttons {
-  margin: auto;
   width: 100%;
   padding: 10px;
-  display: inline-grid;
 }
 .boder-line {
-  max-height: 200px;
+  height: 153px;
+  display: -webkit-box;
   border-top: 3px solid #3c8dbc;
-  border-bottom: 1px solid #3c8dbc;
+  /* border-bottom: 1px solid #3c8dbc; */
+}
+.shop-list-col-1 {
+  width: 150px;
+}
+.shop-list-col-2 {
+  width: 800px;
+}
+.shop-list-col-3 {
+  width: 200px;
 }
 .info {
   color: red;
 }
 .shop-list-right {
   text-align: center;
+}
+.card-title {
+  font-size: 25px;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+.card-description {
+  font-size: 16px;
 }

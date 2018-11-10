@@ -30,19 +30,14 @@ class ShopList extends Component {
       return (
         <section key={index} className="content">
           <div className="container-fluid">
-            <div className="row boder-line">
-              <div
-                className="hidden-xs hidden-sm col-md-3"
-                style={{ padding: "0px" }}
-              >
+            <div className="boder-line" style={{ margin: "10px" }}>
+              <div className="shop-list-col-1">
                 <img src={url} className="shop-list-image" alt="userImage" />
               </div>
-              <div className="col-xs-8 col-sm-8 col-md-7">
+              <div className="shop-list-col-2">
                 <div className="shop-list-description">
-                  <p>
-                    <strong> {shop.name} </strong>
-                  </p>
-                  <p className="hidden-xs">{shop.description}</p>
+                  <p className="card-title">{shop.name}</p>
+                  <p className="card-description">{shop.description}</p>
                   <ul className="shop-list-features">
                     <li>
                       <i className="fa fa-coffee" />
@@ -56,25 +51,14 @@ class ShopList extends Component {
                         Opening Hours - {shop.opening_hours}
                       </span>
                     </li>
-                  </ul>
-
-                  <ul className="shop-list-features">
                     <li>
                       <i className="fa fa-coffee" />
-                      <span style={{ padding: "5px" }}>
-                        Available Cusines - {shop.cuisines_available}
-                      </span>
-                    </li>
-                    <li>
-                      <i className="fa fa-calendar-times-o" />
-                      <span style={{ padding: "5px" }}>
-                        Opening Hours - {shop.opening_hours}
-                      </span>
+                      <span style={{ padding: "5px" }}>Rating - 4.5/5.0</span>
                     </li>
                   </ul>
                 </div>
               </div>
-              <div className="col-xs-4 col-sm-4 col-md-2">
+              <div className="shop-list-col-3">
                 <div className="shop-list-buttons">
                   <FlatButton
                     label="Update"
