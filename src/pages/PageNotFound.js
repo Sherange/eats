@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Header from "../header";
-import SideBar from "../sidebar";
-import MainFooter from "../footer";
-import { getLoginUser } from "../../actions/userActions";
+import Header from "../components/header";
+import SideBar from "../components/sidebar";
+import MainFooter from "../components/footer";
+import { getLoginUser } from "../actions/userActions";
 class PageNotFound extends Component {
   componentDidMount() {
     if (this.props.isAuthenticated === false) {

@@ -3,12 +3,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Login from "./components/login";
 import Registration from "./components/register";
-import HomePage from "./components/pages/HomePage";
-import Layout from "./components/pages/Layout";
-import PageNotFound from "./components/pages/PageNotFound";
-import MyShopsPage from "./components/pages/MyShopsPage";
-import NewShopPage from "./components/pages/NewShopPage";
-import UpdateShopPage from "./components/pages/UpdateShopPage";
+import HomePage from "./pages/HomePage";
+import PageNotFound from "./pages/PageNotFound";
+
+import UserShops from "./pages/UserShops";
+import RegisterShop from "./pages/RegisterShop";
+import ShopUpdate from "./pages/ShopUpdate";
+import UserProfile from "./pages/UserProfile";
 class App extends Component {
   render() {
     return (
@@ -17,10 +18,10 @@ class App extends Component {
           <Route path="/" exact component={HomePage} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Registration} />
-          <Route path="/myshops" component={MyShopsPage} />
-          <Route path="/add-newshop" component={NewShopPage} />
-          <Route path="/update-shop/:id" component={UpdateShopPage} />
-          <Route path="/layout" component={Layout} />
+          <Route path="/user-shops" component={UserShops} />
+          <Route path="/add-shop" component={RegisterShop} />
+          <Route path="/update-shop/:id" component={ShopUpdate} />
+          <Route path="/user-profile/:id" component={UserProfile} />
           <Route path="*" component={PageNotFound} />
         </Switch>
       </BrowserRouter>

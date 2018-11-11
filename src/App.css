@@ -110,10 +110,10 @@ label {
   padding: 10px;
 }
 .boder-line {
-  height: 153px;
+  height: 154px;
   display: -webkit-box;
-  border-top: 3px solid #3c8dbc;
-  /* border-bottom: 1px solid #3c8dbc; */
+  border-top: 2px solid #3c8dbc;
+  border-bottom: 1px solid #3c8dbc;
 }
 .shop-list-col-1 {
   width: 150px;

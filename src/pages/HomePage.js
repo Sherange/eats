@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Header from "../header";
-import SideBar from "../sidebar";
-import MainFooter from "../footer";
-import Home from "../home";
-import { getLoginUser } from "../../actions/userActions";
+import Header from "../components/header";
+import SideBar from "../components/sidebar";
+import MainFooter from "../components/footer";
+import Home from "../components/home";
+import { getLoginUser } from "../actions/userActions";
 
 class HomePage extends Component {
   constructor(props) {
