@@ -9,7 +9,7 @@ import PageNotFound from "./pages/PageNotFound";
 import UserShops from "./pages/UserShops";
 import RegisterShop from "./pages/RegisterShop";
 import ShopUpdate from "./pages/ShopUpdate";
-import UserProfile from "./pages/UserProfile";
+import UserProfilePage from "./pages/UserProfilePage";
 class App extends Component {
   render() {
     return (
@@ -21,7 +21,7 @@ class App extends Component {
           <Route path="/user-shops" component={UserShops} />
           <Route path="/add-shop" component={RegisterShop} />
           <Route path="/update-shop/:id" component={ShopUpdate} />
-          <Route path="/user-profile/:id" component={UserProfile} />
+          <Route path="/user-profile" component={UserProfilePage} />
           <Route path="*" component={PageNotFound} />
         </Switch>
       </BrowserRouter>

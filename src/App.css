@@ -138,3 +138,15 @@ label {
 .card-description {
   font-size: 16px;
 }
+
+.user-profile-section-one {
+  background-color: #3c8dbc;
+  height: 200px;
+}
+.user-profile-section-two {
+  background-color: lightcoral;
+  height: 200px;
+}
+.user-profile-wrapper {
+  display: -webkit-box;
+}

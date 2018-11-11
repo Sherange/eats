@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "../components/header";
 import SideBar from "../components/sidebar";
+import UserProfile from "../components/user-profile";
 import MainFooter from "../components/footer";
 import { getLoginUser } from "../actions/userActions";
 
-class UserProfile extends Component {
+class UserProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -23,6 +24,11 @@ class UserProfile extends Component {
         <div className="wrapper">
           <Header history={this.props.history} />
           <SideBar />
+          <UserProfile
+            dispatch={this.props.dispatch}
+            history={this.props.history}
+            match={this.props.match}
+          />
           <MainFooter />
         </div>
       </div>
@@ -36,4 +42,4 @@ const mapStateToProps = state => ({
   isFetching: state.shop.isFetching
 });
 
-export default connect(mapStateToProps)(UserProfile);
+export default connect(mapStateToProps)(UserProfilePage);
