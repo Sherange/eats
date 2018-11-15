@@ -61,7 +61,7 @@ class AddShop extends Component {
       setTimeout(() => {
         this.setState({ success: false, successMessage: "" }, state => {
           nextProps.dispatch({ type: SHOP_REGISTRATION_SUCCESS, payload: "" });
-          this.props.history.push("/myshops");
+          this.props.history.push("/user-shops");
         });
       }, 2000);
     }

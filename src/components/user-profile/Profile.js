@@ -1,13 +1,39 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
+import DatePicker from "material-ui/DatePicker";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      id : null,
+      name: "",
+      email: "",
+      imagePath: "",
+      phoneNumber: "",
+      dateOfBirth: "",
+      gender: ""
+    };
   }
-  componentDidMount() {}
+  componentDidMount() {
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.user.id !== prevState.id) {
+      return {
+        id : nextProps.user.id,
+        name: nextProps.user.name,
+        email: nextProps.user.email,
+        imagePath: nextProps.user.image_path,
+        phoneNumber: nextProps.user.phone_number,
+        dateOfBirth: nextProps.user.description
+      };
+    }
+    return null;
+  }
+
   render() {
+    console.log("this.props.user", this.props.user);
     return (
       <div className="container-fluid">
         <div className="user-profile-wrapper">
@@ -20,7 +46,7 @@ class Profile extends Component {
             <p className="profile-label">User Details</p>
             <hr className="profile-hr" />
 
-            <p className="profile-email">sherangef@gmail.com</p>
+            <p className="profile-email">{ this.state.email}</p>
             <br />
 
             <p className="profile-label">Address</p>
@@ -46,7 +72,7 @@ class Profile extends Component {
               className="user-profile-image-sm"
               alt="userImage"
             />
-            <p className="profile-name">Sherange</p>
+            <p className="profile-name">{this.state.name}</p>
 
             <div className="box-one">
               <p className="profile-rating">User Rating</p>
@@ -68,7 +94,7 @@ class Profile extends Component {
                 <h4 className="profile-from-label">Email :</h4>
               </div>
               <div className="col-md-10">
-                <h4 className="profile-from-text">sherangef@gmail.com</h4>
+                <h4 className="profile-from-text">{this.state.email}</h4>
               </div>
             </div>
 
@@ -93,6 +119,11 @@ class Profile extends Component {
               </div>
               <div className="col-md-10">
                 <p className="profile-from-text">1st Aug 1996</p>
+                <DatePicker
+                  hintText="Controlled Date Input"
+                  value={this.state.controlledDate}
+                  onChange={this.handleChange}
+                />
               </div>
             </div>
 
