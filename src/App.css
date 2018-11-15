@@ -136,17 +136,127 @@ label {
   font-family: sans-serif;
 }
 .card-description {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .user-profile-section-one {
-  background-color: #3c8dbc;
-  height: 200px;
+  /* background-color: #3c8dbc; */
+  width: 40%;
+  margin: 10px;
 }
 .user-profile-section-two {
-  background-color: lightcoral;
-  height: 200px;
+  /* background-color: lightcoral; */
+  width: 100%;
+  margin: 10px;
+  height: auto;
 }
 .user-profile-wrapper {
-  display: -webkit-box;
+  display: flex;
+  width: 100%;
+}
+
+.profile-name {
+  color: #2c3e50;
+  font-size: 30px;
+  font-weight: 800;
+}
+.user-profile-image {
+  width: 100%;
+  height: auto;
+}
+
+.user-profile-image-sm {
+  display: none;
+  width: 50%;
+  height: auto;
+  margin: auto;
+}
+.profile-label {
+  font-size: 16px;
+  color: #b3b6b7;
+  margin: 2px;
+}
+
+.profile-rating {
+  font-weight: 600;
+  font-size: 16px;
+  color: #2c3e50;
+  padding: 0px;
+  margin: 0px;
+}
+
+.profile-hr {
+  margin: 2px;
+  border: 0;
+  border-bottom: 1px solid #b3b6b7;
+}
+
+.profile-email {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.profile-address {
+  margin: 0px;
+  color: #2c3e50;
+  font-size: 16px;
+  /* font-weight: 100; */
+}
+
+.profile-from-label {
+  color: #b3b6b7;
+  font-size: 20px;
+  /* text-align: right; */
+}
+.profile-from-address {
+  color: #2c3e50;
+  font-size: 20px;
+  margin-top: 0px;
+}
+.profile-from-text {
+  color: #2c3e50;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .user-profile-section-one {
+    display: none;
+  }
+  .user-profile-image-sm {
+    display: block;
+  }
+  .user-profile-section-two {
+    margin: 10px;
+  }
+}
+
+.box-one {
+  width: 33%;
+  float: left;
+  margin: auto;
+  text-align: center;
+}
+
+.box-two {
+  width: 33%;
+  float: left;
+  margin: auto;
+  text-align: center;
+}
+
+.box-three {
+  width: 33%;
+  float: left;
+  margin: auto;
+  text-align: center;
+}
+
+.profile-box-label {
+  /* width: 200px; */
+  margin: 10px;
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 25px;
 }
