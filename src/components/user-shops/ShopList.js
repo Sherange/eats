@@ -31,7 +31,12 @@ class ShopList extends Component {
         <section key={index} className="content">
           <div className="container-fluid">
             <div className="boder-line" style={{ margin: "10px" }}>
-              <div className="shop-list-col-1">
+              <div
+                className="shop-list-col-1"
+                onClick={() =>
+                  this.props.history.push("/update-shop/" + shop.id)
+                }
+              >
                 <img src={url} className="shop-list-image" alt="userImage" />
               </div>
               <div className="shop-list-col-2">

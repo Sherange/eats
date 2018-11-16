@@ -91,6 +91,11 @@ label {
   width: 220px;
   height: 150px;
 }
+.shop-list-col-1 :hover {
+  -webkit-filter: brightness(70%);
+  -webkit-transition: all 1s ease;
+  cursor: pointer;
+}
 .shop-list-description {
   margin: 10px;
   padding: 5px;
