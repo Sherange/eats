@@ -172,9 +172,9 @@ label {
 
 .user-profile-image-sm {
   display: none;
-  width: 50%;
+  width: 100%;
   height: auto;
-  margin: auto;
+  /* margin: auto; */
 }
 .profile-label {
   font-size: 16px;
@@ -211,7 +211,7 @@ label {
 
 .profile-from-label {
   color: #b3b6b7;
-  font-size: 20px;
+  font-size: 18px;
   /* text-align: right; */
 }
 .profile-from-address {
@@ -221,7 +221,7 @@ label {
 }
 .profile-from-text {
   color: #2c3e50;
-  font-size: 20px;
+  font-size: 18px;
   margin-top: 10px;
 }
 
@@ -235,6 +235,16 @@ label {
   .user-profile-section-two {
     margin: 10px;
   }
+}
+.border {
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #b3b6b7;
+  clear: both;
+  display: table;
+  height: auto;
+  width: 90%;
+  margin: 20px;
 }
 
 .box-one {

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
-import SelectField from "material-ui/SelectField";
-import MenuItem from "material-ui/MenuItem";
+import { TextField, SelectField, RaisedButton, MenuItem } from "material-ui";
 import { registerShop } from "../../actions/shopActions";
 import {
   SHOP_REGISTRATION_ERROR,

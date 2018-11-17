@@ -7,7 +7,6 @@ import {
   USER_REGISTRATION_ERROR,
   USER_LOGIN_ERROR
 } from "./types";
-
 export const registerUser = data => dispatch => {
   dispatch({ type: IS_FETCHING });
   const user = {
@@ -37,6 +36,39 @@ export const registerUser = data => dispatch => {
         }
       })
   );
+};
+
+export const updateUser = data => dispatch => {
+  const user = {
+    id: data.id,
+    name: data.name,
+    phone_number: data.phone_number,
+    date_of_birth: data.date_of_birth,
+    gender: data.gender,
+    description: data.description,
+    address: data.user_address.address ? data.user_address.address : "",
+    street_one: data.user_address.street_one
+      ? data.user_address.street_one
+      : "",
+    street_two: data.user_address.street_two
+      ? data.user_address.street_two
+      : "",
+    city: data.user_address.city ? data.user_address.city : "",
+    country: "Sri Lanka"
+  };
+  console.log('data',user);
+  return axios
+    .patch(process.env.REACT_APP_API_URL + "user/" + data.id, user, {
+      headers: {
+        Authorization: localStorage.access_token
+      }
+    })
+    .then(response => {
+      dispatch({ type: USER, payload: response.data.data });
+    })
+    .catch(error => {
+      console.log("error", error);
+    });
 };
 
 export const loginUser = data => dispatch => {
