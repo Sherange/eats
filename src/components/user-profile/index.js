@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Profile from './Profile'
-import { getLoginUser } from "../../actions/userActions";
+import ProfileSummary from "./ProfileSummary";
+import ProfileForm from "./ProfileForm";
 
 class UserProfile extends Component {
   constructor(props) {
@@ -19,11 +19,20 @@ class UserProfile extends Component {
         className="content-wrapper"
         style={{ minHeight: window.innerHeight }}
       >
-        <Profile
-          dispatch={this.props.dispatch}
-          history={this.props.history}
-          user={this.props.user}
-        />
+        <div className="container-fluid">
+          <div className="user-profile-wrapper">
+            <ProfileSummary
+              dispatch={this.props.dispatch}
+              history={this.props.history}
+              user={this.props.user}
+            />
+            <ProfileForm
+              dispatch={this.props.dispatch}
+              history={this.props.history}
+              user={this.props.user}
+            />
+          </div>
+        </div>
       </div>
     );
   }

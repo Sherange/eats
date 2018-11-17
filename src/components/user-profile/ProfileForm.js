@@ -87,7 +87,7 @@ class ProfileForm extends Component {
     });
 
     const selectedGender = GENDER.findIndex((item, index) => {
-      return item.value == this.state.user.gender;
+      return item.value === this.state.user.gender;
     });
 
     const textStyle = {
@@ -98,14 +98,16 @@ class ProfileForm extends Component {
 
     return (
       <div className="user-profile-section-two">
-        <div />
+        <p className="profile-name">
+          {this.state.user.name}'s Profile Infromation
+        </p>
+
         <div className="border">
           <img
-            src="https://d3dz4rogqkqh6r.cloudfront.net/uploads/files/2018/10/yimg_W6jPi8-640x427.jpg"
+            src="/images/profile.png"
             className="user-profile-image-sm"
             alt="userImage"
           />
-          <p className="profile-name">{this.state.user.name}</p>
 
           <div className="box-one">
             <p className="profile-rating">User Rating</p>

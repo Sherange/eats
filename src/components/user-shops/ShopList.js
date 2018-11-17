@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FlatButton from "material-ui/FlatButton";
+import { FlatButton, RaisedButton } from "material-ui";
 class ShopList extends Component {
   constructor(props) {
     super(props);
@@ -108,9 +108,14 @@ class ShopList extends Component {
             <small>Preview</small>
           </h1>
         </section>
-        {this.state.userShops &&
-          this.state.userShops.length > 0 &&
-          this.renderListItem(this.state.userShops)}
+        {this.state.userShops && this.state.userShops.length > 0 ? (
+          this.renderListItem(this.state.userShops)
+        ) : (
+          <div className="empty-list">
+            <p className="profile-name">List your first shop now</p>
+            <RaisedButton label="List My Shop" onClick={() => this.props.history.push('/add-shop')} />
+          </div>
+        )}
       </>
     );
   }

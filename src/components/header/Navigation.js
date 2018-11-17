@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import RaisedButton from "material-ui/RaisedButton";
 import { logoutUser } from "../../actions/userActions";
 export default class Navigation extends Component {
@@ -15,7 +14,7 @@ export default class Navigation extends Component {
   }
 
   goToProfile() {
-    this.props.history.push("/profile");
+    this.props.history.push("/user-profile");
   }
 
   goToLogin() {
