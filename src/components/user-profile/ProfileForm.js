@@ -142,7 +142,11 @@ class ProfileForm extends Component {
               type="text"
               id="user-phone-number"
               inputStyle={textStyle}
-              value={String(this.state.user.phone_number)}
+              value={
+                this.state.user.phone_number
+                  ? String(this.state.user.phone_number)
+                  : ""
+              }
               onChange={this.handleChangePhoneNumber}
               style={{ width: "90%" }}
             />
@@ -161,7 +165,11 @@ class ProfileForm extends Component {
               }
               onChange={this.handleChangeDate}
               openToYearSelection={true}
-              value={moment(this.state.user.date_of_birth).toDate()}
+              value={
+                this.state.user.date_of_birth
+                  ? moment(this.state.user.date_of_birth).toDate()
+                  : null
+              }
               style={{ width: "90%" }}
               textFieldStyle={textStyle}
             />
@@ -193,7 +201,9 @@ class ProfileForm extends Component {
           <div className="col-md-10">
             <TextField
               id="user-description"
-              value={this.state.user.description}
+              value={
+                this.state.user.description ? this.state.user.description : ""
+              }
               onChange={this.handleChangeDescription}
               style={{ width: "90%" }}
               inputStyle={textStyle}

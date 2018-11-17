@@ -24,10 +24,14 @@ class Profile extends Component {
 
             <p className="profile-label">Address</p>
             <hr className="profile-hr" />
-            <p className="profile-address">
-              {this.props.user.user_address &&
-                this.props.user.user_address.address}
-            </p>
+            {this.props.user.user_address &&
+            this.props.user.user_address.address ? (
+              <p className="profile-address">
+                {this.props.user.user_address.address}
+              </p>
+            ) : (
+              <p className="complete-text">Complete your profile</p>
+            )}
             <p className="profile-address">
               {this.props.user.user_address &&
                 this.props.user.user_address.street_one}
@@ -40,25 +44,37 @@ class Profile extends Component {
 
             <p className="profile-label">City</p>
             <hr className="profile-hr" />
-            <p className="profile-address">
-              {this.props.user.user_address &&
-                this.props.user.user_address.city}
-            </p>
+            {this.props.user.user_address &&
+            this.props.user.user_address.city ? (
+              <p className="profile-address">
+                {this.props.user.user_address.city}
+              </p>
+            ) : (
+              <p className="complete-text">Complete your profile</p>
+            )}
             <br />
 
             <p className="profile-label">Country</p>
             <hr className="profile-hr" />
-            <p className="profile-address">
-              {this.props.user.user_address &&
-                this.props.user.user_address.country}
-            </p>
+            {this.props.user.user_address &&
+            this.props.user.user_address.country ? (
+              <p className="profile-address">
+                {this.props.user.user_address.country}
+              </p>
+            ) : (
+              <p className="complete-text">Complete your profile</p>
+            )}
             <br />
 
             <p className="profile-label">Description</p>
             <hr className="profile-hr" />
-            <p className="profile-address">
-              {this.props.user && this.props.user.description}
-            </p>
+            {this.props.user.description ? (
+              <p className="profile-address">
+                {this.props.user && this.props.user.description}
+              </p>
+            ) : (
+              <p className="complete-text">Complete your profile</p>
+            )}
           </div>
           <ProfileForm
             user={this.props.user}

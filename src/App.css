@@ -202,9 +202,16 @@ label {
   font-size: 20px;
   font-weight: 600;
 }
+
 .profile-address {
   margin: 0px;
   color: #2c3e50;
+  font-size: 16px;
+  /* font-weight: 100; */
+}
+.complete-text {
+  margin: 0px;
+  color: #b3b6b7;
   font-size: 16px;
   /* font-weight: 100; */
 }
@@ -214,11 +221,13 @@ label {
   font-size: 18px;
   /* text-align: right; */
 }
+
 .profile-from-address {
   color: #2c3e50;
   font-size: 20px;
   margin-top: 0px;
 }
+
 .profile-from-text {
   color: #2c3e50;
   font-size: 18px;
