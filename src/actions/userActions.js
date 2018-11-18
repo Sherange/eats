@@ -6,7 +6,8 @@ import {
   IS_AUTHENTICATED,
   USER_REGISTRATION_ERROR,
   USER_LOGIN_ERROR,
-  USER_UPDATE_ERROR
+  USER_UPDATE_ERROR,
+  USER_UPDATE_SUCCESS
 } from "./types";
 export const registerUser = data => dispatch => {
   dispatch({ type: IS_FETCHING });
@@ -64,10 +65,11 @@ export const updateUser = data => dispatch => {
       }
     })
     .then(response => {
-      if (response.error) {
+      if (response.data.error) {
         dispatch({ type: USER_UPDATE_ERROR, payload: response.data.message });
       }
       dispatch({ type: USER, payload: response.data.data });
+      dispatch({ type: USER_UPDATE_SUCCESS, payload: response.data.message });
     })
     .catch(error => {
       if (error.response && error.response.data.message) {

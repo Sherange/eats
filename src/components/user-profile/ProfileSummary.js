@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { FlatButton, FloatingActionButton } from "material-ui";
-import ContentAdd from "material-ui/svg-icons/content/add";
-import { zIndex } from "material-ui/styles";
+import { FlatButton } from "material-ui";
 class ProfileSummary extends Component {
   constructor(props) {
     super(props);

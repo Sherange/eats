@@ -9,7 +9,7 @@ import {
 import { GENDER } from "../../constant/constant.js";
 import moment from "moment";
 import { updateUser } from "../../actions/userActions";
-import { USER_UPDATE_ERROR } from "../../actions/types";
+import { USER_UPDATE_ERROR, USER_UPDATE_SUCCESS } from "../../actions/types";
 
 class ProfileForm extends Component {
   constructor(props) {
@@ -19,6 +19,9 @@ class ProfileForm extends Component {
 
       error: false,
       errorMessage: "",
+
+      success: false,
+      successMessage: "",
 
       errorPhoneNumber: "",
       errorBirthDate: "",
@@ -40,10 +43,25 @@ class ProfileForm extends Component {
       }, 2000);
     }
 
+    if (this.state.success === true) {
+      setTimeout(() => {
+        this.setState({ success: false, successMessage: "" }, state => {
+          this.props.dispatch({ type: USER_UPDATE_SUCCESS, payload: "" });
+        });
+      }, 2000);
+    }
+
     if (this.state.error === false && this.props.userUpdateError !== "") {
       this.setState({
         error: true,
         errorMessage: this.props.userUpdateError
+      });
+    }
+
+    if(this.state.success === false && this.props.userUpdateSuccess !== ""){
+      this.setState({
+        success: true,
+        successMessage: this.props.userUpdateSuccess
       });
     }
   }
@@ -415,6 +433,19 @@ class ProfileForm extends Component {
               <div className="alert alert-danger alert-dismissible">
                 <p>
                   <i className="icon fa fa-warning" /> {this.state.errorMessage}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-8 col-md-offset-4" style={{ margin: "10" }}>
+            {this.state.success && (
+              <div className="alert alert-success alert-dismissible">
+                <p>
+                  <i className="icon fa fa-hand-peace-o" />{" "}
+                  {this.state.successMessage}
                 </p>
               </div>
             )}
