@@ -9,14 +9,43 @@ import {
 import { GENDER } from "../../constant/constant.js";
 import moment from "moment";
 import { updateUser } from "../../actions/userActions";
+import { USER_UPDATE_ERROR } from "../../actions/types";
 
 class ProfileForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: []
+      user: [],
+
+      error: false,
+      errorMessage: "",
+
+      errorPhoneNumber: "",
+      errorBirthDate: "",
+      errorGender: "",
+      errorDescription: "",
+      errorAddress: "",
+      errorCity: ""
     };
+    this.validation = this.validation.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.error === true) {
+      setTimeout(() => {
+        this.setState({ error: false, errorMessage: "" }, state => {
+          this.props.dispatch({ type: USER_UPDATE_ERROR, payload: "" });
+        });
+      }, 2000);
+    }
+
+    if (this.state.error === false && this.props.userUpdateError !== "") {
+      this.setState({
+        error: true,
+        errorMessage: this.props.userUpdateError
+      });
+    }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -29,7 +58,7 @@ class ProfileForm extends Component {
   handleChangePhoneNumber = event => {
     const { user } = this.state;
     user.phone_number = event.target.value;
-    this.setState({ user });
+    this.setState({ user, errorPhoneNumber: "" });
   };
 
   handleChangeGender = (event, index, value) => {
@@ -38,47 +67,105 @@ class ProfileForm extends Component {
       return item.key === index;
     });
     user.gender = selectedGender.value;
-    this.setState({ user });
+    this.setState({ user, errorGender: "" });
   };
 
   handleChangeDescription = event => {
     const { user } = this.state;
     user.description = event.target.value;
-    this.setState({ user });
+    this.setState({ user, errorDescription: "" });
   };
 
   handleChangeDate = (event, date) => {
     const { user } = this.state;
     user.date_of_birth = moment(date).format("YYYY-MM-DD");
-    this.setState({ user });
+    this.setState({ user, errorBirthDate: "" });
   };
 
   handleChangeAddress = event => {
     const { user } = this.state;
-    user.user_address.address = event.target.value;
-    this.setState({ user });
+    if (user.user_address) {
+      user.user_address.address = event.target.value;
+    } else {
+      user.user_address = { address: event.target.value };
+    }
+    this.setState({ user, errorAddress: "" });
   };
 
   handleChangeStreetOne = event => {
     const { user } = this.state;
-    user.user_address.street_one = event.target.value;
+    if (user.user_address) {
+      user.user_address.street_one = event.target.value;
+    } else {
+      user.user_address = { street_one: event.target.value };
+    }
     this.setState({ user });
   };
 
   handleChangeStreetTwo = event => {
     const { user } = this.state;
-    user.user_address.street_two = event.target.value;
+    if (user.user_address) {
+      user.user_address.street_two = event.target.value;
+    } else {
+      user.user_address = { street_two: event.target.value };
+    }
     this.setState({ user });
   };
 
   handleChangeCity = event => {
     const { user } = this.state;
     user.user_address.city = event.target.value;
-    this.setState({ user });
+    this.setState({ user, errorCity: "" });
   };
 
+  validation() {
+    if (
+      this.state.user.phone_number === "" ||
+      this.state.user.phone_number === null
+    ) {
+      this.setState({ errorPhoneNumber: "Phone number required" });
+      return false;
+    } else if (
+      this.state.user.date_of_birth === "" ||
+      this.state.user.date_of_birth === null
+    ) {
+      this.setState({ errorBirthDate: "Date of birth required" });
+      return false;
+    } else if (
+      this.state.user.gender === "" ||
+      this.state.user.gender === null
+    ) {
+      this.setState({ errorGender: "Gender is required" });
+      return false;
+    } else if (
+      this.state.user.description === "" ||
+      this.state.user.description === null
+    ) {
+      this.setState({ errorDescription: "Description required" });
+      return false;
+    } else if (
+      this.state.user.user_address === null ||
+      this.state.user.user_address.address === "" ||
+      this.state.user.user_address.address === null
+    ) {
+      this.setState({ errorAddress: "Address required" });
+      return false;
+    } else if (
+      !this.state.user.user_address.city ||
+      this.state.user.user_address.city === "" ||
+      this.state.user.user_address.city === null
+    ) {
+      this.setState({ errorCity: "City can't be blank" });
+      return false;
+    }
+
+    return true;
+  }
+
   onSubmit() {
-    this.props.dispatch(updateUser(this.state.user));
+    if (this.validation() === true) {
+      this.props.dispatch(updateUser(this.state.user));
+    }
   }
 
   render() {
@@ -150,6 +237,7 @@ class ProfileForm extends Component {
                   : ""
               }
               onChange={this.handleChangePhoneNumber}
+              errorText={this.state.errorPhoneNumber}
               style={{ width: "90%" }}
             />
           </div>
@@ -173,6 +261,7 @@ class ProfileForm extends Component {
                   : null
               }
               style={{ width: "90%" }}
+              errorText={this.state.errorBirthDate}
               textFieldStyle={textStyle}
             />
           </div>
@@ -189,7 +278,7 @@ class ProfileForm extends Component {
               onChange={this.handleChangeGender}
               style={{ width: "90%" }}
               labelStyle={textStyle}
-              // errorText={this.state.errorOpeningHours}
+              errorText={this.state.errorGender}
             >
               {genderItem}
             </SelectField>
@@ -208,6 +297,7 @@ class ProfileForm extends Component {
               }
               onChange={this.handleChangeDescription}
               style={{ width: "90%" }}
+              errorText={this.state.errorDescription}
               inputStyle={textStyle}
               multiLine={true}
               rows={1}
@@ -232,6 +322,7 @@ class ProfileForm extends Component {
                   : ""
               }
               onChange={this.handleChangeAddress}
+              errorText={this.state.errorAddress}
               style={{ width: "90%" }}
               inputStyle={textStyle}
             />
@@ -282,6 +373,7 @@ class ProfileForm extends Component {
                   : ""
               }
               onChange={this.handleChangeCity}
+              errorText={this.state.errorCity}
               style={{ width: "90%" }}
               inputStyle={textStyle}
             />
@@ -309,10 +401,23 @@ class ProfileForm extends Component {
         <div className="row">
           <div className="col-md-10 col-md-offset-2">
             <RaisedButton
-              label="Update"
+              label="Save"
               primary={true}
+              labelStyle={{ textTransform: "none" }}
               onClick={() => this.onSubmit()}
             />
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-8 col-md-offset-4" style={{ margin: "10" }}>
+            {this.state.error && (
+              <div className="alert alert-danger alert-dismissible">
+                <p>
+                  <i className="icon fa fa-warning" /> {this.state.errorMessage}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

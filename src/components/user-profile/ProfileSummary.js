@@ -1,10 +1,16 @@
 import React, { Component } from "react";
-
+import { FlatButton, FloatingActionButton } from "material-ui";
+import ContentAdd from "material-ui/svg-icons/content/add";
+import { zIndex } from "material-ui/styles";
 class ProfileSummary extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  handleUplaod = event => {
+    console.log("event.target.files[0]", event.target.files[0]);
+  };
 
   render() {
     return (
@@ -14,6 +20,20 @@ class ProfileSummary extends Component {
           className="user-profile-image"
           alt="userImage"
         />
+        <FlatButton
+          labelStyle={{ textTransform: "none" }}
+          label="Upload Profile Image"
+          labelPosition="before"
+          containerElement="label"
+        >
+          <input
+            type="file"
+            className="upload-input"
+            onChange={event => {
+              this.handleUplaod(event);
+            }}
+          />
+        </FlatButton>
         <p className="profile-label">User Details</p>
         <hr className="profile-hr" />
         <p className="profile-email">{this.props.user.email}</p>

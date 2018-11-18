@@ -25,11 +25,13 @@ class UserProfile extends Component {
               dispatch={this.props.dispatch}
               history={this.props.history}
               user={this.props.user}
+              userUpdateError={this.props.userUpdateError}
             />
             <ProfileForm
               dispatch={this.props.dispatch}
               history={this.props.history}
               user={this.props.user}
+              userUpdateError={this.props.userUpdateError}
             />
           </div>
         </div>
@@ -41,7 +43,8 @@ class UserProfile extends Component {
 const mapStateToProps = state => ({
   user: state.user.user,
   isAuthenticated: state.user.isAuthenticated,
-  isFetching: state.shop.isFetching
+  isFetching: state.shop.isFetching,
+  userUpdateError: state.user.userUpdateError
 });
 
 export default connect(mapStateToProps)(UserProfile);

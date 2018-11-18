@@ -5,7 +5,8 @@ import {
   DONE_FETCHING,
   IS_AUTHENTICATED,
   USER_REGISTRATION_ERROR,
-  USER_LOGIN_ERROR
+  USER_LOGIN_ERROR,
+  USER_UPDATE_ERROR
 } from "./types";
 export const registerUser = data => dispatch => {
   dispatch({ type: IS_FETCHING });
@@ -56,7 +57,6 @@ export const updateUser = data => dispatch => {
     city: data.user_address.city ? data.user_address.city : "",
     country: "Sri Lanka"
   };
-  console.log('data',user);
   return axios
     .patch(process.env.REACT_APP_API_URL + "user/" + data.id, user, {
       headers: {
@@ -64,10 +64,18 @@ export const updateUser = data => dispatch => {
       }
     })
     .then(response => {
+      if (response.error) {
+        dispatch({ type: USER_UPDATE_ERROR, payload: response.data.message });
+      }
       dispatch({ type: USER, payload: response.data.data });
     })
     .catch(error => {
-      console.log("error", error);
+      if (error.response && error.response.data.message) {
+        dispatch({
+          type: USER_UPDATE_ERROR,
+          payload: error.response.data.message
+        });
+      }
     });
 };
 

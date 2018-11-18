@@ -4,7 +4,8 @@ import {
   DONE_FETCHING,
   IS_AUTHENTICATED,
   USER_REGISTRATION_ERROR,
-  USER_LOGIN_ERROR
+  USER_LOGIN_ERROR,
+  USER_UPDATE_ERROR
 } from "../actions/types";
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
   isAuthenticated: false,
   user: [],
   userRegistrationError: "",
-  userLoginError: ""
+  userLoginError: "",
+  userUpdateError: ""
 };
 
 export default function(state = initialState, action) {
@@ -46,6 +48,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: action.payload
+      };
+    case USER_UPDATE_ERROR:
+      return {
+        ...state,
+        userUpdateError: action.payload
       };
     default:
       return state;
