@@ -22,6 +22,7 @@ class UserProfile extends Component {
         <div className="container-fluid">
           <div className="user-profile-wrapper">
             <ProfileSummary
+              isFetching={this.props.isFetching}
               dispatch={this.props.dispatch}
               history={this.props.history}
               user={this.props.user}
@@ -46,7 +47,7 @@ const mapStateToProps = state => ({
   user: state.user.user,
   isAuthenticated: state.user.isAuthenticated,
   isFetching: state.shop.isFetching,
-  userUpdateSuccess : state.user.userUpdateSuccess,
+  userUpdateSuccess: state.user.userUpdateSuccess,
   userUpdateError: state.user.userUpdateError
 });
 

@@ -26,7 +26,6 @@ class ShopList extends Component {
         shop.shop_photos[0] && shop.shop_photos[0].image_path
           ? shop.shop_photos[0].image_path
           : "/images/placeholder.jpg";
-
       return (
         <section key={index} className="content">
           <div className="container-fluid">
@@ -42,22 +41,29 @@ class ShopList extends Component {
               <div className="shop-list-col-2">
                 <div className="shop-list-description">
                   <p className="card-title">{shop.name}</p>
-                  <p className="card-description">{shop.description}</p>
+                  {shop.description.length > 200 ? (
+                    <p className="card-description">
+                      {shop.description.substring(0, 200)}
+                      <span className="read-more">....read more</span>
+                    </p>
+                  ) : (
+                    <p>{shop.description}</p>
+                  )}
                   <ul className="shop-list-features">
                     <li>
-                      <i className="fa fa-coffee" />
+                      <i className="fa fa-coffee fa-2x" />
                       <span style={{ padding: "5px" }}>
                         Available Cusines - {shop.cuisines_available}
                       </span>
                     </li>
                     <li>
-                      <i className="fa fa-calendar-times-o" />
+                      <i className="fa fa-calendar-times-o fa-2x" />
                       <span style={{ padding: "5px" }}>
                         Opening Hours - {shop.opening_hours}
                       </span>
                     </li>
                     <li>
-                      <i className="fa fa-coffee" />
+                      <i className="fa fa-star fa-2x" />
                       <span style={{ padding: "5px" }}>Rating - 4.5/5.0</span>
                     </li>
                   </ul>
@@ -72,7 +78,7 @@ class ShopList extends Component {
                     labelStyle={{ textTransform: "none" }}
                     // backgroundColor={"#00a65a"}
                     style={{ margin: "5px" }}
-                    icon={<i className="fa fa-file-text-o" />}
+                    icon={<i className="fa fa-file-text-o fa-2x" />}
                   />
                   <FlatButton
                     label="Delete"
@@ -80,16 +86,16 @@ class ShopList extends Component {
                     labelStyle={{ textTransform: "none" }}
                     // backgroundColor={"#00a65a"}
                     style={{ margin: "5px" }}
-                    icon={<i className="fa fa-bitbucket" />}
+                    icon={<i className="fa fa-trash-o fa-2x" />}
                   />
-                  <FlatButton
+                  {/* <FlatButton
                     label="Status"
                     primary={true}
                     labelStyle={{ textTransform: "none" }}
                     // backgroundColor={"#F5F5F5"}
                     style={{ margin: "5px" }}
-                    icon={<i className="fa fa-circle-thin" />}
-                  />
+                    icon={<i className="fa fa-circle-thin fa-2x" />}
+                  /> */}
                 </div>
               </div>
             </div>
@@ -113,7 +119,10 @@ class ShopList extends Component {
         ) : (
           <div className="empty-list">
             <p className="profile-name">List your first shop now</p>
-            <RaisedButton label="List My Shop" onClick={() => this.props.history.push('/add-shop')} />
+            <RaisedButton
+              label="List My Shop"
+              onClick={() => this.props.history.push("/add-shop")}
+            />
           </div>
         )}
       </>

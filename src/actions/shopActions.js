@@ -122,6 +122,7 @@ export const registerShop = data => dispatch => {
 };
 
 export const uploadShopPhotos = formData => dispatch => {
+  dispatch({ type: IS_FETCHING });
   return axios
     .post(process.env.REACT_APP_API_URL + "shop-photos", formData, {
       headers: {
@@ -130,6 +131,9 @@ export const uploadShopPhotos = formData => dispatch => {
       }
     })
     .then(response => {
-      console.log("response", response);
+      dispatch({ type: DONE_FETCHING });
+    })
+    .catch(error => {
+      dispatch({ type: DONE_FETCHING });
     });
 };

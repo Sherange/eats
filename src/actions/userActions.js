@@ -9,6 +9,7 @@ import {
   USER_UPDATE_ERROR,
   USER_UPDATE_SUCCESS
 } from "./types";
+
 export const registerUser = data => dispatch => {
   dispatch({ type: IS_FETCHING });
   const user = {
@@ -78,6 +79,21 @@ export const updateUser = data => dispatch => {
           payload: error.response.data.message
         });
       }
+    });
+};
+
+export const uploadProfilePic = (formData, id) => dispatch => {
+  dispatch({ type: IS_FETCHING });
+  return axios
+    .post(process.env.REACT_APP_API_URL + "profile-photo/" + id, formData, {
+      headers: {
+        Authorization: localStorage.access_token,
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then(response => {
+      dispatch(getLoginUser());
+      dispatch({ type: DONE_FETCHING });
     });
 };
 

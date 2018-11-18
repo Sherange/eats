@@ -1,28 +1,39 @@
 import React, { Component } from "react";
-import { FlatButton } from "material-ui";
+import { FlatButton, LinearProgress } from "material-ui";
+import { uploadProfilePic } from "../../actions/userActions";
 class ProfileSummary extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userPhoto: ""
+    };
   }
 
   handleUplaod = event => {
-    console.log("event.target.files[0]", event.target.files[0]);
+    const formData = new FormData();
+    formData.append("image", event.target.files[0]);
+    this.props.dispatch(uploadProfilePic(formData, this.props.user.id));
   };
 
   render() {
     return (
       <div className="user-profile-section-one">
         <img
-          src="/images/profile.png"
+          src={
+            this.props.user.image_path
+              ? this.props.user.image_path
+              : " /images/profile.png"
+          }
           className="user-profile-image"
           alt="userImage"
         />
+        {this.props.isFetching && <LinearProgress mode="indeterminate" />}
         <FlatButton
           labelStyle={{ textTransform: "none" }}
           label="Upload Profile Image"
           labelPosition="before"
           containerElement="label"
+          fullWidth={true}
         >
           <input
             type="file"

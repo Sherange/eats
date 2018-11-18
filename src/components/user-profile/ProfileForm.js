@@ -58,7 +58,7 @@ class ProfileForm extends Component {
       });
     }
 
-    if(this.state.success === false && this.props.userUpdateSuccess !== ""){
+    if (this.state.success === false && this.props.userUpdateSuccess !== "") {
       this.setState({
         success: true,
         successMessage: this.props.userUpdateSuccess
@@ -209,7 +209,11 @@ class ProfileForm extends Component {
 
         <div className="border">
           <img
-            src="/images/profile.png"
+            src={
+              this.props.user.image_path
+                ? this.props.user.image_path
+                : " /images/profile.png"
+            }
             className="user-profile-image-sm"
             alt="userImage"
           />
