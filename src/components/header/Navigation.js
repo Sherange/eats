@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import { logoutUser } from "../../actions/userActions";
+import moment from 'moment'
 export default class Navigation extends Component {
   constructor(props) {
     super(props);
@@ -40,9 +41,13 @@ export default class Navigation extends Component {
               {/* <!-- Menu Toggle Button --> */}
               <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                 <img
-                  src="/images/profile.png"
+                  src={
+                    this.props.user.image_path
+                      ? this.props.user.image_path
+                      : "/images/profile.png"
+                  }
                   className="user-image"
-                  alt="User Image"
+                  alt="UserImage"
                 />
                 {/* <!-- hidden-xs hides the username on small devices so only the image appears. --> */}
                 <span className="hidden-xs">{this.props.user.name}</span>
@@ -51,14 +56,18 @@ export default class Navigation extends Component {
                 {/* <!-- The user image in the menu --> */}
                 <li className="user-header">
                   <img
-                    src="/images/profile.png"
+                    src={
+                      this.props.user.image_path
+                        ? this.props.user.image_path
+                        : "/images/profile.png"
+                    }
                     className="img-circle"
-                    alt="User Image"
+                    alt="UserImage"
                   />
 
                   <p>
                     {this.props.user.name}
-                    <small>Member since Nov. 2012</small>
+                    <small>Member since {moment(this.props.user.created_at).format("Do MMM YYYY")}</small>
                   </p>
                 </li>
                 <li className="user-footer">

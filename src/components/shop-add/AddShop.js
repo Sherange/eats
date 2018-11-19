@@ -5,6 +5,7 @@ import {
   SHOP_REGISTRATION_ERROR,
   SHOP_REGISTRATION_SUCCESS
 } from "../../actions/types";
+import moment from "moment";
 
 class AddShop extends Component {
   constructor(props) {
@@ -282,14 +283,18 @@ class AddShop extends Component {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="box box-info">
+              <div className="box box-success">
                 <div className="box-header with-border">
                   <div className="container">
                     <div className="row">
                       <div className="col-xs-4 col-sm-2 col-md-1">
                         <div className="line-vertical">
                           <img
-                            src="/images/profile.png"
+                            src={
+                              this.props.user.image_path
+                                ? this.props.user.image_path
+                                : "/images/profile.png"
+                            }
                             className="img-circle"
                             style={{ width: "100%" }}
                             alt="profile"
@@ -297,12 +302,15 @@ class AddShop extends Component {
                         </div>
                       </div>
                       <div className="col-xs-8 col-sm-10 col-md-11" />
-                      <h3>{this.props.user.name}</h3>
-                      <p>Member Since - </p>
+                      <p className="owner-info">{this.props.user.name}</p>
+                      <p>
+                        Member Since -{" "}
+                        {moment(this.props.user.created_at).format(
+                          "Do MMM YYYY"
+                        )}{" "}
+                      </p>
                     </div>
                   </div>
-
-                  {/* <h3 className="box-title">Quick Example</h3> */}
                 </div>
               </div>
             </div>

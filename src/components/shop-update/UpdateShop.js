@@ -1,14 +1,19 @@
 import React, { Component } from "react";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
-import SelectField from "material-ui/SelectField";
-import MenuItem from "material-ui/MenuItem";
+import {
+  TextField,
+  RaisedButton,
+  SelectField,
+  MenuItem,
+  FlatButton
+} from "material-ui";
 import { updateShop } from "../../actions/shopActions";
 import {
   SHOP_REGISTRATION_ERROR,
   SHOP_REGISTRATION_SUCCESS
 } from "../../actions/types";
 import PhotoDrop from "./PhotoDrop";
+import moment from "moment";
+import PhotoCarousel from "./PhotoCarousel";
 
 class UpdateShop extends Component {
   constructor(props) {
@@ -306,14 +311,18 @@ class UpdateShop extends Component {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="box box-info">
+              <div className="box box-success">
                 <div className="box-header with-border">
                   <div className="container">
                     <div className="row">
                       <div className="col-xs-4 col-sm-2 col-md-1">
                         <div className="line-vertical">
                           <img
-                            src="/images/profile.png"
+                            src={
+                              this.props.user.image_path
+                                ? this.props.user.image_path
+                                : "/images/profile.png"
+                            }
                             className="img-circle"
                             style={{ width: "100%" }}
                             alt="UserImage"
@@ -321,8 +330,13 @@ class UpdateShop extends Component {
                         </div>
                       </div>
                       <div className="col-xs-8 col-sm-10 col-md-11" />
-                      <h3>{this.props.user.name}</h3>
-                      <p>Member Since - </p>
+                      <p className="owner-info">{this.props.user.name}</p>
+                      <p>
+                        Member Since -{" "}
+                        {moment(this.props.user.created_at).format(
+                          "Do MMM YYYY"
+                        )}{" "}
+                      </p>
                     </div>
                   </div>
 
@@ -332,17 +346,27 @@ class UpdateShop extends Component {
 
               <div className="box box-info">
                 <div className="box-header with-border">
-                  <div className="box-header with-border">
-                    <h3 className="box-title">Upload Photos</h3>
-                  </div>
-                  <PhotoDrop
-                    dispatch={this.props.dispatch}
-                    selectedShop={this.props.selectedShop}
-                  />
+                  <h3 className="box-title">Upload Photos</h3>
                 </div>
+                <PhotoDrop
+                  dispatch={this.props.dispatch}
+                  selectedShop={this.props.selectedShop}
+                />
+              </div>
+
+              <div className="box box-success">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Add new menu</h3>
+                </div>
+                <FlatButton label="Default" />
               </div>
             </div>
           </div>
+
+          <PhotoCarousel
+            user={this.props.user}
+            shop={this.props.selectedShop}
+          />
         </section>
       </>
     );

@@ -6,7 +6,11 @@ export default class UserPannel extends Component {
       <div className="user-panel">
         <div className="pull-left image">
           <img
-            src="/images/profile.png"
+            src={
+              this.props.user.image_path
+                ? this.props.user.image_path
+                : "/images/profile.png"
+            }
             className="img-circle"
             alt="UserImage"
           />

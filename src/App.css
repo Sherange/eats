@@ -56,8 +56,8 @@ label {
 }
 
 .img-box {
-  width: 80%;
-  height: auto;
+  width: 100px;
+  height: 100px;
   display: block;
   margin: auto;
 }
@@ -72,15 +72,15 @@ label {
   width: 100%;
 }
 .dropzone-wrapper {
-  margin-top: 10px;
-  margin-left: 25%;
-  margin-right: 25%;
+  margin: 10px;
+  display: inline;
 }
 .dropzone {
-  width: 100%;
-  height: auto;
+  cursor: pointer;
+  width: 200px;
   padding: 10px;
   border: 1px dashed;
+  margin: auto;
 }
 
 .content-shop-list {
@@ -291,16 +291,26 @@ label {
   text-align: center;
 }
 .upload-input {
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: '100%';
-    opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: "100%";
+  opacity: 0;
 }
 .read-more {
   cursor: pointer;
   color: #3c8dbc;
+}
+
+.user-panel > .image > img {
+  width: 100%;
+  max-width: 45px;
+  height: auto;
+}
+.owner-info {
+  font-size: 20px;
+  color: #2c3e50;
 }
