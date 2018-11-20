@@ -368,8 +368,9 @@ class UpdateShop extends Component {
       <div className="box box-success">
         <div className="box-header with-border">
           <p className="box-title-new">Add Food Item</p>
-          <FlatButton
+          <RaisedButton
             label="Add Food Item"
+            secondary={true}
             onClick={() => this.props.history.push("/add-food-item/1")}
             style={{ float: "right" }}
           />
