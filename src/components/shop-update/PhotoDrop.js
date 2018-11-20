@@ -14,12 +14,10 @@ export default class PhotoDrop extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      this.props.selectedShop &&
-      this.props.selectedShop.id &&
-      this.state.id == ""
-    ) {
-      this.setState({ id: this.props.selectedShop.id });
+    if (this.props.selectedShop && this.props.selectedShop.id) {
+      if (this.state.id !== this.props.selectedShop.id) {
+        this.setState({ id: this.props.selectedShop.id });
+      }
     }
   }
   onDrop(files) {
@@ -40,7 +38,7 @@ export default class PhotoDrop extends Component {
         formData.append("image", file);
         formData.append("main_image", false);
         formData.append("shop_id", this.state.id);
-        this.props.dispatch(uploadShopPhotos(formData));
+        this.props.dispatch(uploadShopPhotos(formData, this.state.id));
       });
     }
   }

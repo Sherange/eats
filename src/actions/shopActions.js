@@ -121,7 +121,7 @@ export const registerShop = data => dispatch => {
     });
 };
 
-export const uploadShopPhotos = formData => dispatch => {
+export const uploadShopPhotos = (formData, id) => dispatch => {
   dispatch({ type: IS_FETCHING });
   return axios
     .post(process.env.REACT_APP_API_URL + "shop-photos", formData, {
@@ -131,6 +131,7 @@ export const uploadShopPhotos = formData => dispatch => {
       }
     })
     .then(response => {
+      dispatch(getSelectedShop({ id: id }));
       dispatch({ type: DONE_FETCHING });
     })
     .catch(error => {

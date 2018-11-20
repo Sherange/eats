@@ -57,7 +57,7 @@ label {
 
 .img-box {
   width: 100px;
-  height: 100px;
+  height: 106px;
   display: block;
   margin: auto;
 }
@@ -313,4 +313,10 @@ label {
 .owner-info {
   font-size: 20px;
   color: #2c3e50;
+}
+.box-title-new {
+  display: inline-block;
+  font-size: 18px;
+  margin: 5px;
+  text-align: center
 }
