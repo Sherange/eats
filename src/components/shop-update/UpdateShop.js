@@ -22,11 +22,18 @@ class UpdateShop extends Component {
       id: "",
       name: "",
       cuisinesAvailable: "",
+      cuisinesAvailableIndex: "",
       openingHours: "",
-      address: "",
+      openingHoursIndex: "",
       phoneNumber: "",
       description: "",
+      address: "",
+      streetOne: "",
+      streetTwo: "",
+      city: "",
+      country: "",
       status: "",
+      shopPhotos: [],
 
       error: false,
       errorMessage: "",
@@ -83,23 +90,29 @@ class UpdateShop extends Component {
         name: this.props.selectedShop.name,
         cuisinesAvailable: this.props.selectedShop.cuisines_available,
         openingHours: this.props.selectedShop.opening_hours,
-        phoneNumber: String(this.props.selectedShop.phone_number),
-        address: this.props.selectedShop.address,
+        phoneNumber: this.props.selectedShop.phone_number,
         description: this.props.selectedShop.description,
+        address: this.props.selectedShop.address,
+        streetOne: this.props.selectedShop.street_one,
+        streetTwo: this.props.selectedShop.street_two,
+        city: this.props.selectedShop.city,
+        country: this.props.selectedShop.country,
         status: this.props.selectedShop.status
       });
     }
   }
 
-  handleChange = (event, index, value) =>
+  handleChangeCuisinesAvailable = (event, index, value) =>
     this.setState({
       cuisinesAvailable: value,
+      cuisinesAvailableIndex: index,
       errorCuisines: ""
     });
 
   handleChangeOpeningHours = (event, index, value) => {
     this.setState({
       openingHours: value,
+      openingHoursIndex: index,
       errorOpeningHours: ""
     });
   };
