@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FlatButton, RaisedButton } from "material-ui";
+import { CUISINE, OPENING_HOURS } from '../../constant/constant'
 class ShopList extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +27,16 @@ class ShopList extends Component {
         shop.shop_photos[0] && shop.shop_photos[0].image_path
           ? shop.shop_photos[0].image_path
           : "/images/placeholder.jpg";
+
+      let selectedCuisine = CUISINE.find((item, index) => {
+        return  item.key === shop.cuisines_available
+      })
+
+      let selectedOpeningHours = OPENING_HOURS.find((item, index) => {
+        return  item.key === shop.opening_hours
+      })
+
+      console.log('selectedCuisine',selectedCuisine)
       return (
         <section key={index} className="content">
           <div className="container-fluid">
@@ -51,13 +62,13 @@ class ShopList extends Component {
                     <li>
                       <i className="fa fa-coffee fa-2x" />
                       <span style={{ padding: "5px" }}>
-                        Available Cusines - {shop.cuisines_available}
+                        Available Cusines - {selectedCuisine.value}
                       </span>
                     </li>
                     <li>
                       <i className="fa fa-calendar-times-o fa-2x" />
                       <span style={{ padding: "5px" }}>
-                        Opening Hours - {shop.opening_hours}
+                        Opening Hours - {selectedOpeningHours.value}
                       </span>
                     </li>
                     <li>
