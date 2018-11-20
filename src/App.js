@@ -10,6 +10,8 @@ import UserShops from "./pages/UserShops";
 import RegisterShop from "./pages/RegisterShop";
 import ShopUpdate from "./pages/ShopUpdate";
 import UserProfilePage from "./pages/UserProfilePage";
+
+import AddNewFoodItemPage from "./pages/AddFoodItemPage";
 class App extends Component {
   render() {
     return (
@@ -22,6 +24,7 @@ class App extends Component {
           <Route path="/add-shop" component={RegisterShop} />
           <Route path="/update-shop/:id" component={ShopUpdate} />
           <Route path="/user-profile" component={UserProfilePage} />
+          <Route path="/add-food-item/:id" component={AddNewFoodItemPage} />
           <Route path="*" component={PageNotFound} />
         </Switch>
       </BrowserRouter>

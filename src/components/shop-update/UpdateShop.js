@@ -356,9 +356,13 @@ class UpdateShop extends Component {
 
               <div className="box box-success">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Add new menu</h3>
+                  <h3 className="box-title">Add Food Item</h3>
                 </div>
-                <FlatButton label="Default" />
+                <p>Add new food item to your shop</p>
+                <FlatButton
+                  label="Add Food Item"
+                  onClick={() => this.props.history.push("/add-food-item/1")}
+                />
               </div>
             </div>
           </div>
