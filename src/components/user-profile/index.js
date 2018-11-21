@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ProfileSummary from "./ProfileSummary";
 import ProfileForm from "./ProfileForm";
+import { getLoginUser } from "../../actions/userActions";
 
 class UserProfile extends Component {
   constructor(props) {
@@ -10,9 +11,7 @@ class UserProfile extends Component {
   }
   componentDidMount() {
     window.scrollTo(0, 0);
-    // if (this.props.match.params && this.props.match.params.id) {
-    //   this.props.dispatch(getLoginUser());
-    // }
+    this.props.dispatch(getLoginUser());
   }
   render() {
     return (

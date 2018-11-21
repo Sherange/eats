@@ -36,7 +36,6 @@ class ShopList extends Component {
         return  item.key === shop.opening_hours
       })
 
-      console.log('selectedCuisine',selectedCuisine)
       return (
         <section key={index} className="content">
           <div className="container-fluid">

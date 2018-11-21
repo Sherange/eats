@@ -86,7 +86,7 @@ class UpdateShop extends Component {
     }
 
     if (prevProps.selectedShop !== this.props.selectedShop) {
-      console.log("here");
+
       const selectedCusine = CUISINE.find((item, key) => {
         return item.key === this.props.selectedShop.cuisines_available;
       });

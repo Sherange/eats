@@ -67,7 +67,13 @@ class ProfileForm extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.user.id !== prevState.user.id) {
+    let selectedGender = GENDER.find((item, index) => {
+      return item.key === nextProps.user.gender;
+    });
+
+    if (nextProps.user && nextProps.user.id !== prevState.user.id) {
+      nextProps.user.gender = selectedGender.value;
+      nextProps.user.genderIndex = selectedGender.key;
       return { user: nextProps.user };
     }
     return null;
@@ -81,10 +87,8 @@ class ProfileForm extends Component {
 
   handleChangeGender = (event, index, value) => {
     const { user } = this.state;
-    const selectedGender = GENDER.find((item, key) => {
-      return item.key === index;
-    });
-    user.gender = selectedGender.value;
+    user.gender = value;
+    user.genderIndex = index;
     this.setState({ user, errorGender: "" });
   };
 
@@ -188,11 +192,7 @@ class ProfileForm extends Component {
 
   render() {
     const genderItem = GENDER.map((item, key) => {
-      return <MenuItem key={key} value={key} primaryText={item.value} />;
-    });
-
-    const selectedGender = GENDER.findIndex((item, index) => {
-      return item.value === this.state.user.gender;
+      return <MenuItem key={key} value={item.value} primaryText={item.value} />;
     });
 
     const textStyle = {
@@ -254,9 +254,7 @@ class ProfileForm extends Component {
               id="user-phone-number"
               inputStyle={textStyle}
               value={
-                this.state.user.phone_number
-                  ? String(this.state.user.phone_number)
-                  : ""
+                this.state.user.phone_number ? this.state.user.phone_number : ""
               }
               onChange={this.handleChangePhoneNumber}
               errorText={this.state.errorPhoneNumber}
@@ -295,8 +293,8 @@ class ProfileForm extends Component {
           </div>
           <div className="col-md-10">
             <SelectField
-              id={"user-gender"}
-              value={selectedGender}
+              id="user-gender"
+              value={this.state.user.gender ? this.state.user.gender : ""}
               onChange={this.handleChangeGender}
               style={{ width: "90%" }}
               labelStyle={textStyle}

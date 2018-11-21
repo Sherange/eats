@@ -47,7 +47,7 @@ export const updateUser = data => dispatch => {
     name: data.name,
     phone_number: data.phone_number,
     date_of_birth: data.date_of_birth,
-    gender: data.gender,
+    gender: data.genderIndex,
     description: data.description,
     address: data.user_address.address ? data.user_address.address : "",
     street_one: data.user_address.street_one
