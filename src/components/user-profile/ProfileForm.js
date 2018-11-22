@@ -270,6 +270,7 @@ class ProfileForm extends Component {
           <div className="col-md-10">
             {/* <p className="profile-from-text">1st Aug 1996</p> */}
             <DatePicker
+              id="user-birthdate"
               formatDate={date =>
                 moment(date, "YYYY-MM-DD").format("Do MMM YY")
               }
