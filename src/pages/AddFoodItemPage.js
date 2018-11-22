@@ -24,7 +24,11 @@ class AddNewFoodItemPage extends Component {
         <div className="wrapper">
           <Header history={this.props.history} />
           <SideBar />
-          <AddNewFoodItem history={this.props.history} />
+          <AddNewFoodItem
+            history={this.props.history}
+            dispatch={this.props.dispatch}
+            match={this.props.match}
+          />
           <MainFooter />
         </div>
       </div>

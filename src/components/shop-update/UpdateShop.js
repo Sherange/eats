@@ -3,8 +3,7 @@ import {
   TextField,
   RaisedButton,
   SelectField,
-  MenuItem,
-  FlatButton
+  MenuItem
 } from "material-ui";
 import { updateShop } from "../../actions/shopActions";
 import {

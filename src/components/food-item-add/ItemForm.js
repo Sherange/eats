@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { TextField, SelectField, RaisedButton, MenuItem } from "material-ui";
+import { TextField, SelectField, MenuItem, RaisedButton } from "material-ui";
 import { FOOD_TYPE, FOOD_CATERGORY } from "../../constant/constant";
 import moment from "moment";
-import { compose } from "../../../../../Library/Caches/typescript/3.1/node_modules/redux";
 
 const UserBox = props => {
   return (
@@ -41,6 +40,7 @@ const ShopBox = props => {
           <div className="col-xs-12 col-sm-12 col-md-12">
             <img
               src={
+                props.selectedShop &&
                 props.selectedShop.shop_photos[0].image_path
                   ? props.selectedShop.shop_photos[0].image_path
                   : "/images/profile.png"
@@ -48,20 +48,23 @@ const ShopBox = props => {
               className="shop-info-img"
             />
             <div className="shop-info">
-              <p className="shop-info-name">{props.selectedShop.name}</p>
-              <p className="shop-info-subtitle">
-                <span class="dot" />
-                {props.selectedShop.shop_address.address}
+              <p className="shop-info-name">
+                {props.selectedShop && props.selectedShop.name}
               </p>
               <p className="shop-info-subtitle">
-                {props.selectedShop.shop_address.street_one}
+                <span className="dot" />
+                {props.selectedShop && props.selectedShop.shop_address.address}
               </p>
               <p className="shop-info-subtitle">
-                {props.selectedShop.shop_address.city}
+                {props.selectedShop &&
+                  props.selectedShop.shop_address.street_one}
+              </p>
+              <p className="shop-info-subtitle">
+                {props.selectedShop && props.selectedShop.shop_address.city}
               </p>
               <p className="shop-info-subtitle">
                 <i className="fa fa-phone-square" />{" "}
-                {props.selectedShop.phone_number}
+                {props.selectedShop && props.selectedShop.phone_number}
               </p>
             </div>
           </div>
@@ -83,9 +86,58 @@ class ItemForm extends Component {
       price: "",
       description: "",
 
-      errorName: ""
+      errorName: "",
+      errorType: "",
+      errorCategory: "",
+      errorPrice: "",
+      errorDescription: ""
+      
     };
+    this.validate = this.validate.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
+
+  validate() {
+    if (this.state.name === "") {
+      this.setState({ errorName: "Meal name required" });
+      return false;
+    } else if (this.state.type === "") {
+      this.setState({ errorType: "Meal type required" });
+      return false;
+    } else if (this.state.category === "") {
+      this.setState({ errorCategory: "Meal category required" });
+      return false;
+    } else if (this.state.price === "") {
+      this.setState({ errorPrice: "Meal price required" });
+      return false;
+    } else if (this.state.description === "") {
+      this.setState({ errorDescription: "Meal description required" });
+      return false;
+    }
+    return true;
+  }
+
+  onSubmit() {
+    if (this.validate() === true) {
+      console.log("here");
+    }
+  }
+
+  handleChangeFoodType = (event, index, value) => {
+    this.setState({
+      type: value,
+      typeIndex: index,
+      errorType: ""
+    });
+  };
+
+  handleChangeCategory = (event, index, value) => {
+    this.setState({
+      category: value,
+      categoryIndex: index,
+      errorCategory: ""
+    });
+  };
 
   _renderForm() {
     const foodType = FOOD_TYPE.map(item => {
@@ -120,17 +172,17 @@ class ItemForm extends Component {
               value={this.state.name}
               type="text"
               hintText=""
-              floatingLabelText="Food Court Name"
+              floatingLabelText="Meal Name"
               errorText={this.state.errorName}
             />
           </div>
           <div className="form-filed">
             <SelectField
               value={this.state.type}
-              // onChange={this.handleChangeCuisinesAvailable}
+              onChange={this.handleChangeFoodType}
               floatingLabelText="Meal Type"
               style={{ width: "90%" }}
-              errorText={this.state.errorCuisines}
+              errorText={this.state.errorType}
             >
               {foodType}
             </SelectField>
@@ -138,13 +190,45 @@ class ItemForm extends Component {
           <div className="form-filed">
             <SelectField
               value={this.state.category}
-              // onChange={this.handleChangeOpeningHours}
+              onChange={this.handleChangeCategory}
               floatingLabelText="Meal Catergory"
               style={{ width: "90%" }}
-              errorText={this.state.errorOpeningHours}
+              errorText={this.state.errorCategory}
             >
               {foodCatergory}
             </SelectField>
+          </div>
+          <div className="form-filed">
+            <TextField
+              onChange={e =>
+                this.setState({
+                  price: e.target.value,
+                  errorPrice: ""
+                })
+              }
+              style={{ width: "90%" }}
+              value={this.state.price}
+              type="text"
+              hintText=""
+              floatingLabelText="Price"
+              errorText={this.state.errorPrice}
+            />
+          </div>
+          <div className="form-filed">
+            <TextField
+              onChange={e =>
+                this.setState({
+                  description: e.target.value,
+                  errorDescription: ""
+                })
+              }
+              style={{ width: "90%" }}
+              value={this.state.description}
+              type="text"
+              hintText=""
+              floatingLabelText="Description"
+              errorText={this.state.errorDescription}
+            />
           </div>
         </div>
       </form>
@@ -156,8 +240,8 @@ class ItemForm extends Component {
       <>
         <section className="content-header">
           <h1>
-            List your shops here
-            <small>start earning</small>
+            Add new meal to your shop{" "}
+            {this.props.selectedShop && this.props.selectedShop.name}
           </h1>
         </section>
         <section className="content">
@@ -165,9 +249,16 @@ class ItemForm extends Component {
             <div className="col-md-8">
               <div className="box box-primary">
                 <div className="box-header with-border">
-                  <h3 className="box-title">Food Item Information</h3>
+                  <h3 className="box-title">Meal Information</h3>
                 </div>
                 {this._renderForm()}
+                <div className="box-footer hidden-xs hidden-sm">
+                  <RaisedButton
+                    label="Update"
+                    primary={true}
+                    onClick={() => this.onSubmit()}
+                  />
+                </div>
               </div>
             </div>
             <div className="col-md-4">
