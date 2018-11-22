@@ -50,3 +50,18 @@ export const OPENING_HOURS = [
   { key: 6, value: "10.00 am – 10.00 pm (Mon-Sun)" },
   { key: 7, value: "10.00 am – 12.00 pm (Mon-Sun)" },
 ]
+
+export const FOOD_TYPE = [
+  { key: 0, value: "Casual Dining" },
+  { key: 1, value: "Bakeries" },
+  { key: 2, value: "Juice" },
+  { key: 3, value: "Quick Bites" }
+]
+
+export const FOOD_CATERGORY = [
+  { key: 0, value: "Lunch" },
+  { key: 1, value: "Break Fast" },
+  { key: 2, value: "Dinner" },
+  { key: 3, value: "Drinks" },
+  { key: 4, value: "Desserts" },
+]

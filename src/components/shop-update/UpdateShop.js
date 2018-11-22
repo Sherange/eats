@@ -86,7 +86,6 @@ class UpdateShop extends Component {
     }
 
     if (prevProps.selectedShop !== this.props.selectedShop) {
-
       const selectedCusine = CUISINE.find((item, key) => {
         return item.key === this.props.selectedShop.cuisines_available;
       });
@@ -368,7 +367,15 @@ class UpdateShop extends Component {
       <div className="box box-success">
         <div className="box-header with-border">
           <p className="box-title-new">Add Food Item</p>
+          {this.props.selectedShop && !this.props.selectedShop.shop_address ? (
+            <p className="incomplete-profile"><i class="fa fa-info-circle"></i> complete your shop profile info</p>
+          ) : null}
           <RaisedButton
+            disabled={
+              this.props.selectedShop && this.props.selectedShop.shop_address
+                ? false
+                : true
+            }
             label="Add Food Item"
             secondary={true}
             onClick={() => this.props.history.push("/add-food-item/1")}

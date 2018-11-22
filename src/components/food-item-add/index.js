@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ItemForm from './ItemForm'
+import ItemForm from "./ItemForm";
 
 class AddFoodItem extends Component {
   render() {
@@ -9,7 +9,10 @@ class AddFoodItem extends Component {
         className="content-wrapper"
         style={{ minHeight: window.innerHeight }}
       >
-        <ItemForm></ItemForm>
+        <ItemForm
+          user={this.props.user}
+          selectedShop={this.props.selectedShop}
+        />
       </div>
     );
   }
@@ -17,6 +20,7 @@ class AddFoodItem extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.user,
+  selectedShop: state.shop.selectedShop,
   isAuthenticated: state.user.isAuthenticated,
   isFetching: state.user.isFetching
 });
