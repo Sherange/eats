@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  TextField,
-  RaisedButton,
-  SelectField,
-  MenuItem
-} from "material-ui";
+import { TextField, RaisedButton, SelectField, MenuItem } from "material-ui";
 import { updateShop } from "../../actions/shopActions";
 import {
   SHOP_REGISTRATION_ERROR,
@@ -367,7 +362,9 @@ class UpdateShop extends Component {
         <div className="box-header with-border">
           <p className="box-title-new">Add Food Item</p>
           {this.props.selectedShop && !this.props.selectedShop.shop_address ? (
-            <p className="incomplete-profile"><i class="fa fa-info-circle"></i> complete your shop profile info</p>
+            <p className="incomplete-profile">
+              <i class="fa fa-info-circle" /> complete your shop profile info
+            </p>
           ) : null}
           <RaisedButton
             disabled={
@@ -377,7 +374,9 @@ class UpdateShop extends Component {
             }
             label="Add Food Item"
             secondary={true}
-            onClick={() => this.props.history.push("/add-food-item/1")}
+            onClick={() =>
+              this.props.history.push("/add-food-item/" + this.state.id)
+            }
             style={{ float: "right" }}
           />
         </div>

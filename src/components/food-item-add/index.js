@@ -7,10 +7,15 @@ class AddFoodItem extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    if (this.props.match.params && this.props.match.params.id) {
+    if (
+      !this.props.selectedShop &&
+      this.props.match.params &&
+      this.props.match.params.id
+    ) {
       this.props.dispatch(getSelectedShop({ id: this.props.match.params.id }));
     }
   }
+
   render() {
     return (
       <div
@@ -20,6 +25,10 @@ class AddFoodItem extends Component {
         <ItemForm
           user={this.props.user}
           selectedShop={this.props.selectedShop}
+          addFoodItemsError={this.props.addFoodItemsError}
+          addFoodItemsSuccess={this.props.addFoodItemsSuccess}
+          dispatch={this.props.dispatch}
+          history={this.props.history}
         />
       </div>
     );
@@ -30,7 +39,9 @@ const mapStateToProps = state => ({
   user: state.user.user,
   selectedShop: state.shop.selectedShop,
   isAuthenticated: state.user.isAuthenticated,
-  isFetching: state.user.isFetching
+  isFetching: state.foodItem.isFetching,
+  addFoodItemsError: state.foodItem.addFoodItemsError,
+  addFoodItemsSuccess: state.foodItem.addFoodItemsSuccess
 });
 
 export default connect(mapStateToProps)(AddFoodItem);

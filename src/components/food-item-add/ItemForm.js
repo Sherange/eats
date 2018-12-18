@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { TextField, SelectField, MenuItem, RaisedButton } from "material-ui";
 import { FOOD_TYPE, FOOD_CATERGORY } from "../../constant/constant";
+import { addFoodItem } from "../../actions/foodActions";
+import {
+  ADD_FOOD_ITEMS_ERROR,
+  ADD_FOOD_ITEMS_SUCCESS
+} from "../../actions/types";
 import moment from "moment";
 
 const UserBox = props => {
@@ -90,11 +95,48 @@ class ItemForm extends Component {
       errorType: "",
       errorCategory: "",
       errorPrice: "",
-      errorDescription: ""
-      
+      errorDescription: "",
+
+      error: false,
+      errorMessage: "",
+      success: false,
+      successMessage: ""
     };
     this.validate = this.validate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.state.error === true) {
+      setTimeout(() => {
+        this.setState({ error: false, errorMessage: "" }, state => {
+          this.props.dispatch({ type: ADD_FOOD_ITEMS_ERROR, payload: "" });
+        });
+      }, 2000);
+    }
+
+    if (this.state.success === true) {
+      setTimeout(() => {
+        this.setState({ success: false, successMessage: "" }, state => {
+          this.props.dispatch({ type: ADD_FOOD_ITEMS_SUCCESS, payload: "" });
+          this.props.history.goBack();
+        });
+      }, 2000);
+    }
+
+    if (this.props.addFoodItemsError && this.state.error === false) {
+      this.setState({
+        error: true,
+        errorMessage: this.props.addFoodItemsError
+      });
+    }
+
+    if (this.props.addFoodItemsSuccess && this.state.success === false) {
+      this.setState({
+        success: true,
+        successMessage: this.props.addFoodItemsSuccess
+      });
+    }
   }
 
   validate() {
@@ -119,7 +161,15 @@ class ItemForm extends Component {
 
   onSubmit() {
     if (this.validate() === true) {
-      console.log("here");
+      const data = {
+        name: this.state.name,
+        category: this.state.categoryIndex,
+        type: this.state.typeIndex,
+        price: this.state.price,
+        description: this.state.description,
+        shop_id: this.props.selectedShop.id
+      };
+      this.props.dispatch(addFoodItem(data));
     }
   }
 
@@ -252,12 +302,29 @@ class ItemForm extends Component {
                   <h3 className="box-title">Meal Information</h3>
                 </div>
                 {this._renderForm()}
-                <div className="box-footer hidden-xs hidden-sm">
+                <div className="box-footer">
                   <RaisedButton
                     label="Update"
                     primary={true}
                     onClick={() => this.onSubmit()}
                   />
+                  {this.state.error && (
+                    <div className="alert alert-danger alert-dismissible">
+                      <p>
+                        <i className="icon fa fa-warning" />{" "}
+                        {this.state.errorMessage}
+                      </p>
+                    </div>
+                  )}
+
+                  {this.state.success && (
+                    <div className="alert alert-success alert-dismissible">
+                      <p>
+                        <i className="icon fa fa-hand-peace-o" />{" "}
+                        {this.state.successMessage}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
