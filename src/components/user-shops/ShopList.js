@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FlatButton, RaisedButton } from "material-ui";
-import { CUISINE, OPENING_HOURS } from '../../constant/constant'
+import { CUISINE, OPENING_HOURS } from "../../constant/constant";
 class ShopList extends Component {
   constructor(props) {
     super(props);
@@ -29,12 +29,12 @@ class ShopList extends Component {
           : "/images/placeholder.jpg";
 
       let selectedCuisine = CUISINE.find((item, index) => {
-        return  item.key === shop.cuisines_available
-      })
+        return item.key === shop.cuisines_available;
+      });
 
       let selectedOpeningHours = OPENING_HOURS.find((item, index) => {
-        return  item.key === shop.opening_hours
-      })
+        return item.key === shop.opening_hours;
+      });
 
       return (
         <section key={index} className="content">
@@ -48,7 +48,12 @@ class ShopList extends Component {
               </div>
               <div className="shop-list-col-2">
                 <div className="shop-list-description">
-                  <p className="card-title">{shop.name}</p>
+                  <p
+                    className="card-title"
+                    onClick={() => this.handleUpdate(shop.id)}
+                  >
+                    {shop.name}
+                  </p>
                   {shop.description.length > 200 ? (
                     <p className="card-description">
                       {shop.description.substring(0, 200)}

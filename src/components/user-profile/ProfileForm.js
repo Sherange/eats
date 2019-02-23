@@ -72,8 +72,10 @@ class ProfileForm extends Component {
     });
 
     if (nextProps.user && nextProps.user.id !== prevState.user.id) {
-      nextProps.user.gender = selectedGender.value;
-      nextProps.user.genderIndex = selectedGender.key;
+      if(selectedGender){
+        nextProps.user.gender = selectedGender.value;
+        nextProps.user.genderIndex = selectedGender.key;
+      }
       return { user: nextProps.user };
     }
     return null;

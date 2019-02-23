@@ -7,6 +7,7 @@ import {
   ADD_FOOD_ITEMS_SUCCESS
 } from "../../actions/types";
 import moment from "moment";
+import ImageUploader from "react-images-upload";
 
 const UserBox = props => {
   return (
@@ -45,8 +46,7 @@ const ShopBox = props => {
           <div className="col-xs-12 col-sm-12 col-md-12">
             <img
               src={
-                props.selectedShop &&
-                props.selectedShop.shop_photos[0].image_path
+                props.selectedShop && props.selectedShop.shop_photos.length > 0
                   ? props.selectedShop.shop_photos[0].image_path
                   : "/images/profile.png"
               }
@@ -100,10 +100,13 @@ class ItemForm extends Component {
       error: false,
       errorMessage: "",
       success: false,
-      successMessage: ""
+      successMessage: "",
+
+      pictures: []
     };
     this.validate = this.validate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
   componentDidUpdate() {
@@ -138,6 +141,12 @@ class ItemForm extends Component {
       });
     }
   }
+
+  onDrop(pictureFiles, pictureDataURLs) {
+		this.setState({
+            pictures: this.state.pictures.concat(pictureFiles),
+        });
+	}
 
   validate() {
     if (this.state.name === "") {
@@ -303,6 +312,16 @@ class ItemForm extends Component {
                 </div>
                 {this._renderForm()}
                 <div className="box-footer">
+                
+                  <ImageUploader
+                    withIcon={true}
+                    buttonText="Choose images"
+                    onChange={this.onDrop}
+                    withPreview={true}
+                    imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                    maxFileSize={5242880}
+                  />
+
                   <RaisedButton
                     label="Update"
                     primary={true}

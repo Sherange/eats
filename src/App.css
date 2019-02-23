@@ -140,6 +140,7 @@ label {
   font-size: 25px;
   font-weight: 600;
   font-family: sans-serif;
+  cursor: pointer;
 }
 .card-description {
   font-size: 14px;
@@ -355,4 +356,8 @@ label {
 .incomplete-profile{
   display: inline-block;
   color: #f56954;
+}
+
+.fileContainer {
+  box-shadow: none !important;
 }
