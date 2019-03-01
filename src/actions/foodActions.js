@@ -12,7 +12,7 @@ export const addFoodItem = data => dispatch => {
     .post(process.env.REACT_APP_API_URL + "food-item", data, {
       headers: {
         Authorization: localStorage.access_token,
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/form-data"
       }
     })
     .then(response => {
@@ -38,3 +38,8 @@ export const addFoodItem = data => dispatch => {
       dispatch({ type: DONE_FETCHING });
     });
 };
+
+export const uploadFoodPhotos = (formData, id) => dispatch =>  {
+  dispatch({ type: IS_FETCHING });
+  console.log(formData, id)
+}

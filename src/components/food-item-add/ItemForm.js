@@ -102,7 +102,7 @@ class ItemForm extends Component {
       success: false,
       successMessage: "",
 
-      pictures: []
+      foodPhotos: []
     };
     this.validate = this.validate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -143,10 +143,10 @@ class ItemForm extends Component {
   }
 
   onDrop(pictureFiles, pictureDataURLs) {
-		this.setState({
-            pictures: this.state.pictures.concat(pictureFiles),
-        });
-	}
+    this.setState({
+      foodPhotos: this.state.foodPhotos.concat(pictureFiles)
+    });
+  }
 
   validate() {
     if (this.state.name === "") {
@@ -170,15 +170,26 @@ class ItemForm extends Component {
 
   onSubmit() {
     if (this.validate() === true) {
-      const data = {
-        name: this.state.name,
-        category: this.state.categoryIndex,
-        type: this.state.typeIndex,
-        price: this.state.price,
-        description: this.state.description,
-        shop_id: this.props.selectedShop.id
-      };
-      this.props.dispatch(addFoodItem(data));
+      var formData = new FormData();
+      formData.append("name", this.state.name);
+      formData.append("category", this.state.categoryIndex);
+      formData.append("type", this.state.typeIndex);
+      formData.append("price", this.state.price);
+      formData.append("description", this.state.description);
+      formData.append("shop_id", this.props.selectedShop.id);
+      this.state.foodPhotos.forEach((file, i) =>{
+        formData.append('food_photos['+i+']', file);
+      })
+      // const data = {
+      //   name: this.state.name,
+      //   category: this.state.categoryIndex,
+      //   type: this.state.typeIndex,
+      //   price: this.state.price,
+      //   description: this.state.description,
+      //   shop_id: this.props.selectedShop.id,
+      //   food_photos: this.state.foodPhotos
+      // };
+      this.props.dispatch(addFoodItem(formData));
     }
   }
 
@@ -312,7 +323,6 @@ class ItemForm extends Component {
                 </div>
                 {this._renderForm()}
                 <div className="box-footer">
-                
                   <ImageUploader
                     withIcon={true}
                     buttonText="Choose images"
@@ -321,7 +331,6 @@ class ItemForm extends Component {
                     imgExtension={[".jpg", ".gif", ".png", ".gif"]}
                     maxFileSize={5242880}
                   />
-
                   <RaisedButton
                     label="Update"
                     primary={true}

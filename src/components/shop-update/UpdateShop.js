@@ -8,6 +8,7 @@ import {
 import PhotoDrop from "./PhotoDrop";
 import moment from "moment";
 import PhotoCarousel from "./PhotoCarousel";
+import FoodItemList from './FoodItemList'
 import { CUISINE, OPENING_HOURS } from "../../constant/constant";
 
 class UpdateShop extends Component {
@@ -518,6 +519,7 @@ class UpdateShop extends Component {
             </div>
           </div>
 
+          {/* add new food item */}
           <div className="row">
             <div className="col-md-8">
               {this.state.shopPhotos && this.state.shopPhotos.length > 0 && (
@@ -527,6 +529,11 @@ class UpdateShop extends Component {
             </div>
             <div className="col-md-4">{this._renderPhotoUpload()}</div>
           </div>
+        </section>
+
+        {/* food item list */}
+        <section className="content">
+          <FoodItemList></FoodItemList>
         </section>
       </>
     );

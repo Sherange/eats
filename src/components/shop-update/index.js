@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import UpdateShop from "./UpdateShop";
-import { getSelectedShop } from "../../actions/shopActions";
+import { getSelectedShop, getSelectedShopFoods } from "../../actions/shopActions";
 
 class UpdateShops extends Component {
   constructor(props) {
@@ -14,9 +14,11 @@ class UpdateShops extends Component {
 
     if (this.props.match.params && this.props.match.params.id) {
       this.props.dispatch(getSelectedShop({ id: this.props.match.params.id }));
+      this.props.dispatch(getSelectedShopFoods({ id: this.props.match.params.id }));
     }
   }
   render() {
+    console.log('this.props',this.props);
     return (
       <div
         className="content-wrapper"
@@ -40,6 +42,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.user.isAuthenticated,
   isFetching: state.shop.isFetching,
   selectedShop: state.shop.selectedShop,
+  shopFoods: state.shop.shopFoods,
   shopRegistrationError: state.shop.shopRegistrationError,
   shopRegistrationSuccess: state.shop.shopRegistrationSuccess
 });

@@ -2,6 +2,7 @@ import {
   SHOPS,
   SELECTED_SHOP,
   SHOP_PHOTOS,
+  SELECTED_SHOP_FOODS,
   USER_SHOPS,
   SHOP_PHOTO_UPLOAD_SUCCESS,
   SHOP_PHOTO_UPLOAD_ERROR,
@@ -16,6 +17,7 @@ const initialState = {
   shops: [],
   selectedShop: null,
   shopPhotos: [],
+  shopFoods: [],
   userShops: [],
   shopRegistrationError: "",
   shopRegistrationSuccess: "",
@@ -60,6 +62,12 @@ export default function(state = initialState, action) {
         ...state,
         shopPhotos: action.payload
       };
+    case SELECTED_SHOP_FOODS:
+      return {
+        ...state,
+        shopFoods: action.payload
+      };
+
     case SHOP_PHOTO_UPLOAD_SUCCESS:
       return {
         ...state,

@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   SHOPS,
   SELECTED_SHOP,
+  SELECTED_SHOP_FOODS,
   // SHOP_PHOTOS,
   USER_SHOPS,
   SHOP_REGISTRATION_SUCCESS,
@@ -45,6 +46,23 @@ export const getSelectedShop = data => dispatch => {
     })
     .catch(error => {
       dispatch({ type: DONE_FETCHING });
+    });
+};
+
+export const getSelectedShopFoods = data => dispatch => {
+  dispatch({ type: SELECTED_SHOP_FOODS, payload: "" });
+  axios
+    .get(process.env.REACT_APP_API_URL + "shop-foods/" + data.id, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.access_token
+      }
+    })
+    .then(response => {
+      dispatch({ type: SELECTED_SHOP_FOODS, payload: response.data.data });
+    })
+    .catch(error => {
+      console.log("error", error);
     });
 };
 
