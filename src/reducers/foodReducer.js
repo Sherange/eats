@@ -1,4 +1,5 @@
 import {
+  FOODS,
   ADD_FOOD_ITEMS_ERROR,
   ADD_FOOD_ITEMS_SUCCESS,
   IS_FETCHING,
@@ -8,7 +9,8 @@ import {
 const initialState = {
   isFetching: false,
   addFoodItemsError: "",
-  addFoodItemsSuccess: ""
+  addFoodItemsSuccess: "",
+  foods: []
 };
 
 export default function(state = initialState, action) {
@@ -32,6 +34,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         addFoodItemsSuccess: action.payload
+      };
+    case FOODS:
+      return {
+        ...state,
+        foods: action.payload
       };
     default:
       return state;

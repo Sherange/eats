@@ -1,7 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Cards from "./Cards";
+import { foods } from '../../actions/foodActions';
 
 class Home extends Component {
+
+  componentDidMount(){
+    if (this.props.isAuthenticated === false) {
+      this.props.dispatch(foods)
+    }
+  }
+
   render() {
     return (
       <div
@@ -67,11 +76,17 @@ class Home extends Component {
         </section>
         <div className="container-fluid">
           <div className="grid-container">
-            <Cards />
+            <Cards foods={this.props.foods} />
           </div>
         </div>
       </div>
     );
   }
 }
-export default Home;
+const mapStateToProps = state => ({
+  user: state.user.user,
+  isAuthenticated: state.user.isAuthenticated,
+  isFetching: state.shop.isFetching,
+  foods: state.foodItem.foods
+});
+export default connect(mapStateToProps)(Home);

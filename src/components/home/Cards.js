@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from "moment";
 import {
   Card,
   CardActions,
@@ -9,54 +10,40 @@ import {
 } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
 
-class Cards extends Component {
-  render() {
-    let rows = [];
-
-    for (let index = 0; index < 64; index++) {
-      rows.push(
-        <div className="grid-item">
-          <Card>
-            {/* <CardTitle
-              title="The Coffee Corner"
-              subtitle="River Avenue, Aluthgama"
-            /> */}
-            <CardMedia
-              overlay={
-                <CardTitle
-                  title="The Coffee Corner"
-                  subtitle="River Avenue, Aluthgama"
-                />
-              }
-            >
-              <img
-                src="https://d3dz4rogqkqh6r.cloudfront.net/uploads/files/2018/10/yimg_W6jPi8-640x427.jpg"
-                alt=""
+const Cards = props => {
+  return props.foods.map((item, index) => {
+    return (
+      <div className="grid-item" key={index}>
+        <Card>
+          {/* <CardTitle
+          title="The Coffee Corner"
+          subtitle="River Avenue, Aluthgama"
+        /> */}
+          <CardMedia
+            overlay={
+              <CardTitle
+                title={item.shop.name}
+                subtitle="River Avenue, Aluthgama"
               />
-            </CardMedia>
+            }
+          >
+            <img src={item.food_photos[0].image_path} alt="" />
+          </CardMedia>
 
-            <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec
-              vulputate interdum sollicitudin. Nunc lacinia auctor quam sed
-              pellentesque. Aliquam dui mauris, mattis quis lacus id,
-              pellentesque lobortis odio.
-            </CardText>
-            <CardHeader
-              title="URL Avatar"
-              subtitle="Subtitle"
-              avatar="/images/profile.png"
-            />
-            <CardActions>
-              <FlatButton label="View" />
-              <FlatButton label="Place Order" />
-            </CardActions>
-          </Card>
-        </div>
-      );
-    }
-    return rows;
-  }
-}
-
+          <CardText>{item.description}</CardText>
+          <CardHeader
+            // style={{ textAlign: "left" }}
+            title={item.shop.name}
+            subtitle={moment(item.shop.created_at).format("Do MMM YYYY")}
+            avatar={item.shop.shop_photos[0].image_path}
+          />
+          <CardActions>
+            <FlatButton label="View" />
+            <FlatButton label="Place Order" />
+          </CardActions>
+        </Card>
+      </div>
+    );
+  });
+};
 export default Cards;

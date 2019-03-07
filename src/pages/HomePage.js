@@ -24,7 +24,10 @@ class HomePage extends Component {
         <div className="wrapper">
           <Header history={this.props.history} />
           <SideBar />
-          <Home />
+          <Home
+            dispatch={this.props.dispatch}
+            history={this.props.history} 
+          />
           <MainFooter />
         </div>
       </div>
@@ -35,7 +38,8 @@ class HomePage extends Component {
 const mapStateToProps = state => ({
   user: state.user.user,
   isAuthenticated: state.user.isAuthenticated,
-  isFetching: state.user.isFetching
+  isFetching: state.user.isFetching,
+  foods: state.foodItem.foods
 });
 
 export default connect(mapStateToProps)(HomePage);
