@@ -43,7 +43,7 @@ class ProfileSummary extends Component {
             }}
           />
         </FlatButton>
-        <p className="profile-label">User Details</p>
+        {/* <p className="profile-label">User Details</p>
         <hr className="profile-hr" />
         <p className="profile-email">{this.props.user.email}</p>
         <br />
@@ -97,7 +97,7 @@ class ProfileSummary extends Component {
           </p>
         ) : (
           <p className="complete-text">Complete your profile</p>
-        )}
+        )} */}
       </div>
     );
   }

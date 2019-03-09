@@ -533,7 +533,7 @@ class UpdateShop extends Component {
 
         {/* food item list */}
         <section className="content">
-          <FoodItemList></FoodItemList>
+          <FoodItemList shopFoods={this.props.shopFoods}></FoodItemList>
         </section>
       </>
     );

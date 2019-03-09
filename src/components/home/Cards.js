@@ -16,27 +16,28 @@ const Cards = props => {
       <div className="grid-item" key={index}>
         <Card>
           {/* <CardTitle
-          title="The Coffee Corner"
-          subtitle="River Avenue, Aluthgama"
+          title={item.shop.name}
+          subtitle={item.shop.shop_address.street_one +', ' + item.shop.shop_address.city}
         /> */}
           <CardMedia
             overlay={
               <CardTitle
-                title={item.shop.name}
-                subtitle="River Avenue, Aluthgama"
+                title={item.name}
+                subtitle={item.shop.name + ", " + item.shop.shop_address.city}
               />
             }
           >
             <img src={item.food_photos[0].image_path} alt="" />
           </CardMedia>
 
-          <CardText>{item.description}</CardText>
-          <CardHeader
+          <CardText>{item.description.substr(0, 200)}....</CardText>
+          <CardText style={{ fontSize: "20px" }}>Rs {item.price}</CardText>
+          {/* <CardHeader
             // style={{ textAlign: "left" }}
             title={item.shop.name}
             subtitle={moment(item.shop.created_at).format("Do MMM YYYY")}
             avatar={item.shop.shop_photos[0].image_path}
-          />
+          /> */}
           <CardActions>
             <FlatButton label="View" />
             <FlatButton label="Place Order" />

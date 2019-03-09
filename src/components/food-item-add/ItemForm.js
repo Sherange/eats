@@ -164,6 +164,11 @@ class ItemForm extends Component {
     } else if (this.state.description === "") {
       this.setState({ errorDescription: "Meal description required" });
       return false;
+    } else if (this.state.description.split(' ').length < 50) {
+      this.setState({
+        errorDescription: "More than 50 words required for description"
+      });
+      return false;
     }
     return true;
   }
@@ -177,9 +182,9 @@ class ItemForm extends Component {
       formData.append("price", this.state.price);
       formData.append("description", this.state.description);
       formData.append("shop_id", this.props.selectedShop.id);
-      this.state.foodPhotos.forEach((file, i) =>{
-        formData.append('food_photos['+i+']', file);
-      })
+      this.state.foodPhotos.forEach((file, i) => {
+        formData.append("food_photos[" + i + "]", file);
+      });
       // const data = {
       //   name: this.state.name,
       //   category: this.state.categoryIndex,
@@ -292,6 +297,7 @@ class ItemForm extends Component {
                   errorDescription: ""
                 })
               }
+              multiLine={true}
               style={{ width: "90%" }}
               value={this.state.description}
               type="text"

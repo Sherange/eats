@@ -3,19 +3,19 @@ import React, { Component } from "react";
 export default class SearchBar extends Component {
   render() {
     return (
-      <form action="#" method="get" className="sidebar-form">
+      <form className="sidebar-form">
         <div className="input-group">
           <input
             type="text"
-            name="q"
+            name="filters"
             className="form-control"
             placeholder="Search..."
           />
           <span className="input-group-btn">
             <button
-              type="submit"
+              // type="submit"
               name="search"
-              id="search-btn"
+              // id="search-btn"
               className="btn btn-flat"
             >
               <i className="fa fa-search" />

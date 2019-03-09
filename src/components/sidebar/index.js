@@ -10,7 +10,7 @@ class SideBar extends Component {
         {/* <!-- sidebar: style can be found in sidebar.less --> */}
         <section className="sidebar">
           {/* user panel (optional)  */}
-          <UserPanel user={this.props.user} />
+          {/* <UserPanel user={this.props.user} /> */}
           {/* search form (Optional) */}
           <SearchBar />
           {/* <!-- Sidebar Menu --> */}

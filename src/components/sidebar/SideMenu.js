@@ -5,16 +5,17 @@ export default class SideMenu extends Component {
   render() {
     return (
       <ul className="sidebar-menu" data-widget="tree">
-        <li className="header">PAGES</li>
+        {/* <li className="header">PAGES</li> */}
+        
+        <li className="header">FOOD CATEGORIES</li>
 
         <li>
           <Link to="/">
             <i className="fa fa-link" />
-            <span>Home</span>
+            <span>All</span>
           </Link>
         </li>
 
-        <li className="header">FOOD CATEGORIES</li>
 
         <li>
           <Link to="/lunch">

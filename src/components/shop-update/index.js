@@ -18,7 +18,6 @@ class UpdateShops extends Component {
     }
   }
   render() {
-    console.log('this.props',this.props);
     return (
       <div
         className="content-wrapper"
@@ -28,6 +27,7 @@ class UpdateShops extends Component {
           dispatch={this.props.dispatch}
           history={this.props.history}
           user={this.props.user}
+          shopFoods={this.props.shopFoods}
           shopRegistrationError={this.props.shopRegistrationError}
           shopRegistrationSuccess={this.props.shopRegistrationSuccess}
           selectedShop={this.props.selectedShop}

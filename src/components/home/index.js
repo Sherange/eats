@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Cards from "./Cards";
-import { foods } from '../../actions/foodActions';
 
 class Home extends Component {
-
-  componentDidMount(){
-    if (this.props.isAuthenticated === false) {
-      this.props.dispatch(foods)
-    }
-  }
 
   render() {
     return (

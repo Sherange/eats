@@ -235,6 +235,11 @@ label {
   font-size: 18px;
   margin-top: 10px;
 }
+.food-item-button {
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+}
 
 @media only screen and (max-width: 1200px) {
   .user-profile-section-one {
@@ -246,6 +251,9 @@ label {
   }
   .user-profile-section-two {
     margin: 10px;
+  }
+  .food-item-button {
+    display: none;
   }
 }
 .border {
@@ -366,7 +374,8 @@ label {
   padding: 10px;
   margin: 10px;
 }
-.food-item-button {
+.no-food-item-title {
+  color: #bbb;
   display: inline-block;
   padding: 10px;
   margin: 10px;

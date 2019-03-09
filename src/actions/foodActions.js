@@ -7,10 +7,14 @@ import {
   IS_FETCHING
 } from "./types";
 
-export const foods = dispatch => {
+export const foods = (data = null) => dispatch => {
+  let url = process.env.REACT_APP_API_URL + "foods"
+  if(data){
+    url = process.env.REACT_APP_API_URL + "foods?filters=" + data
+  }
   dispatch({ type: IS_FETCHING });
   return axios
-    .get(process.env.REACT_APP_API_URL + "foods", {
+    .get(url, {
       headers: {
         Authorization: localStorage.access_token,
         "Content-Type": "multipart/form-data"
@@ -29,6 +33,7 @@ export const foods = dispatch => {
       dispatch({ type: DONE_FETCHING });
     });
 };
+
 export const addFoodItem = data => dispatch => {
   dispatch({ type: IS_FETCHING });
   return axios

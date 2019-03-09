@@ -18,6 +18,13 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={HomePage} />
+          <Route path="/lunch" exact component={HomePage} />
+          <Route path="/breakfast" exact component={HomePage} />
+          <Route path="/dinner" exact component={HomePage} />
+          <Route path="/drinks" exact component={HomePage} />
+          <Route path="/desserts" exact component={HomePage} />
+
+
           <Route path="/login" component={Login} />
           <Route path="/register" component={Registration} />
           <Route path="/user-shops" component={UserShops} />
