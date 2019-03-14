@@ -22,11 +22,21 @@ export const registerUser = data => dispatch => {
       .post(process.env.REACT_APP_API_URL + "user/register", user)
       // .then(response => response.json())
       .then(response => {
-        dispatch({ type: USER, payload: response.data.data });
-        dispatch({
-          type: IS_AUTHENTICATED,
-          payload: true
-        });
+        if (!response.error) {
+          const loginData = {
+            grant_type: "password",
+            client_id: process.env.REACT_APP_CLIENT_ID,
+            client_secret: process.env.REACT_APP_CLIENT_SECRET,
+            username: data.email,
+            password: data.password
+          };
+          dispatch(loginUser(loginData));
+          // dispatch({ type: USER, payload: response.data.data });
+          // dispatch({
+          //   type: IS_AUTHENTICATED,
+          //   payload: true
+          // });
+        }
         dispatch({ type: DONE_FETCHING });
       })
       .catch(error => {

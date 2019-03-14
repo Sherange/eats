@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import { logoutUser } from "../../actions/userActions";
-import moment from 'moment'
+import moment from "moment";
 export default class Navigation extends Component {
   constructor(props) {
     super(props);
@@ -67,7 +67,10 @@ export default class Navigation extends Component {
 
                   <p>
                     {this.props.user.name}
-                    <small>Member since {moment(this.props.user.created_at).format("Do MMM YYYY")}</small>
+                    <small>
+                      Member since{" "}
+                      {moment(this.props.user.created_at).format("Do MMM YYYY")}
+                    </small>
                   </p>
                 </li>
                 <li className="user-footer">
@@ -109,6 +112,18 @@ export default class Navigation extends Component {
                   )}
                 </li>
               </ul>
+            </li>
+
+            <li className="user user-menu">
+              <a href="/orders" className="dropdown-toggle">
+                <img
+                  src="/images/cart.png"
+                  className="user-image"
+                  alt="UserImage"
+                />
+                {/* <!-- hidden-xs hides the username on small devices so only the image appears. --> */}
+                <span className="hidden-xs">Cart</span>
+              </a>
             </li>
           </ul>
         </div>

@@ -12,6 +12,7 @@ import ShopUpdate from "./pages/ShopUpdate";
 import UserProfilePage from "./pages/UserProfilePage";
 
 import AddNewFoodItemPage from "./pages/AddFoodItemPage";
+import OrderFood from './pages/OrderFood';
 class App extends Component {
   render() {
     return (
@@ -32,6 +33,7 @@ class App extends Component {
           <Route path="/update-shop/:id" component={ShopUpdate} />
           <Route path="/user-profile" component={UserProfilePage} />
           <Route path="/add-food-item/:id" component={AddNewFoodItemPage} />
+          <Route path="/orders" component={OrderFood} />
           <Route path="*" component={PageNotFound} />
         </Switch>
       </BrowserRouter>
