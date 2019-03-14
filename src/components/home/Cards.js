@@ -9,6 +9,17 @@ import {
   CardText
 } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
+import { placeOrder } from "../../actions/foodActions";
+
+const handleOrder = (item, dispatch) => {
+  let data = {
+    id: item.id,
+    name: item.name,
+    image_path: item.food_photos[0].image_thumb,
+    price: item.price
+  };
+  dispatch(placeOrder(data));
+};
 
 const Cards = props => {
   return props.foods.map((item, index) => {
@@ -40,7 +51,12 @@ const Cards = props => {
           /> */}
           <CardActions>
             <FlatButton label="View" />
-            <FlatButton label="Place Order" />
+            <FlatButton
+              onClick={() => {
+                handleOrder(item, props.dispatch);
+              }}
+              label="Place Order"
+            />
           </CardActions>
         </Card>
       </div>

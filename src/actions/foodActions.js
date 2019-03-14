@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   FOODS,
+  ORDERS,
   ADD_FOOD_ITEMS_ERROR,
   ADD_FOOD_ITEMS_SUCCESS,
   DONE_FETCHING,
@@ -8,9 +9,9 @@ import {
 } from "./types";
 
 export const foods = (data = null) => dispatch => {
-  let url = process.env.REACT_APP_API_URL + "foods"
-  if(data){
-    url = process.env.REACT_APP_API_URL + "foods?filters=" + data
+  let url = process.env.REACT_APP_API_URL + "foods";
+  if (data) {
+    url = process.env.REACT_APP_API_URL + "foods?filters=" + data;
   }
   dispatch({ type: IS_FETCHING });
   return axios
@@ -65,6 +66,13 @@ export const addFoodItem = data => dispatch => {
       });
       dispatch({ type: DONE_FETCHING });
     });
+};
+
+export const placeOrder = data => dispatch => {
+  dispatch({
+    type: ORDERS,
+    payload: data
+  });
 };
 
 export const uploadFoodPhotos = (formData, id) => dispatch => {

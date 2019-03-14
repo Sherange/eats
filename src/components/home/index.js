@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Cards from "./Cards";
 
 class Home extends Component {
-
   render() {
     return (
       <div
@@ -69,7 +68,7 @@ class Home extends Component {
         </section>
         <div className="container-fluid">
           <div className="grid-container">
-            <Cards foods={this.props.foods} />
+            <Cards foods={this.props.foods} dispatch={this.props.dispatch} />
           </div>
         </div>
       </div>

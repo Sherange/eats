@@ -240,6 +240,19 @@ label {
   padding: 10px;
   margin: 10px;
 }
+.img-order {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 10px;
+}
+.navbar-nav>.user-menu>.dropdown-menu {
+  padding: 0px;
+  border: 0px;
+}
+.skin-green .main-header li.user-header {
+  background-color: #222d32
+}
 
 @media only screen and (max-width: 1200px) {
   .user-profile-section-one {

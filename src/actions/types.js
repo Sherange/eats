@@ -15,6 +15,7 @@ export const SHOP_PHOTO_UPLOAD_ERROR = "SHOP_PHOTO_UPLOAD_ERROR";
 export const FOODS = "FOODS";
 export const ADD_FOOD_ITEMS_ERROR = "ADD_FOOD_ITEMS_ERROR";
 export const ADD_FOOD_ITEMS_SUCCESS = "ADD_FOOD_ITEMS_SUCCESS";
+export const ORDERS = "ORDERS";
 
 export const USER = "USER";
 export const IS_AUTHENTICATED = "IS_AUTHENTICATED";

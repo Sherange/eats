@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import { logoutUser } from "../../actions/userActions";
+import { Link } from "react-router-dom";
 import moment from "moment";
 export default class Navigation extends Component {
   constructor(props) {
@@ -26,20 +27,36 @@ export default class Navigation extends Component {
     return (
       <nav className="navbar navbar-static-top" role="navigation">
         {/* <!-- Sidebar toggle button--> */}
-        <a
-          href="#"
+        <Link
+          to="#"
           className="sidebar-toggle"
           data-toggle="push-menu"
           role="button"
         >
           <span className="sr-only">Toggle navigation</span>
-        </a>
+        </Link>
         {/* <!-- Navbar Right Menu --> */}
         <div className="navbar-custom-menu">
           <ul className="nav navbar-nav">
+            <li className="user user-menu">
+              <Link to="/orders" className="dropdown-toggle">
+                <img
+                  src="/images/cart.png"
+                  className="user-image"
+                  alt="UserImage"
+                />
+                {this.props.orders && this.props.orders.length > 0 && (
+                  <div className="label label-danger">
+                    {this.props.orders.length} Items
+                  </div>
+                )}
+                {/* <!-- hidden-xs hides the username on small devices so only the image appears. --> */}
+                <span className="hidden-xs">Cart</span>
+              </Link>
+            </li>
             <li className="dropdown user user-menu">
               {/* <!-- Menu Toggle Button --> */}
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+              <Link to="#" className="dropdown-toggle" data-toggle="dropdown">
                 <img
                   src={
                     this.props.user.image_path
@@ -51,7 +68,7 @@ export default class Navigation extends Component {
                 />
                 {/* <!-- hidden-xs hides the username on small devices so only the image appears. --> */}
                 <span className="hidden-xs">{this.props.user.name}</span>
-              </a>
+              </Link>
               <ul className="dropdown-menu">
                 {/* <!-- The user image in the menu --> */}
                 <li className="user-header">
@@ -112,18 +129,6 @@ export default class Navigation extends Component {
                   )}
                 </li>
               </ul>
-            </li>
-
-            <li className="user user-menu">
-              <a href="/orders" className="dropdown-toggle">
-                <img
-                  src="/images/cart.png"
-                  className="user-image"
-                  alt="UserImage"
-                />
-                {/* <!-- hidden-xs hides the username on small devices so only the image appears. --> */}
-                <span className="hidden-xs">Cart</span>
-              </a>
             </li>
           </ul>
         </div>

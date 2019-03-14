@@ -42,7 +42,6 @@ class HomePage extends Component {
     if (this.props.isAuthenticated === false) {
       this.props.dispatch(getLoginUser(this.props.history));
     }
-    
     this.props.dispatch(foods());
   }
 

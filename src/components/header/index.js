@@ -12,7 +12,12 @@ class Header extends Component {
         <Logo />
 
         {/* Header Navbar */}
-        <Navigation user={this.props.user} dispatch={this.props.dispatch} history={this.props.history} />
+        <Navigation
+          user={this.props.user}
+          dispatch={this.props.dispatch}
+          history={this.props.history}
+          orders={this.props.orders}
+        />
       </header>
     );
   }
@@ -20,7 +25,8 @@ class Header extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.user,
-  isAuthenticated: state.user.isAuthenticated
+  isAuthenticated: state.user.isAuthenticated,
+  orders: state.foodItem.orders
 });
 
 export default connect(mapStateToProps)(Header);
