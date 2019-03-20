@@ -11,13 +11,16 @@ import {
   TableRowColumn
 } from "material-ui/Table";
 import { submitOrder } from "../../actions/foodActions";
+import { CLEAR_ORDERS, ORDER_PLACED_SUCCESS } from "../../actions/types";
 class Orders extends Component {
   constructor(props) {
     super(props);
     this.state = {
       orders: [],
       totalPrice: 0,
-      tableID: 1
+      tableID: 1,
+      success: false,
+      successMessage: ""
     };
   }
 
@@ -39,6 +42,30 @@ class Orders extends Component {
         return count + item.price;
       }, 0);
       this.setState({ orders: this.props.orders, totalPrice: total });
+    }
+  }
+
+  componentDidUpdate(prevPorps) {
+    if (this.state.success === true) {
+      setTimeout(() => {
+        this.setState({ success: false, successMessage: "" }, state => {
+          this.props.dispatch({ type: CLEAR_ORDERS });
+          this.props.dispatch({ type: ORDER_PLACED_SUCCESS, payload: "" });
+        });
+      }, 2000);
+    }
+
+    if (this.props.orders != prevPorps.orders) {
+      this.setState({
+        orders: this.props.orders
+      });
+    }
+
+    if (this.props.orderPlacedSuccess && this.state.success === false) {
+      this.setState({
+        success: true,
+        successMessage: this.props.orderPlacedSuccess
+      });
     }
   }
 
@@ -140,6 +167,15 @@ class Orders extends Component {
               />
             </>
           )}
+
+          {this.state.success && (
+            <div className="alert alert-success alert-dismissible">
+              <p>
+                <i className="icon fa fa-hand-peace-o" />
+                {this.state.successMessage}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -150,7 +186,8 @@ const mapStateToProps = state => ({
   user: state.user.user,
   isAuthenticated: state.user.isAuthenticated,
   isFetching: state.shop.isFetching,
-  orders: state.foodItem.orders
+  orders: state.foodItem.orders,
+  orderPlacedSuccess: state.foodItem.orderPlacedSuccess
 });
 
 export default connect(mapStateToProps)(Orders);

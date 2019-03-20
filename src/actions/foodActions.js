@@ -4,6 +4,7 @@ import {
   ORDERS,
   ADD_FOOD_ITEMS_ERROR,
   ADD_FOOD_ITEMS_SUCCESS,
+  ORDER_PLACED_SUCCESS,
   DONE_FETCHING,
   IS_FETCHING
 } from "./types";
@@ -83,7 +84,10 @@ export const submitOrder = data => dispatch => {
       }
     })
     .then(response => {
-      console.log("response", response);
+      dispatch({
+        type: ORDER_PLACED_SUCCESS,
+        payload: response.data.message
+      });
     })
     .catch(error => {
       console.log("e", error);

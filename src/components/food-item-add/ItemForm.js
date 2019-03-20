@@ -354,7 +354,7 @@ class ItemForm extends Component {
                   {this.state.success && (
                     <div className="alert alert-success alert-dismissible">
                       <p>
-                        <i className="icon fa fa-hand-peace-o" />{" "}
+                        <i className="icon fa fa-hand-peace-o" />
                         {this.state.successMessage}
                       </p>
                     </div>

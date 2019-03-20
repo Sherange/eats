@@ -3,6 +3,8 @@ import {
   ORDERS,
   ADD_FOOD_ITEMS_ERROR,
   ADD_FOOD_ITEMS_SUCCESS,
+  ORDER_PLACED_SUCCESS,
+  CLEAR_ORDERS,
   IS_FETCHING,
   DONE_FETCHING
 } from "../actions/types";
@@ -11,8 +13,9 @@ const initialState = {
   isFetching: false,
   addFoodItemsError: "",
   addFoodItemsSuccess: "",
+  orderPlacedSuccess: "",
   foods: [],
-  orders:[]
+  orders: []
 };
 
 export default function(state = initialState, action) {
@@ -37,6 +40,11 @@ export default function(state = initialState, action) {
         ...state,
         addFoodItemsSuccess: action.payload
       };
+    case ORDER_PLACED_SUCCESS:
+      return {
+        ...state,
+        orderPlacedSuccess: action.payload
+      };
     case FOODS:
       return {
         ...state,
@@ -46,6 +54,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         orders: [...state.orders, action.payload]
+      };
+    case CLEAR_ORDERS:
+      return {
+        ...state,
+        orders: []
       };
     default:
       return state;
