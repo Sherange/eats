@@ -75,6 +75,21 @@ export const placeOrder = data => dispatch => {
   });
 };
 
+export const submitOrder = data => dispatch => {
+  return axios
+    .post(process.env.REACT_APP_API_URL + "order", data, {
+      headers: {
+        Authorization: localStorage.access_token
+      }
+    })
+    .then(response => {
+      console.log("response", response);
+    })
+    .catch(error => {
+      console.log("e", error);
+    });
+};
+
 export const uploadFoodPhotos = (formData, id) => dispatch => {
   dispatch({ type: IS_FETCHING });
 };

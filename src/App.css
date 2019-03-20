@@ -242,7 +242,7 @@ label {
 }
 .img-order {
   width: 100px;
-  height: 100px;
+  height: 50px;
   display: block;
   margin: 10px;
 }
@@ -252,6 +252,38 @@ label {
 }
 .skin-green .main-header li.user-header {
   background-color: #222d32
+}
+.order-title {
+  padding-left: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+.order-title-th {
+  padding-left: 10px;
+  font-weight: 200;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.top-table {
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+  border-spacing: 15px;
+  border: 1px dashed black;
+  padding: 5px;
+}
+.top-th {
+  border: 1px dashed black;
+  padding: 5px;
+}
+.top-td {
+  border: 1px dashed black;
+  padding: 5px;
+}
+.react-numeric-input {
+  padding-left: 10px;
 }
 
 @media only screen and (max-width: 1200px) {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { TextField, SelectField, RaisedButton, MenuItem } from "material-ui";
+import NumericInput from "react-numeric-input";
+import { RaisedButton } from "material-ui";
 import {
   Table,
   TableBody,
@@ -9,59 +10,136 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
+import { submitOrder } from "../../actions/foodActions";
 class Orders extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      orders: [],
+      totalPrice: 0,
+      tableID: 1
     };
   }
+
+  onSubmit = () => {
+    let foodItems = this.state.orders.map(item => {
+      return item.id;
+    });
+    let data = {
+      amount: this.state.totalPrice,
+      table_id: this.state.tableID,
+      food_items: foodItems
+    };
+    this.props.dispatch(submitOrder(data));
+  };
+
+  componentDidMount() {
+    if (this.props.orders) {
+      let total = this.props.orders.reduce((count, item) => {
+        return count + item.price;
+      }, 0);
+      this.setState({ orders: this.props.orders, totalPrice: total });
+    }
+  }
+
+  renderRow() {
+    return this.state.orders.map((item, key) => {
+      return (
+        <TableRow key={key}>
+          <TableRowColumn>
+            <img
+              src={item.image_path ? item.image_path : "/images/profile.png"}
+              className="img-order"
+            />
+          </TableRowColumn>
+          <TableRowColumn>{item.name}</TableRowColumn>
+          <TableRowColumn>{item.price}</TableRowColumn>
+        </TableRow>
+      );
+    });
+  }
+
   render() {
-    console.log('this.props',this.props.orders);
     return (
       <div className="box box-primary">
         <div className="box-header with-border">
           <h3 className="box-title">Order Summery</h3>
         </div>
         <div className="box-body">
-          <Table multiSelectable={false}>
-            <TableHeader displaySelectAll={false}>
-              <TableRow>
-                <TableHeaderColumn>FOOD ITEM</TableHeaderColumn>
-                <TableHeaderColumn>Name</TableHeaderColumn>
-                <TableHeaderColumn>PRICE</TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            <TableBody displayRowCheckbox={false}>
-              <TableRow>
-                <TableRowColumn>
-                  <img src={"/images/profile.png"} className="img-order" />
-                </TableRowColumn>
-                <TableRowColumn>John Smith</TableRowColumn>
-                <TableRowColumn>Employed</TableRowColumn>
-              </TableRow>
-              <TableRow>
-                <TableRowColumn>2</TableRowColumn>
-                <TableRowColumn>Randal White</TableRowColumn>
-                <TableRowColumn>Unemployed</TableRowColumn>
-              </TableRow>
-              <TableRow>
-                <TableRowColumn>3</TableRowColumn>
-                <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                <TableRowColumn>Employed</TableRowColumn>
-              </TableRow>
-              <TableRow>
-                <TableRowColumn>4</TableRowColumn>
-                <TableRowColumn>Steve Brown</TableRowColumn>
-                <TableRowColumn>Employed</TableRowColumn>
-              </TableRow>
-              <TableRow>
-                <TableRowColumn>5</TableRowColumn>
-                <TableRowColumn>Christopher Nolan</TableRowColumn>
-                <TableRowColumn>Unemployed</TableRowColumn>
-              </TableRow>
-            </TableBody>
-          </Table>
+          <table className="top-table">
+            <thead>
+              <tr>
+                <th className="top-th">
+                  <p className="order-title-th">
+                    <small>Total Price </small>
+                  </p>
+                </th>
+                <th className="top-th">
+                  <p className="order-title-th">
+                    <small>Your Table ID</small>
+                  </p>
+                </th>
+                <th className="top-th">
+                  <p className="order-title-th">
+                    <small>No of Items</small>
+                  </p>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="top-td">
+                  <p className="order-title">Rs: {this.state.totalPrice}/=</p>
+                </td>
+                <td className="top-td">
+                  <NumericInput
+                    style={{
+                      input: {
+                        width: "50px"
+                      }
+                    }}
+                    onChange={value => this.setState({ tableID: value })}
+                    min={1}
+                    max={10}
+                    value={this.state.tableID}
+                  />
+                </td>
+                <td className="top-td">
+                  <p className="order-title">
+                    {this.state.orders ? this.state.orders.length : 0}
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          {this.state.orders && this.state.orders.length > 0 ? (
+            <Table multiSelectable={false}>
+              <TableHeader displaySelectAll={false}>
+                <TableRow>
+                  <TableHeaderColumn>FOOD ITEM</TableHeaderColumn>
+                  <TableHeaderColumn>FOOD NAME</TableHeaderColumn>
+                  <TableHeaderColumn>PRICE</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody displayRowCheckbox={false}>
+                {this.renderRow()}
+              </TableBody>
+            </Table>
+          ) : (
+            <div>No Orders - Place your order now</div>
+          )}
+
+          {this.state.orders && this.state.orders.length > 0 && (
+            <>
+              <hr />
+              <RaisedButton
+                label="Submit Order"
+                primary={true}
+                onClick={() => this.onSubmit()}
+              />
+            </>
+          )}
         </div>
       </div>
     );
