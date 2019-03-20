@@ -4,6 +4,7 @@ import Cards from "./Cards";
 
 class Home extends Component {
   render() {
+    const { user } = this.props;
     return (
       <div
         className="content-wrapper"
@@ -19,7 +20,9 @@ class Home extends Component {
 
                 <div className="info-box-content">
                   <span className="info-box-text">Shops</span>
-                  <span className="info-box-number">560</span>
+                  <span className="info-box-number">
+                    {user && user.meta ? user.meta.shop_count : 0}
+                  </span>
                 </div>
               </div>
             </div>
@@ -31,8 +34,10 @@ class Home extends Component {
                 </span>
 
                 <div className="info-box-content">
-                  <span className="info-box-text">Likes</span>
-                  <span className="info-box-number">41,410</span>
+                  <span className="info-box-text">Food Items</span>
+                  <span className="info-box-number">
+                    {user && user.meta ? user.meta.food_count : 0}
+                  </span>
                 </div>
               </div>
             </div>
@@ -46,8 +51,10 @@ class Home extends Component {
                 </span>
 
                 <div className="info-box-content">
-                  <span className="info-box-text">Sales</span>
-                  <span className="info-box-number">760</span>
+                  <span className="info-box-text">Orders</span>
+                  <span className="info-box-number">
+                    {user && user.meta ? user.meta.order_count : 0}
+                  </span>
                 </div>
               </div>
             </div>
@@ -59,8 +66,10 @@ class Home extends Component {
                 </span>
 
                 <div className="info-box-content">
-                  <span className="info-box-text">New Members</span>
-                  <span className="info-box-number">2,000</span>
+                  <span className="info-box-text">Members</span>
+                  <span className="info-box-number">
+                    {user && user.meta ? user.meta.user_count : 0}
+                  </span>
                 </div>
               </div>
             </div>
