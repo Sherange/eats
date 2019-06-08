@@ -26,10 +26,10 @@ const Cards = props => {
     return (
       <div className="grid-item" key={index}>
         <Card>
-          {/* <CardTitle
+          <CardTitle
           title={item.shop.name}
           subtitle={item.shop.shop_address.street_one +', ' + item.shop.shop_address.city}
-        /> */}
+        />
           <CardMedia
             overlay={
               <CardTitle
@@ -50,7 +50,7 @@ const Cards = props => {
             avatar={item.shop.shop_photos[0].image_path}
           /> */}
           <CardActions>
-            <FlatButton label="View" />
+            {/* <FlatButton label="View" /> */}
             <FlatButton
               onClick={() => {
                 handleOrder(item, props.dispatch);

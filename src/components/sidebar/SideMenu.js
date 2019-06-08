@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 export default class SideMenu extends Component {
   render() {
+    const { user } = this.props;
     return (
       <ul className="sidebar-menu" data-widget="tree">
         {/* <li className="header">PAGES</li> */}
-        
+
         <li className="header">FOOD CATEGORIES</li>
 
         <li>
@@ -15,7 +16,6 @@ export default class SideMenu extends Component {
             <span>All</span>
           </Link>
         </li>
-
 
         <li>
           <Link to="/lunch">
@@ -68,36 +68,41 @@ export default class SideMenu extends Component {
             </li>
           </ul>
         </li> */}
+        {user && user.user_type === "admin" && (
+          <li className="header">SHOP OWNERS</li>
+        )}
 
-        <li className="header">USER</li>
-
-        <li>
+        {/* <li>
           <Link to="/user-profile">
             <i className="fa fa-link" />
             <span>Profile</span>
           </Link>
-        </li>
+        </li> */}
 
-        <li>
+        {/* <li>
           <Link to="/orders">
             <i className="fa fa-link" />
             <span>Orders</span>
           </Link>
-        </li>
+        </li> */}
 
-        <li>
-          <Link to="/user-shops">
-            <i className="fa fa-link" />
-            <span>My Shops</span>
-          </Link>
-        </li>
-
+        {user && user.user_type === "admin" && (
           <li>
-          <Link to="/add-shop">
-            <i className="fa fa-link" />
-            <span>Add Shop</span>
-          </Link>
-        </li>
+            <Link to="/user-shops">
+              <i className="fa fa-link" />
+              <span>My Shops</span>
+            </Link>
+          </li>
+        )}
+
+        {user && user.user_type === "admin" && (
+          <li>
+            <Link to="/add-shop">
+              <i className="fa fa-link" />
+              <span>Add Shop</span>
+            </Link>
+          </li>
+        )}
       </ul>
     );
   }

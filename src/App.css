@@ -271,21 +271,34 @@ label {
   margin-right: 10%;
   width: 80%;
   border-spacing: 15px;
-  border: 1px dashed black;
+  border: 1px dashed #222d32;
   padding: 5px;
 }
 .top-th {
-  border: 1px dashed black;
+  border: 1px dashed #222d32;
   padding: 5px;
 }
 .top-td {
-  border: 1px dashed black;
+  border: 1px dashed #222d32;
   padding: 5px;
 }
 .react-numeric-input {
   padding-left: 10px;
 }
-
+.info-box {
+  min-height: 64px;
+}
+.info-box-icon {
+  height: 64px;
+  width: 64px;
+  background : #222d32;
+  font-size: none;
+  line-height: 0;
+}
+.info-box-content {
+  padding: 5px 10px;
+  margin-left: 70px;
+}
 @media only screen and (max-width: 1200px) {
   .user-profile-section-one {
     display: none;

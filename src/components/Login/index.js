@@ -178,9 +178,9 @@ class Login extends Component {
               </div>
             )}
 
-            <Link to="/password-reset" className="text-center">
+            {/* <Link to="/password-reset" className="text-center">
               I forgot my password
-            </Link>
+            </Link> */}
             <br />
             <Link to="/register" className="text-center">
               Register a new membership

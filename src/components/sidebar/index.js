@@ -9,12 +9,16 @@ class SideBar extends Component {
       <aside className="main-sidebar">
         {/* <!-- sidebar: style can be found in sidebar.less --> */}
         <section className="sidebar">
+       
           {/* user panel (optional)  */}
           {/* <UserPanel user={this.props.user} /> */}
+          
           {/* search form (Optional) */}
-          <SearchBar />
+          {/* <SearchBar /> */}
+        
           {/* <!-- Sidebar Menu --> */}
           <SideMenu user={this.props.user} />
+          
         </section>
       </aside>
     );
