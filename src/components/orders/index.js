@@ -71,11 +71,12 @@ class Orders extends Component {
 
   renderRow() {
     return this.state.orders.map((item, key) => {
+      let imagePath = item.image_path.substr(22);
       return (
         <TableRow key={key}>
           <TableRowColumn>
             <img
-              src={item.image_path ? item.image_path : "/images/profile.png"}
+              src={process.env.REACT_APP_IMAGE_PATH + imagePath}
               className="img-order"
             />
           </TableRowColumn>

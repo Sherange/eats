@@ -23,10 +23,13 @@ class ShopList extends Component {
 
   renderListItem = shops => {
     return shops.map((shop, index) => {
-      let url =
-        shop.shop_photos[0] && shop.shop_photos[0].image_path
-          ? shop.shop_photos[0].image_path
-          : "/images/placeholder.jpg";
+      let imagePath = "/images/placeholder.jpg";
+
+      if (shop.shop_photos[0] && shop.shop_photos[0].image_path) {
+        imagePath = shop.shop_photos[0].image_path.substr(22);
+      }
+
+      let url = process.env.REACT_APP_IMAGE_PATH + imagePath;
 
       let selectedCuisine = CUISINE.find((item, index) => {
         return item.key === shop.cuisines_available;
