@@ -40,7 +40,7 @@ const Cards = props => {
               />
             }
           >
-            <img style={{ height : 200, width : 300}} src={process.env.REACT_APP_IMAGE_PATH + imagePath } alt="" />
+            <img src={process.env.REACT_APP_IMAGE_PATH + imagePath } alt="" />
           </CardMedia>
 
           <CardText>{item.description.substr(0, 200)}....</CardText>
