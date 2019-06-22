@@ -25,14 +25,13 @@ class PhotoCarousel extends Component {
 
   renderItem() {
     return this.state.shopPhotos.map((item, index) => {
-      let imagePath = "/images/profile.png";
-      if (item.image_path) {
-        imagePath =
-          process.env.REACT_APP_IMAGE_PATH + item.image_path.substr(22);
-      }
       return (
         <div className="item" key={index} style={{ margin: "10px" }}>
-          <img src={imagePath} style={{ height: "180px" }} alt="UserImage" />
+          <img
+            src={item.image_path ? item.image_path : "/images/profile.png"}
+            style={{ height: "180px" }}
+            alt="UserImage"
+          />
         </div>
       );
     });
@@ -43,7 +42,7 @@ class PhotoCarousel extends Component {
       <div className="box box-purple">
         <OwlCarousel
           className="owl-theme"
-          loop={false}
+          loop={true}
           margin={10}
           nav={false}
           autoplay={true}

@@ -23,18 +23,15 @@ const handleOrder = (item, dispatch) => {
 
 const Cards = props => {
   return props.foods.map((item, index) => {
-    let imagePath = item.food_photos[0].image_path.substr(22);
+    let imagePath = item.food_photos[0].image_path.substr(22)
+    console.log()
     return (
       <div className="grid-item" key={index}>
         <Card>
           <CardTitle
-            title={item.shop.name}
-            subtitle={
-              item.shop.shop_address.street_one +
-              ", " +
-              item.shop.shop_address.city
-            }
-          />
+          title={item.shop.name}
+          subtitle={item.shop.shop_address.street_one +', ' + item.shop.shop_address.city}
+        />
           <CardMedia
             overlay={
               <CardTitle
@@ -43,11 +40,7 @@ const Cards = props => {
               />
             }
           >
-            <img
-              style={{ height: 200, width: 300 }}
-              src={process.env.REACT_APP_IMAGE_PATH + imagePath}
-              alt=""
-            />
+            <img style={{ height : 200, width : 300}} src={process.env.REACT_APP_IMAGE_PATH + imagePath } alt="" />
           </CardMedia>
 
           <CardText>{item.description.substr(0, 200)}....</CardText>

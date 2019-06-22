@@ -13,14 +13,13 @@ const foodType = item => {
 const FoodItemList = props => {
   if (props.shopFoods && props.shopFoods.length > 0) {
     return props.shopFoods.map((item, index) => {
-      let imagePath = item.food_photos[0].image_path.substr(22);
       let food_type = foodType(item.type);
       return (
         <div className="row" key={index}>
           <div className="col-md-12">
             <div className="box box-primary">
               <img
-                src={process.env.REACT_APP_IMAGE_PATH + imagePath}
+                src={item.food_photos[0].image_path}
                 className="shop-list-image"
                 alt="food-itemimage"
               />
