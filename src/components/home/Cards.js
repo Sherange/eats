@@ -24,7 +24,6 @@ const handleOrder = (item, dispatch) => {
 const Cards = props => {
   return props.foods.map((item, index) => {
     let imagePath = item.food_photos[0].image_path.substr(22)
-    console.log()
     return (
       <div className="grid-item" key={index}>
         <Card>
@@ -40,7 +39,7 @@ const Cards = props => {
               />
             }
           >
-            <img src={process.env.REACT_APP_IMAGE_PATH + imagePath } alt="" />
+            <img src={process.env.IMAGE_PATH + imagePath } alt="" />
           </CardMedia>
 
           <CardText>{item.description.substr(0, 200)}....</CardText>
