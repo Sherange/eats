@@ -25,6 +25,16 @@ class Home extends Component {
                     <span className="info-box-number">
                       {user && user.meta ? user.meta.shop_count : 0}
                     </span>
+
+                    <a
+                      href={
+                        process.env.REACT_APP_API_URL + "reports/shop-report"
+                      }
+                      target="_blank"
+                    >
+                      {" "}
+                      Shop Report
+                    </a>
                   </div>
                 </div>
               </div>
@@ -40,6 +50,15 @@ class Home extends Component {
                     <span className="info-box-number">
                       {user && user.meta ? user.meta.food_count : 0}
                     </span>
+
+                    <a
+                      href={
+                        process.env.REACT_APP_API_URL + "reports/food-report"
+                      }
+                      target="_blank"
+                    >
+                      Food Report
+                    </a>
                   </div>
                 </div>
               </div>
@@ -57,6 +76,14 @@ class Home extends Component {
                     <span className="info-box-number">
                       {user && user.meta ? user.meta.order_count : 0}
                     </span>
+                    <a
+                      href={
+                        process.env.REACT_APP_API_URL + "reports/order-report"
+                      }
+                      target="_blank"
+                    >
+                      Order Report
+                    </a>
                   </div>
                 </div>
               </div>
@@ -72,6 +99,14 @@ class Home extends Component {
                     <span className="info-box-number">
                       {user && user.meta ? user.meta.user_count : 0}
                     </span>
+                    <a
+                      href={
+                        process.env.REACT_APP_API_URL + "reports/user-report"
+                      }
+                      target="_blank"
+                    >
+                      User Report
+                    </a>
                   </div>
                 </div>
               </div>
