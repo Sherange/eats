@@ -82,11 +82,11 @@ class UpdateShop extends Component {
 
     if (prevProps.selectedShop !== this.props.selectedShop) {
       const selectedCusine = CUISINE.find((item, key) => {
-        return item.key === this.props.selectedShop.cuisines_available;
+        return item.value === this.props.selectedShop.cuisines_available;
       });
 
       const selectedOpeningHours = OPENING_HOURS.find((item, key) => {
-        return item.key === this.props.selectedShop.opening_hours;
+        return item.value === this.props.selectedShop.opening_hours;
       });
 
       this.setState({

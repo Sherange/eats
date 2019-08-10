@@ -4,7 +4,7 @@ import { FlatButton } from "material-ui";
 
 const foodType = item => {
   return FOOD_TYPE.find(type => {
-    if (item == type.key) {
+    if (item == type.value) {
       return type;
     }
   });

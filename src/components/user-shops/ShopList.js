@@ -29,11 +29,11 @@ class ShopList extends Component {
           : "/images/placeholder.jpg";
 
       let selectedCuisine = CUISINE.find((item, index) => {
-        return item.key === shop.cuisines_available;
+        return item.value === shop.cuisines_available;
       });
 
       let selectedOpeningHours = OPENING_HOURS.find((item, index) => {
-        return item.key === shop.opening_hours;
+        return item.value === shop.opening_hours;
       });
 
       return (

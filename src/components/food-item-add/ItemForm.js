@@ -177,8 +177,8 @@ class ItemForm extends Component {
     if (this.validate() === true) {
       var formData = new FormData();
       formData.append("name", this.state.name);
-      formData.append("category", this.state.categoryIndex);
-      formData.append("type", this.state.typeIndex);
+      formData.append("category", this.state.category);
+      formData.append("type", this.state.type);
       formData.append("price", this.state.price);
       formData.append("description", this.state.description);
       formData.append("shop_id", this.props.selectedShop.id);
