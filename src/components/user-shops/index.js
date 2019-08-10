@@ -1,16 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ShopList from "./ShopList";
-import { getUserShops } from "../../actions/shopActions";
+import { getUserShops, deleteShop } from "../../actions/shopActions";
 class MyShops extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userShops: []
+    };
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.dispatch(getUserShops());
+  }
+
+  shopDelete(id) {
+    this.props.dispatch(deleteShop(id));
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.userShops !== this.state.userShops) {
+      this.setState({ userShops: this.props.userShops });
+    }
   }
 
   render() {
@@ -22,7 +34,8 @@ class MyShops extends Component {
         <ShopList
           dispatch={this.props.dispatch}
           user={this.props.user}
-          userShops={this.props.userShops}
+          userShops={this.state.userShops}
+          shopDelete={this.shopDelete.bind(this)}
           history={this.props.history}
         />
       </div>

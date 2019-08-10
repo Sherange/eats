@@ -96,6 +96,21 @@ export const updateShop = data => dispatch => {
     });
 };
 
+export const deleteShop = id => dispatch => {
+  return axios
+    .delete(process.env.REACT_APP_API_URL + "shop/" + id, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.access_token
+      }
+    })
+    .then(response => {
+      if (!response.data.error) {
+        dispatch(getUserShops());
+      }
+    });
+};
+
 export const getUserShops = () => dispatch => {
   dispatch({ type: IS_FETCHING });
   axios

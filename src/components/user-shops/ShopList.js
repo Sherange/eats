@@ -10,11 +10,10 @@ class ShopList extends Component {
     this.handleUpdate = this.handleUpdate.bind(this);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.userShops.length > 0) {
-      return { userShops: nextProps.userShops };
+  componentDidUpdate(prevProps) {
+    if (this.props.userShops !== this.state.userShops) {
+      this.setState({ userShops: this.props.userShops });
     }
-    return null;
   }
 
   handleUpdate(id) {
@@ -98,6 +97,7 @@ class ShopList extends Component {
                     primary={true}
                     labelStyle={{ textTransform: "none" }}
                     // backgroundColor={"#00a65a"}
+                    onClick={() => this.props.shopDelete(shop.id)}
                     style={{ margin: "5px" }}
                     icon={<i className="fa fa-trash-o fa-2x" />}
                   />
