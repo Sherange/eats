@@ -78,7 +78,7 @@ export const updateShop = data => dispatch => {
       if (response.data.error) {
         dispatch({
           type: SHOP_REGISTRATION_ERROR,
-          payload: response.data.data
+          payload: response.data.message
         });
       } else {
         dispatch(getUserShops());
@@ -87,6 +87,12 @@ export const updateShop = data => dispatch => {
           payload: response.data.message
         });
       }
+    })
+    .catch(error => {
+      dispatch({
+        type: SHOP_REGISTRATION_ERROR,
+        payload: error.response.data.message
+      });
     });
 };
 

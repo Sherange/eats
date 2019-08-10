@@ -289,14 +289,14 @@ label {
   min-height: 64px;
 }
 .info-box-icon {
-  height: 64px;
-  width: 64px;
+  height: 65px;
+  width: 65px;
   background : #222d32;
   font-size: none;
   line-height: 0;
 }
 .info-box-content {
-  padding: 5px 10px;
+  padding: 0px;
   margin-left: 70px;
 }
 @media only screen and (max-width: 1200px) {

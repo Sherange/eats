@@ -165,8 +165,8 @@ class UpdateShop extends Component {
       const data = {
         id: this.state.id,
         name: this.state.name,
-        cuisines_available: this.state.cuisinesAvailableIndex,
-        opening_hours: this.state.openingHoursIndex,
+        cuisines_available: this.state.cuisinesAvailable,
+        opening_hours: this.state.openingHours,
         phone_number: this.state.phoneNumber,
         description: this.state.description,
         user_id: this.props.user.id,

@@ -69,7 +69,7 @@ export default class SideMenu extends Component {
           </ul>
         </li> */}
         {user && user.user_type === "admin" && (
-          <li className="header">SHOP OWNERS</li>
+          <li className="header">SHOP ADMIN</li>
         )}
 
         {/* <li>
@@ -90,7 +90,7 @@ export default class SideMenu extends Component {
           <li>
             <Link to="/user-shops">
               <i className="fa fa-link" />
-              <span>My Shops</span>
+              <span>Shops</span>
             </Link>
           </li>
         )}

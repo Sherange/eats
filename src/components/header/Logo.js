@@ -2,7 +2,7 @@ import React from "react";
 
 const Logo = () => {
   return (
-    <a href="index2.html" className="logo">
+    <a href="/" className="logo">
       {/* mini logo for sidebar mini 50x50 pixels */}
       <span className="logo-mini">
         <b>F</b>
