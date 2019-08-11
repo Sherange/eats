@@ -27,9 +27,13 @@ const Cards = props => {
       <div className="grid-item" key={index}>
         <Card>
           <CardTitle
-          title={item.shop.name}
-          subtitle={item.shop.shop_address.street_one +', ' + item.shop.shop_address.city}
-        />
+            title={item.shop.name}
+            subtitle={
+              item.shop.shop_address.street_one +
+              ", " +
+              item.shop.shop_address.city
+            }
+          />
           <CardMedia
             overlay={
               <CardTitle
@@ -38,7 +42,10 @@ const Cards = props => {
               />
             }
           >
-            <img src={item.food_photos[0].image_path} style={{ height : '200px'}}/>
+            <img
+              src={item.food_photos[0].image_path}
+              style={{ height: "200px" }}
+            />
           </CardMedia>
 
           <CardText>{item.description.substr(0, 200)}....</CardText>
@@ -49,15 +56,21 @@ const Cards = props => {
             subtitle={moment(item.shop.created_at).format("Do MMM YYYY")}
             avatar={item.shop.shop_photos[0].image_path}
           /> */}
-          <CardActions>
-            {/* <FlatButton label="View" /> */}
-            <FlatButton
-              onClick={() => {
-                handleOrder(item, props.dispatch);
-              }}
-              label="Place Order"
-            />
-          </CardActions>
+
+          {props.userType !== "admin" && (
+            <CardActions>
+              {/* <FlatButton label="View" /> */}
+              <FlatButton
+                onClick={() => {
+                  alert(
+                    "Your item added to cart successfully \n Please visit the cart to checkout"
+                  );
+                  handleOrder(item, props.dispatch);
+                }}
+                label="Place Order"
+              />
+            </CardActions>
+          )}
         </Card>
       </div>
     );

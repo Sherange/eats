@@ -116,7 +116,7 @@ class Home extends Component {
 
         <div className="container-fluid">
           <div className="grid-container">
-            <Cards foods={this.props.foods} dispatch={this.props.dispatch} />
+            <Cards foods={this.props.foods} userType={user.user_type} dispatch={this.props.dispatch} />
           </div>
         </div>
       </div>
