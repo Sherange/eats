@@ -45,13 +45,31 @@ class Orders extends Component {
     }
   }
 
+  handleRemove(item) {
+    const { orders } = this.state;
+    if (orders && orders.length > 0) {
+      let index = orders.indexOf(item);
+
+      orders.splice(index);
+
+      let total = orders.reduce((count, item) => {
+        return count + item.price;
+      }, 0);
+
+      this.setState({ orders, totalPrice: total });
+    }
+  }
+
   componentDidUpdate(prevPorps) {
     if (this.state.success === true) {
       setTimeout(() => {
-        this.setState({ success: false, successMessage: "" }, state => {
-          this.props.dispatch({ type: CLEAR_ORDERS });
-          this.props.dispatch({ type: ORDER_PLACED_SUCCESS, payload: "" });
-        });
+        this.setState(
+          { success: false, successMessage: "", totalPrice: 0 },
+          state => {
+            this.props.dispatch({ type: CLEAR_ORDERS });
+            this.props.dispatch({ type: ORDER_PLACED_SUCCESS, payload: "" });
+          }
+        );
       }, 2000);
     }
 
@@ -81,6 +99,9 @@ class Orders extends Component {
           </TableRowColumn>
           <TableRowColumn>{item.name}</TableRowColumn>
           <TableRowColumn>{item.price}</TableRowColumn>
+          <TableRowColumn>
+            <button onClick={() => this.handleRemove(item)}>Remove</button>
+          </TableRowColumn>
         </TableRow>
       );
     });
@@ -147,6 +168,7 @@ class Orders extends Component {
                   <TableHeaderColumn>FOOD ITEM</TableHeaderColumn>
                   <TableHeaderColumn>FOOD NAME</TableHeaderColumn>
                   <TableHeaderColumn>PRICE</TableHeaderColumn>
+                  <TableHeaderColumn />
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false}>
