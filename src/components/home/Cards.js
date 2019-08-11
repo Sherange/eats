@@ -38,7 +38,7 @@ const Cards = props => {
               />
             }
           >
-            <img src={item.food_photos[0].image_path} alt="" />
+            <img src={item.food_photos[0].image_path} style={{ height : '200px'}}/>
           </CardMedia>
 
           <CardText>{item.description.substr(0, 200)}....</CardText>
