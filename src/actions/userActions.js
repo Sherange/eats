@@ -55,7 +55,7 @@ export const updateUser = data => dispatch => {
   const user = {
     id: data.id,
     name: data.name,
-    phone_number: data.phone_number,
+    phone_number: Number(data.phone_number),
     date_of_birth: data.date_of_birth,
     gender: data.genderIndex,
     description: data.description,
