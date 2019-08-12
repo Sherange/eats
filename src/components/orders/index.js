@@ -70,7 +70,7 @@ class Orders extends Component {
             this.props.dispatch({ type: ORDER_PLACED_SUCCESS, payload: "" });
           }
         );
-      }, 2000);
+      }, 4000);
     }
 
     if (this.props.orders != prevPorps.orders) {
@@ -192,7 +192,7 @@ class Orders extends Component {
 
           {this.state.success && (
             <div className="alert alert-success alert-dismissible">
-              <p>
+              <p style={{ fontSize : 18}}>
                 <i className="icon fa fa-hand-peace-o" />
                 {this.state.successMessage}
               </p>
