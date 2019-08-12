@@ -33,9 +33,14 @@ const FoodItemList = props => {
                 <p className="card-title">Rs {item.price}</p>
               </div>
               <div className="food-item-button">
-                <FlatButton label="Update" primary={true} />
-                <FlatButton label="Delete" secondary={true} />
-                <FlatButton label="Unlist" disabled={false} />
+                {/* <FlatButton label="Update" primary={true} /> */}
+                <FlatButton
+                  label="Delete"
+                  secondary={true}
+                  onClick={() => props.handleDelete(item.id)}
+                  dispatch={props.dispatch}
+                />
+                {/* <FlatButton label="Unlist" disabled={false} /> */}
               </div>
               <div />
             </div>

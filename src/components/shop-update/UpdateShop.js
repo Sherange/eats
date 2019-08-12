@@ -5,10 +5,11 @@ import {
   SHOP_REGISTRATION_ERROR,
   SHOP_REGISTRATION_SUCCESS
 } from "../../actions/types";
+import { deleteFood } from "../../actions/foodActions";
 import PhotoDrop from "./PhotoDrop";
 import moment from "moment";
 import PhotoCarousel from "./PhotoCarousel";
-import FoodItemList from './FoodItemList'
+import FoodItemList from "./FoodItemList";
 import { CUISINE, OPENING_HOURS } from "../../constant/constant";
 
 class UpdateShop extends Component {
@@ -501,6 +502,10 @@ class UpdateShop extends Component {
     );
   }
 
+  handleDelete(id) {
+    this.props.dispatch(deleteFood(id));
+  }
+
   render() {
     return (
       <>
@@ -533,7 +538,10 @@ class UpdateShop extends Component {
 
         {/* food item list */}
         <section className="content">
-          <FoodItemList shopFoods={this.props.shopFoods}></FoodItemList>
+          <FoodItemList
+            shopFoods={this.props.shopFoods}
+            handleDelete={this.handleDelete.bind(this)}
+          />
         </section>
       </>
     );
