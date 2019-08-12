@@ -9,7 +9,7 @@ const Logo = () => {
       </span>
       {/* logo for regular state and mobile devices */}
       <span className="logo-lg">
-        <b>Food Courts</b>
+        <b>Easy Food</b>
       </span>
     </a>
   );

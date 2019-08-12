@@ -61,6 +61,7 @@ const Cards = props => {
             <CardActions>
               {/* <FlatButton label="View" /> */}
               <FlatButton
+                style={{ backgroundColor: "#00a65a", color : "white" }}
                 onClick={() => {
                   alert(
                     "Your item added to cart successfully \n Please visit the cart to checkout"

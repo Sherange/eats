@@ -8,7 +8,7 @@ export default class MainFooter extends Component {
         <div className="pull-right hidden-xs">Anything you want - Order Now</div>
         {/* <!-- Default to the left --> */}
         <strong>
-          Copyright &copy; 2019 <a href="/">Sherange Fonseka</a>.
+          Copyright &copy; 2019 <a href="/">Easy Foods TM</a>.
         </strong>{" "}
         All rights reserved.
       </footer>
